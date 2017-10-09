@@ -3,7 +3,8 @@
   <div class="row">
     <div class="col-md-12">
       <app-home *ngIf="loadedFeature === 'home'"></app-home>
-      <app-create-assignment *ngIf="loadedFeature !== 'home'"></app-create-assignment>
+      <app-login *ngIf="loadedFeature === 'login'"></app-login>
+      <app-create-assignment *ngIf="loadedFeature === 'create-assignment'"></app-create-assignment>
     </div>
   </div>
 </div>
