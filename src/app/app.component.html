@@ -1,9 +1,10 @@
-<app-navbar></app-navbar>
+<app-navbar (featureSelected)="onNavigate($event)"></app-navbar>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-home></app-home>
-      <app-create-assignment></app-create-assignment>
+      <app-home *ngIf="loadedFeature === 'home'"></app-home>
+      <app-login *ngIf="loadedFeature === 'login'"></app-login>
+      <app-create-assignment *ngIf="loadedFeature === 'create-assignment'"></app-create-assignment>
     </div>
   </div>
 </div>

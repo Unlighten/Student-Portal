@@ -13,7 +13,6 @@ import { CreateEditComponent } from './admin/create-assignment/create-edit/creat
 import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

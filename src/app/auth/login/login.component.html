@@ -1,13 +1,16 @@
-<form (submit)="loginUser($event)">
-  <div class="input">
-    <label>Username:</label>
-    <input type="text">
-  </div>
-  <div class="input">
-      <label>Password:</label>
-      <input type="password">
-    </div>
-    <div class="input">
-        <input type="button" value="Login">
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <h3 style="text-align: center;">Login</h3>
+    <form>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="username" id="username" name="username" ngModel class="form-control">
       </div>
-</form>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" ngModel class="form-control">
+      </div>
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+  </div>
+</div>
