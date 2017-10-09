@@ -10,6 +10,7 @@ import { HomeListComponent } from './admin/home/home-list/home-list.component';
 import { HomeStudentComponent } from './admin/home/home-student/home-student.component';
 import { HomeItemComponent } from './admin/home/home-list/home-item/home-item.component';
 import { CreateEditComponent } from './admin/create-assignment/create-edit/create-edit.component';
+import { FooterComponent } from './footer/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CreateEditComponent } from './admin/create-assignment/create-edit/creat
     HomeListComponent,
     HomeStudentComponent,
     HomeItemComponent,
-    CreateEditComponent
+    CreateEditComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule
