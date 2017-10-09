@@ -1,0 +1,20 @@
+footer {
+    position: fixed;
+    height: 35px;
+    bottom: 0;
+    width: 100%;
+    background-color: #e24a52;
+}
+
+.glyphs {
+    margin-top: 5px;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    border-radius: 100%;
+    border: 1px solid black;
+}
+
+.glyphs:hover {
+    border: 1px solid white;
+}
