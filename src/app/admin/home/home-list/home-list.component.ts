@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-list.component.css']
 })
 export class HomeListComponent implements OnInit {
+  students = [];
 
   constructor() { }
 

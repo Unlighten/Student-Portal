@@ -7,7 +7,9 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './admin/home/home.component';
 import { CreateAssignmentComponent } from './admin/create-assignment/create-assignment.component';
 import { HomeListComponent } from './admin/home/home-list/home-list.component';
-import { HomeDetailComponent } from './admin/home/home-detail/home-detail.component';
+import { HomeStudentComponent } from './admin/home/home-student/home-student.component';
+import { HomeItemComponent } from './admin/home/home-list/home-item/home-item.component';
+import { CreateEditComponent } from './admin/create-assignment/create-edit/create-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HomeDetailComponent } from './admin/home/home-detail/home-detail.compon
     HomeComponent,
     CreateAssignmentComponent,
     HomeListComponent,
-    HomeDetailComponent
+    HomeStudentComponent,
+    HomeItemComponent,
+    CreateEditComponent
   ],
   imports: [
     BrowserModule
