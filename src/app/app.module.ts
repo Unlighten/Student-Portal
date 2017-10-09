@@ -3,13 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { StudentListComponent } from './student-list/student-list.component';
+import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './admin/home/home.component';
+import { CreateAssignmentComponent } from './admin/create-assignment/create-assignment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    StudentListComponent
+    AdminComponent,
+    HomeComponent,
+    CreateAssignmentComponent
   ],
   imports: [
     BrowserModule
