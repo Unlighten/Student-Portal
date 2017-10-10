@@ -4,20 +4,35 @@
       <div class="row">
         <div class="col-sm-4 form-group">
           <label for="name">Assignment Name:</label>
-            <input type="text" id="name" class="form-control">
+            <input 
+              type="text" 
+              id="name" 
+              class="form-control"
+              #nameInput>
         </div>
         <div class="col-sm-4 form-group">
           <label for="description">Description Link:</label>
-            <input type="text" id="description" class="form-control">
+            <input 
+              type="text" 
+              id="description" 
+              class="form-control"
+              #descInput>
         </div>
         <div class="col-sm-4 form-group">
           <label for="due">Due Date:</label>
-            <input type="text" id="due" class="form-control">
+            <input 
+              type="text" 
+              id="due" 
+              class="form-control"
+              #dueInput>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit">Add</button>
+          <button 
+            class="btn btn-success" 
+            type="submit"
+            (click)="onAddItem()">Add</button>
           <button class="btn btn-danger" type="button">Delete</button>
           <button class="btn btn-primary" type="button">Clear</button>
         </div>
