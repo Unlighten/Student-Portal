@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Assignment } from '../../../../shared/assignment.model';
+import { CreateAssignmentService } from '../../../create-assignment/create-assignment.service';
 
 @Component({
   selector: 'app-home-item',
@@ -8,15 +9,14 @@ import { Assignment } from '../../../../shared/assignment.model';
 })
 export class HomeItemComponent implements OnInit {
   @Input() assignment: Assignment;
-  @Output() assignmentSelected = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(private createAssignmentService: CreateAssignmentService) { }
 
   ngOnInit() {
   }
 
   onSelected() {
-    this.assignmentSelected.emit();
+    this.createAssignmentService.assignmentSelected.emit(this.assignment);
   }
 
 }

@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
+import { CreateAssignmentService } from './admin/create-assignment/create-assignment.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AuthGuard } from './auth/auth-guard.service';
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    CreateAssignmentService
   ],
   bootstrap: [AppComponent]
 })
