@@ -3,6 +3,8 @@ import { Assignment } from '../../../shared/assignment.model';
 import { CreateAssignmentService } from '../create-assignment.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import { DataStorageService } from '../../../shared/data-storage.service';
+import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-create-edit',
@@ -16,7 +18,7 @@ export class CreateEditComponent implements OnInit, OnDestroy {
   editedItemIndex: number;
   editedItem: Assignment;
 
-  constructor(private createAssignmentService: CreateAssignmentService) { }
+  constructor(private createAssignmentService: CreateAssignmentService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.subscription = this.createAssignmentService.startedEditing.subscribe(
@@ -43,6 +45,14 @@ export class CreateEditComponent implements OnInit, OnDestroy {
     }
     this.editMode = false;
     form.reset();
+  }
+
+  onSaveData() {
+    this.dataStorageService.storeData().subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );
   }
 
   onClear() {
