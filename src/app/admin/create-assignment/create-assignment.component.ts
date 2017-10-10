@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Assignment } from '../../shared/assignment.model';
+import { CreateAssignmentService } from './create-assignment.service';
 
 @Component({
   selector: 'app-create-assignment',
@@ -7,18 +8,17 @@ import { Assignment } from '../../shared/assignment.model';
   styleUrls: ['./create-assignment.component.css']
 })
 export class CreateAssignmentComponent implements OnInit {
-  assignments: Assignment[] = [
-    new Assignment('CSS Monster', 'This is really hard', '08/14/2017'),
-    new Assignment('Static Website', 'HTML and CSS', '08/21/2017')
-  ];
+  assignments: Assignment[];
 
-  constructor() { }
+  constructor(private createAssignmentService: CreateAssignmentService) { }
 
   ngOnInit() {
-  }
-
-  onAssignmentAdded(assignment: Assignment) {
-    this.assignments.push(assignment);
+    this.assignments = this.createAssignmentService.getAssignments();
+    this.createAssignmentService.assignmentsChanged.subscribe(
+      (assignments: Assignment[]) => {
+        this.assignments = assignments;
+      }
+    )
   }
 
 }

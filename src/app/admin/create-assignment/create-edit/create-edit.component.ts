@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Assignment } from '../../../shared/assignment.model';
+import { CreateAssignmentService } from '../create-assignment.service';
 
 @Component({
   selector: 'app-create-edit',
@@ -10,9 +11,8 @@ export class CreateEditComponent implements OnInit {
   @ViewChild('nameInput') nameInputRef: ElementRef;
   @ViewChild('descInput') descInputRef: ElementRef;
   @ViewChild('dueInput') dueInputRef: ElementRef;
-  @Output() assignmentAdded = new EventEmitter<Assignment>();
 
-  constructor() { }
+  constructor(private createAssignmentService: CreateAssignmentService) { }
 
   ngOnInit() {
   }
@@ -23,7 +23,8 @@ export class CreateEditComponent implements OnInit {
     const assignDue = this.dueInputRef.nativeElement.value;
     
     const newAssignment = new Assignment(assignName, assignDesc, assignDue);
-    this.assignmentAdded.emit(newAssignment);
+
+    this.createAssignmentService.addAssignment(newAssignment);
   }
 
 }
