@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../home.model';
+import { HomeService } from '../home.service';
 
 @Component({
   selector: 'app-home-student',
@@ -7,16 +8,12 @@ import { Student } from '../home.model';
   styleUrls: ['./home-student.component.css']
 })
 export class HomeStudentComponent implements OnInit {
-  students: Student[] = [
-    new Student('Nathan Bogan'),
-    new Student('Thomas McClellan'),
-    new Student('Aaron Moore'),
-    new Student('Maximilian Schwarzmüller')
-  ]
+  students: Student[];
 
-  constructor() { }
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
+    this.students = this.homeService.getStudents();
   }
 
 }

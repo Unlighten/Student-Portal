@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Assignment } from '../../shared/assignment.model';
+import { CreateAssignmentService } from './create-assignment.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-create-assignment',
   templateUrl: './create-assignment.component.html',
   styleUrls: ['./create-assignment.component.css']
 })
-export class CreateAssignmentComponent implements OnInit {
-  assignments: Assignment[] = [
-    new Assignment('CSS Monster', 'This is really hard', '08/14/2017'),
-    new Assignment('Static Website', 'HTML and CSS', '08/21/2017')
-  ];
+export class CreateAssignmentComponent implements OnInit, OnDestroy {
+  assignments: Assignment[];
+  private subscription: Subscription;
 
-  constructor() { }
+  constructor(private createAssignmentService: CreateAssignmentService) { }
 
   ngOnInit() {
+    this.assignments = this.createAssignmentService.getAssignments();
+    this.subscription = this.createAssignmentService.assignmentsChanged.subscribe(
+      (assignments: Assignment[]) => {
+        this.assignments = assignments;
+      }
+    )
   }
 
-  onAssignmentAdded(assignment: Assignment) {
-    this.assignments.push(assignment);
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
