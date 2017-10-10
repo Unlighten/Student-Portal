@@ -42,6 +42,7 @@
             class="btn btn-success" 
             type="submit"
             [disabled]="!f.valid"
+            (click)="onSaveData()"
           >{{ editMode ? 'Update' : 'Add' }}</button>
           <button 
             class="btn btn-danger" 
