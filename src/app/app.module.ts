@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DropdownDirective } from './navbar/dropdown.directives';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './admin/home/home.component';
 import { CreateAssignmentComponent } from './admin/create-assignment/create-assignment.component';
@@ -25,6 +26,7 @@ import { CreateAssignmentService } from './admin/create-assignment/create-assign
     AdminComponent,
     HomeComponent,
     CreateAssignmentComponent,
+    DropdownDirective,
     HomeListComponent,
     HomeStudentComponent,
     HomeItemComponent,
