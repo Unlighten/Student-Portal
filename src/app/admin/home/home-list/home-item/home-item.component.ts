@@ -16,7 +16,7 @@ export class HomeItemComponent implements OnInit {
   }
 
   onSelected() {
-    this.createAssignmentService.assignmentSelected.emit(this.assignment);
+    this.createAssignmentService.assignmentSelected.next(this.assignment);
   }
 
 }

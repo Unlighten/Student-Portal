@@ -23,6 +23,10 @@ export class CreateAssignmentComponent implements OnInit, OnDestroy {
     )
   }
 
+  onEditItem(index: number) {
+    this.createAssignmentService.startedEditing.next(index);
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
