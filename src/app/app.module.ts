@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DropdownDirective } from './navbar/dropdown.directives';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './admin/home/home.component';
 import { CreateAssignmentComponent } from './admin/create-assignment/create-assignment.component';
@@ -27,6 +28,7 @@ import { DataStorageService } from './shared/data-storage.service';
     AdminComponent,
     HomeComponent,
     CreateAssignmentComponent,
+    DropdownDirective,
     HomeListComponent,
     HomeStudentComponent,
     HomeItemComponent,

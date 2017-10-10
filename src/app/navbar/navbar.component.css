@@ -32,4 +32,10 @@ img.logo{
 
 .navbar-inverse, .navbar-nav>li>a:hover{
     color: black !important;
+    background-color: #e24a52;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+    color: white !important;
+    background-color: red;
 }
