@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DropdownDirective } from './navbar/dropdown.directives';
@@ -18,6 +19,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { CreateAssignmentService } from './admin/create-assignment/create-assignment.service';
+import { DataStorageService } from './shared/data-storage.service';
 
 @NgModule({
   declarations: [
@@ -37,12 +39,15 @@ import { CreateAssignmentService } from './admin/create-assignment/create-assign
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpModule
   ],
   providers: [
     AuthService,
     AuthGuard,
-    CreateAssignmentService
+    CreateAssignmentService,
+    DataStorageService
   ],
   bootstrap: [AppComponent]
 })
