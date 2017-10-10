@@ -18,7 +18,9 @@
     <a 
       href="#" 
       class="list-group-item clearfix"
-      *ngFor="let assignment of assignments">
+      *ngFor="let assignment of assignments, let i = index"
+      (click)="onEditItem(i)"
+    >
       <div class="pull-left">
         <h4 class="list-group-item-heading">{{ assignment.name }}</h4>
         <p class="list-group-item-text">{{ assignment.description }}</p>
