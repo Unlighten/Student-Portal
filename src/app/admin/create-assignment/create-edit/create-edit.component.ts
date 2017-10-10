@@ -40,8 +40,10 @@ export class CreateEditComponent implements OnInit, OnDestroy {
     const newAssignment = new Assignment(value.name, value.desc, value.due);
     if (this.editMode) {
       this.createAssignmentService.updateAssignment(this.editedItemIndex, newAssignment);
+      this.onSaveData();
     } else {
       this.createAssignmentService.addAssignment(newAssignment);
+      this.onSaveData();
     }
     this.editMode = false;
     form.reset();
