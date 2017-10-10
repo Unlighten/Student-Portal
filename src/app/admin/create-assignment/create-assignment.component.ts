@@ -17,4 +17,8 @@ export class CreateAssignmentComponent implements OnInit {
   ngOnInit() {
   }
 
+  onAssignmentAdded(assignment: Assignment) {
+    this.assignments.push(assignment);
+  }
+
 }
