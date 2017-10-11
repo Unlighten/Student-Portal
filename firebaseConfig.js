@@ -4,5 +4,8 @@ export default {
     databaseURL: "https://student-portal-4e814.firebaseio.com",
     projectId: "student-portal-4e814",
     storageBucket: "student-portal-4e814.appspot.com",
-    messagingSenderId: "300575670495"
+    messagingSenderId: "300575670495",
+    adminTokens: [
+        "DzkK2qZRung2mamlXPSjHhAUKBB3"
+    ]
 };
