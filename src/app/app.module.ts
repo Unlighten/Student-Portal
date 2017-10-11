@@ -20,7 +20,7 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { CreateAssignmentService } from './admin/create-assignment/create-assignment.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { AssignmentListComponent } from './shared/assignment-list/assignment-list.component';
-import { HomeDetailComponent } from './home/home-detail/home-detail.component';
+import { HomeDetailComponent } from './admin/home/home-detail/home-detail.component';
 
 @NgModule({
   declarations: [
