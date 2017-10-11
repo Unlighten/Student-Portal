@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { Assignment } from '../../../shared/assignment.model';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-home-list',
@@ -11,5 +13,4 @@ export class HomeListComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

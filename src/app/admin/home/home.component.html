@@ -4,15 +4,6 @@
   </div>
   <div class="col-md-6">
     <app-home-student></app-home-student>
-    <!-- <app-home-detail *ngIf="selectedAssignment; else infoText" [assignment]="selectedAssignment">
-      <ng-template #infoText></ng-template>
-    </app-home-detail> -->
+    <app-home-detail *ngIf="selectedAssignment; else ''"></app-home-detail>
   </div>
 </div>
-
-<!-- * -->
-
-
-<!-- In new .component.ts, under export class ... OnInit {
-  @Input() assignment: Assignment;
-} -->
