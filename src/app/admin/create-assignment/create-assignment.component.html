@@ -15,18 +15,6 @@
   </div>
 <div class="row">
   <div class="col-xs-12">
-    <a 
-      class="list-group-item clearfix"
-      *ngFor="let assignment of assignments, let i = index"
-      (click)="onEditItem(i)"
-    >
-      <div class="pull-left">
-        <h4 class="list-group-item-heading">{{ assignment.name }}</h4>
-        <p class="list-group-item-text">{{ assignment.description }}</p>
-      </div>
-      <div class="pull-right">
-        <p class="list-group-item-text"><b>Due:</b><br>{{ assignment.due }}</p>
-      </div>
-    </a>
+    <app-assignment-list></app-assignment-list>
   </div>
 </div>

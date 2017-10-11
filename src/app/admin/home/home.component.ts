@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Assignment } from '../../shared/assignment.model';
 import { HomeService } from './home.service';
 import { CreateAssignmentService } from '../create-assignment/create-assignment.service';
+import { DataStorageService } from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { CreateAssignmentService } from '../create-assignment/create-assignment.
 export class HomeComponent implements OnInit {
   selectedAssignment: Assignment;
 
-  constructor(private createAssignmentService: CreateAssignmentService) { }
+  constructor(private createAssignmentService: CreateAssignmentService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.createAssignmentService.assignmentSelected.subscribe(
@@ -20,6 +21,11 @@ export class HomeComponent implements OnInit {
         this.selectedAssignment = assignment;
       }
     );
+    this.onFetchData();
+  }
+
+  onFetchData() {
+    this.dataStorageService.getData();
   }
 
 }

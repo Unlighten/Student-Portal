@@ -65,6 +65,7 @@ export class CreateEditComponent implements OnInit, OnDestroy {
   onDelete() {
     this.createAssignmentService.deleteAssignment(this.editedItemIndex);
     this.onClear();
+    this.onSaveData();
   }
 
   ngOnDestroy() {

@@ -6,18 +6,20 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a routerLink="/home">Home</a></li>
-        <li><a routerLink="/create-assignments">Create Assignments</a></li>
-        <li class="dropdown" appDropdown>
-            <a style="cursor: pointer;" class="dropdown-toggle" data-toggle="dropdown" role="button">Cohorts <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">The Adventures of Nathan</a></li>
-              <li><a href="#">Nathan and The Giant Peach</a></li>
-              <li><a href="#">Lord of the Nathans</a></li>
-              <li><a href="#">Star Wars: Return of the Nathan</a></li>
-              <li><a href="#">Gladiator: Nathan</a></li>
-            </ul>
-          </li>
+        <ng-template [ngIf]="authService.isAdminAuthenticated()">
+          <li><a routerLink="/home">Home</a></li>
+          <li><a routerLink="/create-assignments">Create Assignments</a></li>
+          <li class="dropdown" appDropdown>
+              <a style="cursor: pointer;" class="dropdown-toggle" data-toggle="dropdown" role="button">Cohorts <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">The Adventures of Nathan</a></li>
+                <li><a href="#">Nathan and The Giant Peach</a></li>
+                <li><a href="#">Lord of the Nathans</a></li>
+                <li><a href="#">Star Wars: Return of the Nathan</a></li>
+                <li><a href="#">Gladiator: Nathan</a></li>
+              </ul>
+            </li>
+        </ng-template>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <ng-template [ngIf]="!authService.isAuthenticated()">
