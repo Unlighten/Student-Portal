@@ -5,11 +5,6 @@
   </div>
 <div class="row">
   <div class="col-xs-12">
-    <app-assignment-list
-      *ngFor="let assignmentElement of assignments"
-      [assignment]="assignmentElement"
-      (assignmentSelected)="onAssignmentSelected(assignmentElement)"
-    ></app-assignment-list>
+    <app-assignment-list (click)="onDetail($event)"></app-assignment-list>
   </div>
 </div>
-

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Assignment } from '../../../shared/assignment.model';
 import { CreateAssignmentService } from '../../create-assignment/create-assignment.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -9,11 +9,9 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./home-detail.component.css']
 })
 export class HomeDetailComponent implements OnInit {
-  @Input() assignment: Assignment;
   assignments: Assignment[];
   private subscription: Subscription;
   
-
   constructor(private createAssignmentService: CreateAssignmentService) { }
 
   ngOnInit() {
@@ -23,6 +21,5 @@ export class HomeDetailComponent implements OnInit {
         this.assignments = assignments;
       }
     )
-  }
-
+  };
 }

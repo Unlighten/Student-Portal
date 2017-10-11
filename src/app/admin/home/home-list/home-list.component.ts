@@ -8,9 +8,14 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./home-list.component.css']
 })
 export class HomeListComponent implements OnInit {
+  assignments: Assignment[];
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onDetail(e) {
+    console.log(e.target);
   }
 }
