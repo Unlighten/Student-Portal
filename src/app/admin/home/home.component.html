@@ -4,13 +4,14 @@
   </div>
   <div class="col-md-6">
     <app-home-student></app-home-student>
-    *
+    <!-- <app-home-detail *ngIf="selectedAssignment; else infoText" [assignment]="selectedAssignment">
+      <ng-template #infoText></ng-template>
+    </app-home-detail> -->
   </div>
 </div>
 
 <!-- * -->
-<!-- <app-whatever *ngIf="selectedAssignment; else infoText" [assignment]="selectedAssignment"></app-whatever>
-<ng-template #infoText></ng-template> -->
+
 
 <!-- In new .component.ts, under export class ... OnInit {
   @Input() assignment: Assignment;
