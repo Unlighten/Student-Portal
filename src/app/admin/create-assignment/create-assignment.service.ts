@@ -6,10 +6,12 @@ export class CreateAssignmentService {
   assignmentsChanged = new Subject<Assignment[]>();
   startedEditing = new Subject<number>();
 
-  private assignments: Assignment[] = [
-    new Assignment('CSS Monster', 'This is really hard', '08/14/2017'),
-    new Assignment('Static Website', 'HTML and CSS', '08/21/2017')
-  ];
+  private assignments: Assignment[] = [];
+
+  setData(assignments: Assignment[]) {
+    this.assignments = assignments;
+    this.assignmentsChanged.next(this.assignments.slice());
+  }
 
   getAssignments() {
     return this.assignments.slice();
