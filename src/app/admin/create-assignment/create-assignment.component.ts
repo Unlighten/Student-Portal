@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataStorageService } from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-create-assignment',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateAssignmentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataStorageService: DataStorageService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.onFetchData();
+  }
+
+  onFetchData() {
+    this.dataStorageService.getData();
+  }
 
 }
