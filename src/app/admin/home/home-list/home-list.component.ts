@@ -22,11 +22,11 @@ export class HomeListComponent implements OnInit {
 
   onDetail(e) {
     let data = this.createAssignment.getAssignment(e.target.id);
-    console.log()
-    // console.log(this.Assignment)
-    console.log(data.name)
-    console.log(data.description)
-    console.log(data.due)
+    console.log(data)
+    console.log("Click worked")
+    // console.log(data.name)
+    // console.log(data.description)
+    // console.log(data.due)
   }
 
   open(content) {
