@@ -57,17 +57,12 @@ export class AuthService {
     return this.token != null; //if there is a token, return true... it always returns true
   }
 
-  isAdminAuthenticated() {
+  isAdminAuthenticated(uid) {
     // console.log(4, uid)
-    return firebase.auth().onAuthStateChanged((user) => {
-      // console.log(2, user.uid)
-      if (user.uid == firebaseConfig.adminUIDs[0]){ 
-        // console.log(5, uid);
-        return user.uid != null;
-        // return this.token != null;
-      } else {
-        return null
-      }
-    })
+    if (uid == firebaseConfig.adminUIDs[0]){ 
+      // console.log(5, uid);
+      // return uid != null;
+      return this.token != null;
+    }
+    }
   }
-}
