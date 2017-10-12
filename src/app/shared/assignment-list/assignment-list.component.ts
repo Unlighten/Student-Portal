@@ -26,7 +26,6 @@ export class AssignmentListComponent implements OnInit {
         console.log(assignments)
       }
     )
-    
   }
 
   onSelected() {
@@ -40,5 +39,4 @@ export class AssignmentListComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

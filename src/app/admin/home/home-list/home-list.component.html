@@ -5,6 +5,99 @@
   </div>
 <div class="row">
   <div class="col-xs-12">
-    <app-assignment-list (click)="onDetail($event)"></app-assignment-list>
+    <app-assignment-list><a (click)="onDetail($event)" data-toggle="modal" data-target="#myModal"></a></app-assignment-list>
   </div>
 </div>
+
+<div 
+  class="modal fade" 
+  id="myModal" 
+  tabindex="-1" 
+  role="dialog" 
+  aria-labelledby="myModalLabel"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title" id="modal-title">Name</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>Desc</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>Due:</h4>
+            <h5>Due</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <label for="text">Upload Assignment:</label>
+            <input type="text" id="text">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button 
+          class="btn btn-default" 
+          type="submit" 
+          style="border: 2px solid #e24a52"
+        >Submit</button>
+        <button 
+          class="btn btn-danger" 
+          type="button" 
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <ng-template #content let-c="close" let-d="dismiss">  
+    <div class="modal-header">
+      <h3 class="modal-title">Name</h3>
+      <button 
+        type="button" 
+        class="close" 
+        aria-label="Close" 
+        (click)="d('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <h5>Desc</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Due:</h4>
+          <h5>Due</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <label for="text">Upload Assignment:</label>
+          <input type="text" id="text">
+          <button 
+            type="submit" 
+            class="btn btn-default" 
+            style="border: 2px solid #e24a52"
+          >Submit</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="c('Close click')"
+          >Cancel</button>
+        </div>
+      </div>
+    </div>
+  </ng-template> -->

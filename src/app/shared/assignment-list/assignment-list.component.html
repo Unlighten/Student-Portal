@@ -4,7 +4,9 @@
     (click)="onEditItem(i)"
     (click)="onSelected()"
     style="cursor: pointer"
-    id="{{i}}"
+    id="{ i }}"
+    data-toggle="modal"
+    data-target="#myModal"
   >
     <div class="pull-left">
       <h4 class="list-group-item-heading">{{ assignment.name }}</h4>
