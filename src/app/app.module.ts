@@ -21,6 +21,7 @@ import { CreateAssignmentService } from './admin/create-assignment/create-assign
 import { DataStorageService } from './shared/data-storage.service';
 import { AssignmentListComponent } from './shared/assignment-list/assignment-list.component';
 import { HomeDetailComponent } from './admin/home/home-detail/home-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -37,13 +38,15 @@ import { HomeDetailComponent } from './admin/home/home-detail/home-detail.compon
     LoginComponent,
     AssignmentListComponent,
     HomeDetailComponent
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    NgbModule.forRoot()
   ],
   providers: [
     AuthService,

@@ -13,9 +13,8 @@ export class AuthService {
       firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
-          response.uid == firebaseConfig.adminTokens[0] ? console.log("Admin") : console.log("not Admin")
-
-          this.router.navigate(['/create-assignments']);
+          response.uid == firebaseConfig.adminUIDs[0] ? console.log("Admin") : console.log("not Admin")
+          this.router.navigate(['/home']);
           firebase.auth().currentUser.getIdToken()
             .then(
               (token: string) => {
@@ -45,11 +44,25 @@ export class AuthService {
     return this.token;
   }
 
-  isAuthenticated() {
-    return this.token != null;
+  getID() {
+    return new Promise((resolve, reject) =>{
+      firebase.auth().onAuthStateChanged((user) => {
+        // console.log(2, user.uid)
+        resolve(user.uid)
+      })
+    })    
   }
 
-  isAdminAuthenticated() {
-    return this.token != null;
+  isAuthenticated() {
+    return this.token != null; //if there is a token, return true... it always returns true
   }
-}
+
+  isAdminAuthenticated(uid) {
+    // console.log(4, uid)
+    if (uid == firebaseConfig.adminUIDs[0]){ 
+      // console.log(5, uid);
+      // return uid != null;
+      return this.token != null;
+    }
+    }
+  }

@@ -5,7 +5,7 @@ export default {
     projectId: "student-portal-4e814",
     storageBucket: "student-portal-4e814.appspot.com",
     messagingSenderId: "300575670495",
-    adminTokens: [
+    adminUIDs: [
         "DzkK2qZRung2mamlXPSjHhAUKBB3"
     ]
 };

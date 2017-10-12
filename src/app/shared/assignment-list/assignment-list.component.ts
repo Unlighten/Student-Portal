@@ -1,7 +1,8 @@
-import { Component, OnInit, Injectable, Input } from '@angular/core';
+import { Component, OnInit, Injectable, Input, Output } from '@angular/core';
 import { Assignment } from '../assignment.model';
 import { CreateAssignmentService } from '../../admin/create-assignment/create-assignment.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-assignment-list',
@@ -10,6 +11,8 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class AssignmentListComponent implements OnInit {
   @Input() assignment: Assignment;
+  @Output() assignmentSelected = new Subject<void>();
+
   assignments: Assignment[];
   private subscription: Subscription;
 
@@ -20,6 +23,7 @@ export class AssignmentListComponent implements OnInit {
     this.subscription = this.createAssignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
         this.assignments = assignments;
+        console.log(assignments)
       }
     )
   }
@@ -35,5 +39,4 @@ export class AssignmentListComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }
