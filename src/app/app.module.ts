@@ -17,11 +17,14 @@ import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
+import { AuthNullGuard } from './auth/auth-null-guard.service';
 import { CreateAssignmentService } from './admin/create-assignment/create-assignment.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { AssignmentListComponent } from './shared/assignment-list/assignment-list.component';
 import { HomeDetailComponent } from './admin/home/home-detail/home-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserComponent } from './user/user.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     LoginComponent,
     AssignmentListComponent,
-    HomeDetailComponent
+    HomeDetailComponent,
+    UserComponent,
+    UserProfileComponent
     
   ],
   imports: [
@@ -51,6 +56,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   providers: [
     AuthService,
     AuthGuard,
+    AuthNullGuard,
     CreateAssignmentService,
     DataStorageService
   ],
