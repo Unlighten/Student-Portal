@@ -12,8 +12,6 @@ import { CreateAssignmentService } from '../../../admin/create-assignment/create
 export class AssignmentDetailComponent implements OnInit {
   assignments: Assignment[];
   private subscription: Subscription;
-
-  // closeResult: string; //Angular bootstrap
   
   constructor(private createAssignmentService: CreateAssignmentService, private modalService: NgbModal) { }
 
@@ -25,23 +23,4 @@ export class AssignmentDetailComponent implements OnInit {
       }
     )
   };
-
-//   open(content) { //Angular bootstrap
-//     this.modalService.open(content).result.then((result) => {
-//       this.closeResult = `Close with: ${ result }`;
-//     }, (reason) => {
-//       this.closeResult = `Dismissed ${ this.getDismissReason(reason) }`;
-//     });
-//   }
-
-//   //Angular bootstrap
-//   private getDismissReason(reason: any): string {
-//     if (reason === ModalDismissReasons.ESC) {
-//       return 'by pressing ESC';
-//     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-//       return 'by clicking on a backdrop';
-//     } else {
-//       return `with: ${ reason }`;
-//     }
-//   }
 }

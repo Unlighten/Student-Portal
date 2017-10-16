@@ -18,4 +18,7 @@ export class StudentService {
     
     return this.students.slice(); 
   }
+  getStudent(index: number) { //Pulls in data for individual assignment within Assignment[]
+    return this.students[index];
+  }
 }

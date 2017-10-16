@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
+import { Student } from '../../shared/student.model';
+import { StudentService } from '../../shared/student.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home-student',
@@ -6,8 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-student.component.css']
 })
 export class HomeStudentComponent implements OnInit {
+  students: Student[];
+  @ViewChildren(Student) Student: ElementRef; //Pulls Id from each assignment for individual ref => allows individual assignment for detail 
+  closeResult: string; //Angular bootstrap
   
-  constructor() { }
+  constructor(private getStudent: StudentService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
+
+  onDetail(e) { //(click) of assignment list to get to modal 
+    let data = this.getStudent.getStudent(e.target.id);
+    // console.log(data)
+    console.log("Click worked")
+    // console.log(data.name)
+    // console.log(data.description)
+    // console.log(data.due)
+  }
 }
