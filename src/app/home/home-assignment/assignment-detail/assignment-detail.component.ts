@@ -21,6 +21,6 @@ export class AssignmentDetailComponent implements OnInit {
         this.assignments = assignments;
       }
     )
-    // console.log(e.target.id)
-  };
+    console.log(this.assignments)
+  }
 }

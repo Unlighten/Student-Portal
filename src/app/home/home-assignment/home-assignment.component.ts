@@ -12,13 +12,13 @@ export class HomeAssignmentComponent implements OnInit {
   assignments: Assignment[];
   @ViewChildren(Assignment) Assignment: ElementRef; //Pulls Id from each assignment for individual ref => allows individual assignment for detail 
   
-  constructor(private createAssignment: CreateAssignmentService) { }
+  constructor(private createAssignmentService: CreateAssignmentService) { }
 
   ngOnInit() {
   }
 
   onDetail(e) { //(click) of assignment list to get to modal 
-    let data = this.createAssignment.getAssignment(e.target.id);
+    let data = this.createAssignmentService.getAssignment(e.target.id);
     // console.log(data)
     // console.log("Click worked")
     console.log(data.name)
