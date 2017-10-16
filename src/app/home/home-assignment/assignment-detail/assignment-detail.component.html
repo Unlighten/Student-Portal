@@ -1,19 +1,20 @@
 <div class="modal-dialog">
-  <div class="modal-content">
+  <div class="modal-content" *ngFor="let assignment of assignments">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Name</h4>
+      <h4 class="modal-title">{{ assignment.name }}</h4>
     </div>
     <div class="modal-body">
       <div class="row">
         <div class="col-xs-12">
-          <h5>Desc</h5>
+          <h4>Description Link: </h4>
+          <a href="{{ assignment.description }}" target="blank">{{ assignment.description }}</a>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
           <h4>Due:</h4>
-          <h5>Due</h5>
+          <h5>{{ assignment.due }}</h5>
         </div>
       </div>
       <div class="row">

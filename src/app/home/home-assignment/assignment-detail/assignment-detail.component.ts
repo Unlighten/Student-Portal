@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Assignment } from '../../../shared/assignment.model';
 import { Subscription } from 'rxjs/Subscription';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CreateAssignmentService } from '../../../admin/create-assignment/create-assignment.service';
 
 @Component({
@@ -13,7 +12,7 @@ export class AssignmentDetailComponent implements OnInit {
   assignments: Assignment[];
   private subscription: Subscription;
   
-  constructor(private createAssignmentService: CreateAssignmentService, private modalService: NgbModal) { }
+  constructor(private createAssignmentService: CreateAssignmentService) { }
 
   ngOnInit() { //Creates and infills assignments onInit
     this.assignments = this.createAssignmentService.getAssignments();
@@ -22,5 +21,6 @@ export class AssignmentDetailComponent implements OnInit {
         this.assignments = assignments;
       }
     )
+    // console.log(e.target.id)
   };
 }
