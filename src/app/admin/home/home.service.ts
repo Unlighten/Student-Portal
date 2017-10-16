@@ -9,10 +9,13 @@ export class HomeService {
   
   setData(students: Student[]) { //Fills in data for assignments
     this.students = students;
+    console.log('data',this.students);
     this.studentsChanged.next(this.students.slice());
   }
 
   getStudents() {
+    console.log(this.students);
+    
     return this.students.slice(); 
   }
 }

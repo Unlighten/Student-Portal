@@ -9,7 +9,7 @@ import { Student } from './home.model';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [HomeService]
+  // providers: [HomeService]
 })
 export class HomeComponent implements OnInit {
   selectedAssignment: Assignment; 

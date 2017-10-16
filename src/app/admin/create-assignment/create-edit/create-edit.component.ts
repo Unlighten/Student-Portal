@@ -23,6 +23,7 @@ export class CreateEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.createAssignmentService.startedEditing.subscribe(
       (index: number) => {
+        debugger
         this.editedItemIndex = index;
         this.editMode = true;
         this.editedItem = this.createAssignmentService.getAssignment(index);

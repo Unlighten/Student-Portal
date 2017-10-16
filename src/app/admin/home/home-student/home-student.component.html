@@ -5,7 +5,11 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <a class="list-group-item" *ngFor="let student of students">
+    <a 
+      class="list-group-item clearfix" 
+      *ngFor="let student of students"
+      style="cursor: pointer"
+    >
       <h4 class="list-group-item-heading col-xs-6">{{ student.fname }}</h4>
       <h4 class="list-group-item-heading col-xs-6">{{ student.lname }}</h4>
     </a>
