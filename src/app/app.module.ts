@@ -51,7 +51,7 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
   ],
   providers: [
     AuthService,
