@@ -18,7 +18,7 @@ export class AssignmentListComponent implements OnInit {
 
   constructor(private createAssignmentService: CreateAssignmentService) { }
 
-  ngOnInit() {
+  ngOnInit() { //Infills Assignment[] with FB data
     this.assignments = this.createAssignmentService.getAssignments();
     this.subscription = this.createAssignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
@@ -28,15 +28,15 @@ export class AssignmentListComponent implements OnInit {
     )
   }
 
-  onSelected() {
+  onSelected() { //When clicked, infills edit input bars for edit functionality
     this.createAssignmentService.assignmentSelected.next(this.assignment);
   }
 
-  onEditItem(index: number) {
+  onEditItem(index: number) { //Allows editability and puts at end of existing list
     this.createAssignmentService.startedEditing.next(index);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy() { //When subscription is not detected, automatically disables CRUD ability on data
     this.subscription.unsubscribe();
   }
 }

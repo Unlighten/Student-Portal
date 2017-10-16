@@ -11,11 +11,11 @@ export class CreateAssignmentComponent implements OnInit {
   constructor(private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    this.onFetchData();
+    this.onFetchData(); //Fetches data from FB onInit
   }
 
   onFetchData() {
-    this.dataStorageService.getData();
+    this.dataStorageService.getData(); //Attn. data-storage.service.ts
   }
 
 }

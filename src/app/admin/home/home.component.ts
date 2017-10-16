@@ -11,7 +11,7 @@ import { DataStorageService } from '../../shared/data-storage.service';
   providers: [HomeService]
 })
 export class HomeComponent implements OnInit {
-  selectedAssignment: Assignment;
+  selectedAssignment: Assignment; 
 
   constructor(private createAssignmentService: CreateAssignmentService, private dataStorageService: DataStorageService) { }
 
@@ -19,13 +19,13 @@ export class HomeComponent implements OnInit {
     this.createAssignmentService.assignmentSelected.subscribe(
       (assignment: Assignment) => {
         this.selectedAssignment = assignment;
-      }
+      } //OnInit, Angular sets up looking for assignments array
     );
-    this.onFetchData();
+    this.onFetchData(); //Also fetches assignments from FB
   }
 
   onFetchData() {
-    this.dataStorageService.getData();
+    this.dataStorageService.getData(); //Attn. data-storage.service.ts
   }
 
 }

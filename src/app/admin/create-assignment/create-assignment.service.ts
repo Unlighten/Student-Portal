@@ -6,32 +6,32 @@ export class CreateAssignmentService {
   assignmentsChanged = new Subject<Assignment[]>();
   startedEditing = new Subject<number>();
 
-  private assignments: Assignment[] = [];
+  private assignments: Assignment[] = []; //Sets array for assignments => infilled by FB
 
-  setData(assignments: Assignment[]) {
+  setData(assignments: Assignment[]) { //Fills in data for assignments
     this.assignments = assignments;
     this.assignmentsChanged.next(this.assignments.slice());
   }
 
-  getAssignments() {
+  getAssignments() { //Pulls in data to infill Assignment[]
     return this.assignments.slice();
   }
 
-  getAssignment(index: number) {
+  getAssignment(index: number) { //Pulls in data for individual assignment within Assignment[]
     return this.assignments[index];
   }
 
-  addAssignment(assignment: Assignment) {
+  addAssignment(assignment: Assignment) { //Adds single assignment through add button (create-assignment) => affects FB
     this.assignments.push(assignment);
     this.assignmentsChanged.next(this.assignments.slice());
   }
 
-  updateAssignment(index: number, newAssignment: Assignment) {
+  updateAssignment(index: number, newAssignment: Assignment) { //Updates single assignment through add button (create-assignment) => affects FB
     this.assignments[index] = newAssignment;
     this.assignmentsChanged.next(this.assignments.slice());
   }
 
-  deleteAssignment(index: number) {
+  deleteAssignment(index: number) { //Deletes single assignment through delete button (create-assignment) => affects FB
     this.assignments.splice(index, 1);
     this.assignmentsChanged.next(this.assignments.slice());
   }
