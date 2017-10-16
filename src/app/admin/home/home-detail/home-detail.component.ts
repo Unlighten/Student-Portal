@@ -13,11 +13,11 @@ export class HomeDetailComponent implements OnInit {
   assignments: Assignment[];
   private subscription: Subscription;
 
-  closeResult: string;
+  closeResult: string; //Angular bootstrap
   
   constructor(private createAssignmentService: CreateAssignmentService, private modalService: NgbModal) { }
 
-  ngOnInit() {
+  ngOnInit() { //Creates and infills assignments onInit
     this.assignments = this.createAssignmentService.getAssignments();
     this.subscription = this.createAssignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
@@ -26,7 +26,7 @@ export class HomeDetailComponent implements OnInit {
     )
   };
 
-  open(content) {
+  open(content) { //Angular bootstrap
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Close with: ${ result }`;
     }, (reason) => {
@@ -34,6 +34,7 @@ export class HomeDetailComponent implements OnInit {
     });
   }
 
+  //Angular bootstrap
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

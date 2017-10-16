@@ -9,6 +9,6 @@ export class HomeService {
   ];
 
   getStudents() {
-    return this.students.slice();
+    return this.students.slice(); 
   }
 }

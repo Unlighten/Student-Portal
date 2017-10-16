@@ -8,12 +8,12 @@ import { HomeService } from '../home.service';
   styleUrls: ['./home-student.component.css']
 })
 export class HomeStudentComponent implements OnInit {
-  students: Student[];
+  students: Student[]; //Links to home.model and reminds Angular Student is an array
 
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {
-    this.students = this.homeService.getStudents();
+    this.students = this.homeService.getStudents(); //OnInit, Angular sets up student array
   }
 
 }

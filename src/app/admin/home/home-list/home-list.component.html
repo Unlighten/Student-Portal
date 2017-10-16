@@ -6,6 +6,10 @@
 <div class="row">
   <div class="col-xs-12">
     <app-assignment-list (click)="onDetail($event)"></app-assignment-list>
+    <ng-template>
+      <a data-toggle="modal"
+      data-target="#detailModal"></a>
+    </ng-template>
   </div>
 </div>
 
@@ -13,10 +17,10 @@
 <!-- home-detail content (normal bootstrap) -->
 <div 
   class="modal fade" 
-  id="myModal" 
+  id="detailModal" 
   tabindex="-1" 
   role="dialog" 
-  aria-labelledby="myModalLabel"
+  aria-labelledby="detailModalLabel"
 >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
