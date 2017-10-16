@@ -12,7 +12,6 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class HomeListComponent implements OnInit {
   assignments: Assignment[];
   @ViewChildren(Assignment) Assignment: ElementRef; //Pulls Id from each assignment for individual ref => allows individual assignment for detail 
-
   closeResult: string; //Angular bootstrap
   
   constructor(private createAssignment: CreateAssignmentService, private modalService: NgbModal) { }
@@ -29,13 +28,12 @@ export class HomeListComponent implements OnInit {
     console.log(data.due)
   }
 
-  open(content) { //Angular bootstrap option
+  open(content) {
     this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Close with: ${ result }`;
+      this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.closeResult = `Dismissed ${ this.getDismissReason(reason) }`;
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-    console.log(content._parentView.component.createAssignment.assignments)
   }
 
   //Angular bootstrap option

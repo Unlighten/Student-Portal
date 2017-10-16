@@ -52,7 +52,7 @@ import { HomeService } from './admin/home/home.service';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
   ],
   providers: [
     AuthService,
