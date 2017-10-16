@@ -25,6 +25,7 @@ import { HomeDetailComponent } from './admin/home/home-detail/home-detail.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserComponent } from './user/user.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { HomeService } from './admin/home/home.service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
     AuthGuard,
     AuthNullGuard,
     CreateAssignmentService,
-    DataStorageService
+    DataStorageService,
+    HomeService
   ],
   bootstrap: [AppComponent]
 })

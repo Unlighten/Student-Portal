@@ -3,13 +3,16 @@ import { Http, Response } from '@angular/http';
 import { CreateAssignmentService } from "../admin/create-assignment/create-assignment.service";
 import { AuthService } from "../auth/auth.service";
 import { Assignment } from "./assignment.model";
+import { Student } from "../admin/home/home.model";
+import { HomeService } from "../admin/home/home.service";
 
 @Injectable()
 export class DataStorageService {
   constructor(
     private http: Http, 
     private createAssignmentService: CreateAssignmentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private homeService: HomeService
   ) {}
 
   storeData() { //stores data via preset criteria (name, description, due)
@@ -24,5 +27,13 @@ export class DataStorageService {
         this.createAssignmentService.setData(assignments); //looks to infill where criteria fits Assignment[]
       }
     );
+
+    this.http.get('https://student-portal-4e814.firebaseio.com/users.json')
+    .subscribe(
+      (response: Response) => {
+        const students: Student[] = response.json();
+        this.homeService.setData(students);
+      }
+    )
   }
 }

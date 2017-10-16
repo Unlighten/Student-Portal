@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Assignment } from '../assignment.model';
 import { CreateAssignmentService } from '../../admin/create-assignment/create-assignment.service';
 import { Subscription } from 'rxjs/Subscription';
