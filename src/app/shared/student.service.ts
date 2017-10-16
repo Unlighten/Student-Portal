@@ -1,7 +1,7 @@
-import { Student } from "./home.model";
 import { Subject } from "rxjs/Subject";
+import { Student } from "./student.model";
 
-export class HomeService {
+export class StudentService {
   studentSelected = new Subject<Student>();  
   studentsChanged = new Subject<Student[]>();
 

@@ -1,20 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Student } from '../home.model';
-import { HomeService } from '../home.service';
+import { Student } from '../student.model';
 import { Subscription } from 'rxjs/Subscription';
+import { StudentService } from '../student.service';
 
 @Component({
-  selector: 'app-home-student',
-  templateUrl: './home-student.component.html',
-  styleUrls: ['./home-student.component.css']
+  selector: 'app-student-list',
+  templateUrl: './student-list.component.html',
+  styleUrls: ['./student-list.component.css']
 })
-export class HomeStudentComponent implements OnInit {
+export class StudentListComponent implements OnInit {
   @Input() student: Student;
   
   students: Student[]; //Links to home.model and reminds Angular Student is an array
   private subscription: Subscription;
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: StudentService) { }
 
   ngOnInit() {
     this.students = this.homeService.getStudents(); //OnInit, Angular sets up student array

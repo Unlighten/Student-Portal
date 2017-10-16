@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +12,10 @@ export class NavbarComponent {
     private authService: AuthService
   ) {}
 
-  @Output() featureSelected = new EventEmitter<string>();
+  @Output() featureSelected = new Subject<string>();
 
   onSelect(feature: string) {
-    this.featureSelected.emit(feature);
+    this.featureSelected.next(feature);
   }
 
   onLogout() {

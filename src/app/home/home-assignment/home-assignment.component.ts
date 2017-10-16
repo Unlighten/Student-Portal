@@ -1,15 +1,15 @@
 import { Component, OnInit, Output, ViewChildren, ElementRef } from '@angular/core';
-import { Assignment } from '../../../shared/assignment.model';
 import { Subject } from 'rxjs/Subject';
-import { CreateAssignmentService } from '../../create-assignment/create-assignment.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Assignment } from '../../shared/assignment.model';
+import { CreateAssignmentService } from '../../admin/create-assignment/create-assignment.service';
 
 @Component({
-  selector: 'app-home-list',
-  templateUrl: './home-list.component.html',
-  styleUrls: ['./home-list.component.css']
+  selector: 'app-home-assignment',
+  templateUrl: './home-assignment.component.html',
+  styleUrls: ['./home-assignment.component.css']
 })
-export class HomeListComponent implements OnInit {
+export class HomeAssignmentComponent implements OnInit {
   assignments: Assignment[];
   @ViewChildren(Assignment) Assignment: ElementRef; //Pulls Id from each assignment for individual ref => allows individual assignment for detail 
   closeResult: string; //Angular bootstrap

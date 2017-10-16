@@ -3,8 +3,8 @@ import { Http, Response } from '@angular/http';
 import { CreateAssignmentService } from "../admin/create-assignment/create-assignment.service";
 import { AuthService } from "../auth/auth.service";
 import { Assignment } from "./assignment.model";
-import { Student } from "../admin/home/home.model";
-import { HomeService } from "../admin/home/home.service";
+import { StudentService } from "./student.service";
+import { Student } from "./student.model";
 
 @Injectable()
 export class DataStorageService {
@@ -12,7 +12,7 @@ export class DataStorageService {
     private http: Http, 
     private createAssignmentService: CreateAssignmentService,
     private authService: AuthService,
-    private homeService: HomeService
+    private homeService: StudentService
   ) {}
 
   storeData() { //stores data via preset criteria (name, description, due)
