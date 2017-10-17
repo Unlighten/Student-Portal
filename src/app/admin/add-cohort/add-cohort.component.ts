@@ -42,7 +42,7 @@ export class AddCohortComponent implements OnInit {
   }
 
   onSaveData() {
-    this.dataStorageService.storeData().subscribe(
+    this.dataStorageService.storeCohortData().subscribe(
       (response: Response) => {
         console.log(response)
       }

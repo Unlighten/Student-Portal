@@ -14,7 +14,7 @@ export class DataStorageService {
     private createAssignmentService: CreateAssignmentService,
     private authService: AuthService,
     private homeService: StudentService,
-    private addCohortService: AddCohortService
+    private addCohortService: AddCohortService,
     private studentService: StudentService
   ) {}
 
@@ -42,5 +42,9 @@ export class DataStorageService {
         this.studentService.setStudentData(students);
       }
     );
+  }
+
+  storeCohortData() {
+    return this.http.put('https://student-portal-4e814.firebaseio.com/cohorts.json', this.addCohortService.getCohorts());     
   }
 }
