@@ -25,6 +25,8 @@ import { AssignmentDetailComponent } from './home/home-assignment/assignment-det
 import { StudentService } from './shared/student.service';
 import { StudentDetailComponent } from './home/home-student/student-detail/student-detail.component';
 import { StudentListComponent } from './shared/student-list/student-list.component';
+import { AddCohortComponent } from './admin/add-cohort/add-cohort.component';
+import { AddCohortService } from './admin/add-cohort/add-cohort.service';
 import { CreateStudentComponent } from './admin/create-student/create-student.component';
 import { EditStudentComponent } from './admin/create-student/edit-student/edit-student.component';
 
@@ -45,6 +47,7 @@ import { EditStudentComponent } from './admin/create-student/edit-student/edit-s
     AssignmentDetailComponent,
     StudentListComponent,
     StudentDetailComponent,
+    AddCohortComponent
     CreateStudentComponent,
     EditStudentComponent
   ],
@@ -61,7 +64,8 @@ import { EditStudentComponent } from './admin/create-student/edit-student/edit-s
     AuthNullGuard,
     CreateAssignmentService,
     DataStorageService,
-    StudentService
+    StudentService,
+    AddCohortService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,18 @@
+<div class="col-xs-4"></div>
+<div class='col-xs-4'>
+  <form (ngSubmit)='onSubmit(f)' #f='ngForm'>
+    <label>Cohort Name</label>
+    <input 
+      type='text'
+      id='cohortName'
+      class='form-control'
+      name='cohortName'
+      ngModel
+      required />
+      <button
+        class='btn btn-success'
+        type='submit'
+        [disabled]='!f.valid'  
+      >Add Cohort</button>
+  </form>
+</div>
