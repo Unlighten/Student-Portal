@@ -21,8 +21,9 @@ export class HomeAssignmentComponent implements OnInit {
     let data = this.createAssignmentService.getAssignment(e.target.id);
     // console.log(data)
     // console.log("Click worked")
-    console.log(data.name)
-    console.log(data.description)
-    console.log(data.due)
+    // console.log(data.name)
+    // console.log(data.description)
+    // console.log(data.due)
+    console.log(e.target.id);
   };
 }
