@@ -20,6 +20,7 @@ export class HomeAssignmentComponent implements OnInit {
   onDetail(e) { //(click) of assignment list to get to modal 
     let data = this.createAssignmentService.getAssignment(e.target.id);
     // console.log(data)
+    // console.log(Assignment);
     // console.log("Click worked")
     // console.log(data.name)
     // console.log(data.description)

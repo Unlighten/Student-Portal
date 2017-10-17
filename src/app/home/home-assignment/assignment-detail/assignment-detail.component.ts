@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+// import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Assignment } from '../../../shared/assignment.model';
 import { Subscription } from 'rxjs/Subscription';
 import { CreateAssignmentService } from '../../../admin/create-assignment/create-assignment.service';
@@ -9,12 +10,14 @@ import { CreateAssignmentService } from '../../../admin/create-assignment/create
   styleUrls: ['./assignment-detail.component.css']
 })
 export class AssignmentDetailComponent implements OnInit {
+  // @Input()
   assignments: Assignment[];
   private subscription: Subscription;
   
   constructor(private createAssignmentService: CreateAssignmentService) { }
 
-  ngOnInit() { //Creates and infills assignments onInit
+  ngOnInit(id?) { //Creates and infills assignments onInit
+    console.log(id)
     this.assignments = this.createAssignmentService.getAssignments();
     this.subscription = this.createAssignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
@@ -22,5 +25,8 @@ export class AssignmentDetailComponent implements OnInit {
       }
     )
     console.log(this.assignments)
+  }
+  openModal(p){
+    this.assignments[0]
   }
 }
