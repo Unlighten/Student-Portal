@@ -21,7 +21,7 @@ export class StudentListComponent implements OnInit {
     this.subscription = this.homeService.studentsChanged.subscribe(
       (students: Student[]) => {
         this.students = students;
-        console.log("should be here",students)
+        // console.log("should be here",students)
       }
     );
   }

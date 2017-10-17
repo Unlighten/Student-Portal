@@ -23,7 +23,7 @@ export class AssignmentListComponent implements OnInit {
     this.subscription = this.createAssignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
         this.assignments = assignments;
-        console.log(assignments)
+        // console.log(assignments)
       }
     )
   }

@@ -20,7 +20,6 @@ import { AuthNullGuard } from './auth/auth-null-guard.service';
 import { CreateAssignmentService } from './admin/create-assignment/create-assignment.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { AssignmentListComponent } from './shared/assignment-list/assignment-list.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeAssignmentComponent } from './home/home-assignment/home-assignment.component';
 import { AssignmentDetailComponent } from './home/home-assignment/assignment-detail/assignment-detail.component';
 import { StudentService } from './shared/student.service';
@@ -52,7 +51,6 @@ import { StudentListComponent } from './shared/student-list/student-list.compone
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
-    NgbModule.forRoot(),
   ],
   providers: [
     AuthService,
