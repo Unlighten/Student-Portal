@@ -5,6 +5,7 @@ import { AuthService } from "../auth/auth.service";
 import { Assignment } from "./assignment.model";
 import { StudentService } from "./student.service";
 import { Student } from "./student.model";
+import { AddCohortService } from "../admin/add-cohort/add-cohort.service";
 
 @Injectable()
 export class DataStorageService {
@@ -12,7 +13,8 @@ export class DataStorageService {
     private http: Http, 
     private createAssignmentService: CreateAssignmentService,
     private authService: AuthService,
-    private homeService: StudentService
+    private homeService: StudentService,
+    private addCohortService: AddCohortService
   ) {}
 
   storeData() { //stores data via preset criteria (name, description, due)

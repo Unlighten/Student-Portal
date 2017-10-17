@@ -25,6 +25,8 @@ import { AssignmentDetailComponent } from './home/home-assignment/assignment-det
 import { StudentService } from './shared/student.service';
 import { StudentDetailComponent } from './home/home-student/student-detail/student-detail.component';
 import { StudentListComponent } from './shared/student-list/student-list.component';
+import { AddCohortComponent } from './admin/add-cohort/add-cohort.component';
+import { AddCohortService } from './admin/add-cohort/add-cohort.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { StudentListComponent } from './shared/student-list/student-list.compone
     AssignmentListComponent,
     AssignmentDetailComponent,
     StudentListComponent,
-    StudentDetailComponent
+    StudentDetailComponent,
+    AddCohortComponent
     
   ],
   imports: [
@@ -58,7 +61,8 @@ import { StudentListComponent } from './shared/student-list/student-list.compone
     AuthNullGuard,
     CreateAssignmentService,
     DataStorageService,
-    StudentService
+    StudentService,
+    AddCohortService
   ],
   bootstrap: [AppComponent]
 })
