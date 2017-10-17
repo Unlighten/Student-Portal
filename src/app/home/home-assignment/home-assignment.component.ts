@@ -12,7 +12,6 @@ import { CreateAssignmentService } from '../../admin/create-assignment/create-as
 export class HomeAssignmentComponent implements OnInit {
   assignments: Assignment[];
   @ViewChildren(Assignment) Assignment: ElementRef; //Pulls Id from each assignment for individual ref => allows individual assignment for detail 
-  closeResult: string; //Angular bootstrap
   
   constructor(private createAssignment: CreateAssignmentService, private modalService: NgbModal) { }
 
