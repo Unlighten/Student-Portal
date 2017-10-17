@@ -6,6 +6,7 @@ import { Assignment } from "./assignment.model";
 import { StudentService } from "./student.service";
 import { Student } from "./student.model";
 import { AddCohortService } from "../admin/add-cohort/add-cohort.service";
+import { Cohort } from "../admin/add-cohort/cohort.model";
 
 @Injectable()
 export class DataStorageService {
@@ -40,6 +41,14 @@ export class DataStorageService {
       (response: Response) => {
         const students: Student[] = response.json();
         this.studentService.setStudentData(students);
+      }
+    );
+
+    this.http.get('https://student-portal-4e814.firebaseio.com/cohorts.json')
+    .subscribe( //since .subscribe is here, no need for each instance of getData
+      (response: Response) => {
+        const cohorts: Cohort[] = response.json(); //json readable by Angular
+        this.addCohortService.setCohortData(cohorts); //looks to infill where criteria fits Assignment[]
       }
     );
   }

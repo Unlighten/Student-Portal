@@ -17,6 +17,8 @@ export class AddCohortComponent implements OnInit {
   editedItemIndex: number;
   editedItem: Cohort;
 
+  cohorts: Cohort[];
+
   constructor(private dataStorageService: DataStorageService, private addCohortService: AddCohortService) { }
 
   ngOnInit() {
@@ -32,6 +34,14 @@ export class AddCohortComponent implements OnInit {
     //     })
     //   }
     // );
+    this.cohorts = this.addCohortService.getCohorts();
+    this.subscription = this.addCohortService.cohortsChanged.subscribe(
+      (cohorts: Cohort[]) => {
+        this.cohorts = cohorts;
+      }
+    )
+    console.log(this.cohorts)
+
   }
 
   onSubmit(form: NgForm) {
