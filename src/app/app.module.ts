@@ -43,7 +43,6 @@ import { StudentListComponent } from './shared/student-list/student-list.compone
     AssignmentDetailComponent,
     StudentListComponent,
     StudentDetailComponent
-    
   ],
   imports: [
     BrowserModule,

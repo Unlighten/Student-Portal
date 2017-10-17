@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
 import { Student } from '../../shared/student.model';
 import { StudentService } from '../../shared/student.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home-student',
