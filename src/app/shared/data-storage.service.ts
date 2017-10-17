@@ -14,7 +14,7 @@ export class DataStorageService {
     private createAssignmentService: CreateAssignmentService,
     private authService: AuthService,
     private homeService: StudentService,
-    private addCohortService: AddCohortService
+    private addCohortService: AddCohortService,
     private studentService: StudentService
   ) {}
 

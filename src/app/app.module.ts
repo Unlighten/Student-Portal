@@ -47,7 +47,7 @@ import { EditStudentComponent } from './admin/create-student/edit-student/edit-s
     AssignmentDetailComponent,
     StudentListComponent,
     StudentDetailComponent,
-    AddCohortComponent
+    AddCohortComponent,
     CreateStudentComponent,
     EditStudentComponent
   ],
