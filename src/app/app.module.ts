@@ -25,6 +25,8 @@ import { AssignmentDetailComponent } from './home/home-assignment/assignment-det
 import { StudentService } from './shared/student.service';
 import { StudentDetailComponent } from './home/home-student/student-detail/student-detail.component';
 import { StudentListComponent } from './shared/student-list/student-list.component';
+import { CreateStudentComponent } from './admin/create-student/create-student.component';
+import { EditStudentComponent } from './admin/create-student/edit-student/edit-student.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +44,9 @@ import { StudentListComponent } from './shared/student-list/student-list.compone
     AssignmentListComponent,
     AssignmentDetailComponent,
     StudentListComponent,
-    StudentDetailComponent
-    
+    StudentDetailComponent,
+    CreateStudentComponent,
+    EditStudentComponent
   ],
   imports: [
     BrowserModule,

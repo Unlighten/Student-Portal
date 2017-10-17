@@ -50,7 +50,7 @@ export class CreateEditComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataStorageService.storeData().subscribe(
+    this.dataStorageService.storeAssignmentData().subscribe(
       (response: Response) => {
         console.log(response);
       }

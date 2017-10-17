@@ -4,21 +4,37 @@ import { Student } from "./student.model";
 export class StudentService {
   studentSelected = new Subject<Student>();  
   studentsChanged = new Subject<Student[]>();
+  startedEditing = new Subject<number>();
 
   private students: Student[] = [];//Sets array for assignments => infilled by FB
   
-  setData(students: Student[]) { //Fills in data for assignments
+  setStudentData(students: Student[]) { //Fills in data for assignments
     this.students = students;
     // console.log('data',this.students);
     this.studentsChanged.next(this.students.slice());
   }
 
-  getStudents() {
+  getStudents() { //Pulls in data to infill Student[]
     // console.log(this.students);
-    
     return this.students.slice(); 
   }
-  getStudent(index: number) { //Pulls in data for individual assignment within Assignment[]
+  
+  getStudent(index: number) { //Pulls in data for individual student within Student[]
     return this.students[index];
+  }
+
+  addStudent(student: Student) { //Adds single student through add button (edit-student) => affects FB
+    this.students.push(student);
+    this.studentsChanged.next(this.students.slice());
+  }
+
+  updateStudent(index: number, newStudent: Student) { //Updates single student through add button (edit-student) => affects FB
+    this.students[index] = newStudent;
+    this.studentsChanged.next(this.students.slice());
+  }
+
+  deleteStudent(index: number) { //Deletes single student through delete button (edit-student) => affects FB
+    this.students.splice(index, 1);
+    this.studentsChanged.next(this.students.slice());
   }
 }

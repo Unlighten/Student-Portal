@@ -12,11 +12,15 @@ export class DataStorageService {
     private http: Http, 
     private createAssignmentService: CreateAssignmentService,
     private authService: AuthService,
-    private homeService: StudentService
+    private studentService: StudentService
   ) {}
 
-  storeData() { //stores data via preset criteria (name, description, due)
+  storeAssignmentData() { //stores data via preset criteria (name, description, due)
     return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.createAssignmentService.getAssignments()); 
+  }
+
+  storeStudentData() {
+    return this.http.put('https://student-portal-4e814.firebaseio.com/users.json', this.studentService.getStudents()); 
   }
 
   getData() { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
@@ -24,7 +28,7 @@ export class DataStorageService {
     .subscribe( //since .subscribe is here, no need for each instance of getData
       (response: Response) => {
         const assignments: Assignment[] = response.json(); //json readable by Angular
-        this.createAssignmentService.setData(assignments); //looks to infill where criteria fits Assignment[]
+        this.createAssignmentService.setAssignmentData(assignments); //looks to infill where criteria fits Assignment[]
       }
     );
 
@@ -32,8 +36,8 @@ export class DataStorageService {
     .subscribe(
       (response: Response) => {
         const students: Student[] = response.json();
-        this.homeService.setData(students);
+        this.studentService.setStudentData(students);
       }
-    )
+    );
   }
 }
