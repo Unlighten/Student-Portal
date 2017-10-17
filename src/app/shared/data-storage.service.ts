@@ -43,4 +43,8 @@ export class DataStorageService {
       }
     );
   }
+
+  storeCohortData() {
+    return this.http.put('https://student-portal-4e814.firebaseio.com/cohorts.json', this.addCohortService.getCohorts());     
+  }
 }

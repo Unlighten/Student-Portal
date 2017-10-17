@@ -14,7 +14,11 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthNullGuard || AuthGuard]  },
   { path: 'login', component: LoginComponent },
   { path: 'create-assignments', component: CreateAssignmentComponent, canActivate: [AuthGuard] },
+<<<<<<< HEAD
   { path: 'add-cohort', component: AddCohortComponent, canActivate: [AuthGuard] },
+=======
+  { path: 'add-cohort', component: AddCohortComponent, canActivate: [AuthGuard] },  
+>>>>>>> 1049ff1e7bcf8a71350acca04a2ddc02018a34d0
   { path: 'create-students', component: CreateStudentComponent, canActivate: [AuthGuard] }
 ];
 
