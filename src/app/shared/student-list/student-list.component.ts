@@ -26,6 +26,7 @@ export class StudentListComponent implements OnInit {
         // console.log("should be here",students)
       }
     );
+    console.log(this.students)
   }
 
   onSelected() {

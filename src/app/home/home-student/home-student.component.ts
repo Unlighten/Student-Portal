@@ -9,21 +9,17 @@ import { StudentService } from '../../shared/student.service';
 })
 export class HomeStudentComponent implements OnInit {
   students: Student[];
-  @ViewChildren(Student) Student: ElementRef; //Pulls Id from each assignment for individual ref => allows individual assignment for detail 
-  closeResult: string; //Angular bootstrap
-  
+  @ViewChildren(Student) Student: ElementRef; //Pulls Id from each student for individual ref => allows individual student for detail 
+
   constructor(private getStudent: StudentService) { }
 
   ngOnInit() {
-
+    // console.log(this.students)    
   }
 
-  onDetail(e) { //(click) of assignment list to get to modal 
+  onDetail(e) { //(click) of student list to get to modal 
     let data = this.getStudent.getStudent(e.target.id);
-    // console.log(data)
+    console.log(e.target.id)
     console.log("Click worked")
-    // console.log(data.name)
-    // console.log(data.description)
-    // console.log(data.due)
   }
 }

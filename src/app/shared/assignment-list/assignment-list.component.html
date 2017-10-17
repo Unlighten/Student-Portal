@@ -1,16 +1,16 @@
-  <a 
-    class="list-group-item clearfix"
-    *ngFor="let assignment of assignments, let i = index"
-    (click)="onEditItem(i)"
-    (click)="onSelected()"
-    style="cursor: pointer"
-    id="{{i}}"
-  >
-    <div class="pull-left col-xs-6">
-      <h4 class="list-group-item-heading">{{ assignment.name }}</h4>
-      <p class="list-group-item-text">{{ assignment.description }}</p>
-    </div>
-    <div class="pull-right">
-      <p class="list-group-item-text"><b>Due:</b><br>{{ assignment.due }}</p>
-    </div>
-  </a>
+<a 
+  class="list-group-item clearfix"
+  *ngFor="let assignment of assignments, let i = index"
+  (click)="onEditItem(i)"
+  (click)="onSelected()"
+  style="cursor: pointer"
+  id="{{i}}"
+>
+  <div class="pull-left col-xs-6">
+    <h4 class="list-group-item-heading">{{ assignment.name }}</h4>
+    <p class="list-group-item-text">{{ assignment.description }}</p>
+  </div>
+  <div class="pull-right">
+    <p class="list-group-item-text"><b>Due:</b><br>{{ assignment.due }}</p>
+  </div>
+</a>
