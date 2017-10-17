@@ -27,6 +27,8 @@ import { StudentDetailComponent } from './home/home-student/student-detail/stude
 import { StudentListComponent } from './shared/student-list/student-list.component';
 import { AddCohortComponent } from './admin/add-cohort/add-cohort.component';
 import { AddCohortService } from './admin/add-cohort/add-cohort.service';
+import { CreateStudentComponent } from './admin/create-student/create-student.component';
+import { EditStudentComponent } from './admin/create-student/edit-student/edit-student.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { AddCohortService } from './admin/add-cohort/add-cohort.service';
     StudentListComponent,
     StudentDetailComponent,
     AddCohortComponent
-    
+    CreateStudentComponent,
+    EditStudentComponent
   ],
   imports: [
     BrowserModule,

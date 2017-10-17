@@ -8,7 +8,7 @@ export class CreateAssignmentService {
 
   private assignments: Assignment[] = []; //Sets array for assignments => infilled by FB
 
-  setData(assignments: Assignment[]) { //Fills in data for assignments
+  setAssignmentData(assignments: Assignment[]) { //Fills in data for assignments
     this.assignments = assignments;
     this.assignmentsChanged.next(this.assignments.slice());
   }
