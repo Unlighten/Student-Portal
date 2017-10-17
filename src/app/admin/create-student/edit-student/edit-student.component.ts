@@ -5,6 +5,7 @@ import { Student } from '../../../shared/student.model';
 import { StudentService } from '../../../shared/student.service';
 import { DataStorageService } from '../../../shared/data-storage.service';
 import { Response } from '@angular/http';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-edit-student',
@@ -53,6 +54,12 @@ export class EditStudentComponent implements OnInit {
     }
     this.editMode = false;
     form.reset();
+
+    firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
+      .catch(function(error) {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+      })
   }
 
   onSaveData() {
