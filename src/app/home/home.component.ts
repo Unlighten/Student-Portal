@@ -4,6 +4,8 @@ import { StudentService } from '../shared/student.service';
 import { CreateAssignmentService } from '../admin/create-assignment/create-assignment.service';
 import { DataStorageService } from '../shared/data-storage.service';
 import { Student } from '../shared/student.model';
+import { AddCohortService } from '../admin/add-cohort/add-cohort.service';
+import { Cohort } from '../admin/add-cohort/cohort.model';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ import { Student } from '../shared/student.model';
 export class HomeComponent implements OnInit {
   selectedAssignment: Assignment; 
   selectedStudent: Student;
-
+  
   constructor(private createAssignmentService: CreateAssignmentService, private studentService: StudentService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
@@ -28,7 +30,6 @@ export class HomeComponent implements OnInit {
         this.selectedStudent = student;
       }
     )
-
     this.onFetchData(); //Also fetches assignments from FB
   }
 

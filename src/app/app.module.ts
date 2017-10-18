@@ -29,6 +29,7 @@ import { AddCohortComponent } from './admin/add-cohort/add-cohort.component';
 import { AddCohortService } from './admin/add-cohort/add-cohort.service';
 import { CreateStudentComponent } from './admin/create-student/create-student.component';
 import { EditStudentComponent } from './admin/create-student/edit-student/edit-student.component';
+import { SelectCohortComponent } from './admin/select-cohort/select-cohort.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { EditStudentComponent } from './admin/create-student/edit-student/edit-s
     StudentDetailComponent,
     AddCohortComponent,
     CreateStudentComponent,
-    EditStudentComponent
+    EditStudentComponent,
+    SelectCohortComponent
   ],
   imports: [
     BrowserModule,
