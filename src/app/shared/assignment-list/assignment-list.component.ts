@@ -25,11 +25,19 @@ export class AssignmentListComponent implements OnInit {
         this.assignments = assignments;
         // console.log(assignments)
       }
-    )
+    );
   }
 
   onSelected() { //When clicked, infills edit input bars for edit functionality
     this.createAssignmentService.assignmentSelected.next(this.assignment);
+  }
+
+  bindElementToAssignment(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list
+    if (data.target.id) { //prevents errors when hitting the links directly
+      this.createAssignmentService.getAssignmentById(data.target.id);
+    } else { //prevents errors within the modal itself
+      
+    }
   }
 
   onEditItem(index: number) { //Allows editability and puts at end of existing list
