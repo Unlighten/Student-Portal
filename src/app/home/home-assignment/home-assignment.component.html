@@ -5,12 +5,12 @@
     </div>
   <div class="row">
     <div class="col-xs-12">
-      <app-assignment-list (click)="onDetail($event)" data-toggle="modal" data-target="#assignmentDetailModal">
-        <ng-template [ngIf]="true">
-          <a data-toggle="modal"
-          data-target="#assignmentDetailModal"></a>
-        </ng-template>
-      </app-assignment-list>
+      <app-assignment-list 
+        (click)="list.bindElementToAssignment($event)" 
+        #list 
+        data-toggle="modal" 
+        data-target="#assignmentDetailModal"
+      ></app-assignment-list>
     </div>
   </div>
 

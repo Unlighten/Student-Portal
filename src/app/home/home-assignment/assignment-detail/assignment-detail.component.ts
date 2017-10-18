@@ -11,6 +11,11 @@ import { CreateAssignmentService } from '../../../admin/create-assignment/create
 export class AssignmentDetailComponent implements OnInit {
   assignments: Assignment[];
   private subscription: Subscription;
+  assignment: Assignment = { //Empty object to fill with modal click
+    name: '',
+    description: '',
+    due: ''
+  };
   
   constructor(private createAssignmentService: CreateAssignmentService) { }
 
@@ -20,7 +25,11 @@ export class AssignmentDetailComponent implements OnInit {
       (assignments: Assignment[]) => {
         this.assignments = assignments;
       }
-    )
-    console.log(this.assignments)
+    );
+    console.log(this.assignments);
+
+    this.createAssignmentService.oneAssignment.subscribe(data => this.assignment = data); //Modal component => Attn. createAssignmentService
   }
+
 }
+

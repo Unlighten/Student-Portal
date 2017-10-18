@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StudentService } from '../../../shared/student.service'
 import { Student } from '../../../shared/student.model'
 import { Subscription } from 'rxjs/Subscription'
@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/Subscription'
   styleUrls: ['./student-detail.component.css']
 })
 export class StudentDetailComponent implements OnInit {
+  @Input() student: Student;
   students: Student[];
   private subscription: Subscription;
 
