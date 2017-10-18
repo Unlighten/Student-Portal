@@ -34,6 +34,17 @@
               required
             >
         </div>
+        <div class='col-xs-3 form-group move-left'>
+            <select 
+              class="form-control"
+              type='text'
+              id='cohort'
+              name='cohort'
+              ngModel
+              required>
+                <option *ngFor='let cohort of cohorts'>{{ cohort }}</option>
+            </select>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-12">

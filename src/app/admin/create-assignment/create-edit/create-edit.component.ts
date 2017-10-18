@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { DataStorageService } from '../../../shared/data-storage.service';
 import { Response } from '@angular/http';
+import { Cohort } from '../../add-cohort/cohort.model';
+import { AddCohortService } from '../../add-cohort/add-cohort.service';
 
 @Component({
   selector: 'app-create-edit',
@@ -17,8 +19,9 @@ export class CreateEditComponent implements OnInit, OnDestroy {
   editMode = false;
   editedItemIndex: number;
   editedItem: Assignment;
-
-  constructor(private createAssignmentService: CreateAssignmentService, private dataStorageService: DataStorageService) { }
+  cohorts: Cohort[]
+  
+  constructor(private createAssignmentService: CreateAssignmentService, private dataStorageService: DataStorageService, private addCohortService: AddCohortService) { }
 
   ngOnInit() {
     this.subscription = this.createAssignmentService.startedEditing.subscribe(
@@ -29,15 +32,17 @@ export class CreateEditComponent implements OnInit, OnDestroy {
         this.createAssignmentForm.setValue({
           name: this.editedItem.name,
           desc: this.editedItem.description,
-          due: this.editedItem.due
+          due: this.editedItem.due,
+          cohort: this.editedItem.cohort
         })
       }
     );
+    this.cohorts = this.addCohortService.getCohorts();        
   }
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newAssignment = new Assignment(value.name, value.desc, value.due);
+    const newAssignment = new Assignment(value.name, value.desc, value.due, value.cohort);
     if (this.editMode) {
       this.createAssignmentService.updateAssignment(this.editedItemIndex, newAssignment);
       this.onSaveData();
