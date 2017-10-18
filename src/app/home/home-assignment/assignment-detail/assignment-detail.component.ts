@@ -14,7 +14,8 @@ export class AssignmentDetailComponent implements OnInit {
   assignment: Assignment = { //Empty object to fill with modal click
     name: '',
     description: '',
-    due: ''
+    due: '',
+    cohort: ''
   };
   
   constructor(private createAssignmentService: CreateAssignmentService) { }

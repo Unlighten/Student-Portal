@@ -34,6 +34,7 @@ export class EditStudentComponent implements OnInit {
           fname: this.editedItem.fname,
           lname: this.editedItem.lname,
           email: this.editedItem.email,
+          password: 'nonulls',
           cohort: this.editedItem.cohort
         })
       }
