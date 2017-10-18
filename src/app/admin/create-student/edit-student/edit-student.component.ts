@@ -34,7 +34,7 @@ export class EditStudentComponent implements OnInit {
           fname: this.editedItem.fname,
           lname: this.editedItem.lname,
           email: this.editedItem.email,
-          password: this.editedItem.password
+          cohort: this.editedItem.cohort
         })
       }
     );
@@ -47,7 +47,7 @@ export class EditStudentComponent implements OnInit {
       value.fname, 
       value.lname, 
       value.email, 
-      value.password
+      value.cohort
     );
     if (this.editMode) {
       this.studentService.updateStudent(this.editedItemIndex, newStudent);
