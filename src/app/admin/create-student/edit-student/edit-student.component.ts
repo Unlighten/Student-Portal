@@ -30,8 +30,7 @@ export class EditStudentComponent implements OnInit {
         this.createAssignmentForm.setValue({
           fname: this.editedItem.fname,
           lname: this.editedItem.lname,
-          email: this.editedItem.email,
-          password: this.editedItem.password
+          email: this.editedItem.email
         })
       }
     );
@@ -42,8 +41,7 @@ export class EditStudentComponent implements OnInit {
     const newStudent = new Student(
       value.fname, 
       value.lname, 
-      value.email, 
-      value.password
+      value.email
     );
     if (this.editMode) {
       this.studentService.updateStudent(this.editedItemIndex, newStudent);

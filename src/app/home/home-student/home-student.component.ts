@@ -8,18 +8,18 @@ import { StudentService } from '../../shared/student.service';
   styleUrls: ['./home-student.component.css']
 })
 export class HomeStudentComponent implements OnInit {
-  students: Student[];
+  public students: Student[];
   @ViewChildren(Student) Student: ElementRef; //Pulls Id from each student for individual ref => allows individual student for detail 
 
-  constructor(private getStudent: StudentService) { }
+  constructor(public getStudent: StudentService) { }
 
   ngOnInit() {
     // console.log(this.students)    
   }
 
   onDetail(e) { //(click) of student list to get to modal 
-    let data = this.getStudent.getStudent(e.target.id);
-    console.log(e.target.id)
+    let data = this.getStudent.students;
+    console.log(data)
     console.log("Click worked")
   }
 }

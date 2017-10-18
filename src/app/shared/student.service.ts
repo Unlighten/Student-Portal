@@ -6,7 +6,7 @@ export class StudentService {
   studentsChanged = new Subject<Student[]>();
   startedEditing = new Subject<number>();
 
-  private students: Student[] = [];//Sets array for students => infilled by FB
+  public students: Student[] = [];//Sets array for students => infilled by FB
   
   setStudentData(students: Student[]) { //Fills in data for students
     this.students = students;
