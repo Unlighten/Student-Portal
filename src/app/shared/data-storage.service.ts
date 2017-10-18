@@ -23,6 +23,10 @@ export class DataStorageService {
     return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.createAssignmentService.getAssignments()); 
   }
 
+  storeCompletedAssignmentData() { //aaron's function in the making
+    return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.createAssignmentService.getAssignments()); 
+  }
+
   storeStudentData() {
     return this.http.put('https://student-portal-4e814.firebaseio.com/users.json', this.studentService.getStudents()); 
   }
