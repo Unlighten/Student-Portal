@@ -65,6 +65,15 @@ export class EditStudentComponent implements OnInit {
         let errorCode = error.code;
         let errorMessage = error.message;
       })
+
+    firebase.auth().sendPasswordResetEmail(value.email)
+      .then(function() {
+        console.log('Password reset sent to ' + value.email);
+      })
+      .catch(function(error) {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+      })
   }
 
   onSaveData() {
