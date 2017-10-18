@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { StudentService } from '../../../shared/student.service'
-import { Student } from '../../../shared/student.model'
 import { Subscription } from 'rxjs/Subscription'
+import { Student } from '../../../shared/student.model';
 
 @Component({
   selector: 'app-student-detail',
@@ -9,6 +9,11 @@ import { Subscription } from 'rxjs/Subscription'
   styleUrls: ['./student-detail.component.css']
 })
 export class StudentDetailComponent implements OnInit {
+  student: Student = {
+    fname: '',
+    lname: '',
+    email: ''
+  };
   students: Student[];
   private subscription: Subscription;
 
@@ -20,7 +25,7 @@ export class StudentDetailComponent implements OnInit {
       (students: Student[]) => {
         this.students = students;
       }
-    )
+    );
+    this.studentService.oneStudent.subscribe(data => this.student = data);
   }
-
 }

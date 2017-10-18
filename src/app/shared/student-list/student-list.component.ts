@@ -26,10 +26,19 @@ export class StudentListComponent implements OnInit {
         // console.log("should be here",students)
       }
     );
+    console.log(this.students)
   }
 
   onSelected() {
     this.studentService.studentSelected.next(this.student);
+  }
+
+  bindElementToStudent(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list
+    if (data.target.id) { //prevents errors when hitting the links directly
+      this.studentService.getStudentById(data.target.id);
+    } else { //prevents errors within the modal itself
+      
+    }
   }
 
   onEditItem(index: number) {

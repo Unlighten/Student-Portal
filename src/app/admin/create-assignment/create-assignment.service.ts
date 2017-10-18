@@ -5,6 +5,7 @@ export class CreateAssignmentService {
   assignmentSelected = new Subject<Assignment>();
   assignmentsChanged = new Subject<Assignment[]>();
   startedEditing = new Subject<number>();
+  oneAssignment = new Subject<any>(); //Binds single assignments to oneAssignment
 
   private assignments: Assignment[] = []; //Sets array for assignments => infilled by FB
 
@@ -34,5 +35,10 @@ export class CreateAssignmentService {
   deleteAssignment(index: number) { //Deletes single assignment through delete button (create-assignment) => affects FB
     this.assignments.splice(index, 1);
     this.assignmentsChanged.next(this.assignments.slice());
+  }
+
+  getAssignmentById(aid) { //Accesses individual assignments for modal
+    const getAssignmentById = this.assignments[aid];
+    this.oneAssignment.next(getAssignmentById);
   }
 }

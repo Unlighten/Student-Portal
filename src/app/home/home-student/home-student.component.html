@@ -6,13 +6,12 @@
 <div class="row">
   <div class="col-xs-12">
     <app-student-list
-      (click)="onDetail($event)" data-toggle="modal" data-target="#studentDetailModal">
-      <ng-template [ngIf]='true'>
-        <a data-toggle='modal'
-        data-target='#studentDetailModal'></a>
-      </ng-template>
-    </app-student-list>
+      (click)="studentList.bindElementToStudent($event)" 
+      #studentList 
+      data-toggle="modal" 
+      data-target="#studentDetailModal"
+    ></app-student-list>
     </div>
 </div>
 
-  <app-student-detail></app-student-detail>
+<app-student-detail></app-student-detail>

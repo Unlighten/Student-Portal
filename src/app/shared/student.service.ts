@@ -5,8 +5,9 @@ export class StudentService {
   studentSelected = new Subject<Student>();  
   studentsChanged = new Subject<Student[]>();
   startedEditing = new Subject<number>();
+  oneStudent = new Subject<any>();
 
-  private students: Student[] = [];//Sets array for students => infilled by FB
+  public students: Student[] = [];//Sets array for students => infilled by FB
   
   setStudentData(students: Student[]) { //Fills in data for students
     this.students = students;
@@ -36,5 +37,10 @@ export class StudentService {
   deleteStudent(index: number) { //Deletes single student through delete button (edit-student) => affects FB
     this.students.splice(index, 1);
     this.studentsChanged.next(this.students.slice());
+  }
+
+  getStudentById(aid) {
+    const studentById = this.students[aid];
+    this.oneStudent.next(studentById);
   }
 }

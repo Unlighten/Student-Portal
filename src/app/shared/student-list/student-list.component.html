@@ -4,7 +4,12 @@
   style="cursor: pointer"
   (click)="onEditItem(i)"
   (click)="onSelected()"
+  id="{{i}}"
 >
-  <h4 class="list-group-item-heading col-xs-6">{{ student.fname }}</h4>
-  <h4 class="list-group-item-heading col-xs-6">{{ student.lname }}</h4>
+<div class="pull left col-xs-8">  
+  <h4 class="list-group-item-heading">{{ student.fname }} {{ student.lname }}</h4>
+</div>
+<div class="pull right col-xs-4">
+  <h5 class="list-group-item-text">{{ student.email }}</h5>
+</div> 
 </a>
