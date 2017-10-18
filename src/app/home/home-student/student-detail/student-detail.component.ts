@@ -12,7 +12,8 @@ export class StudentDetailComponent implements OnInit {
   student: Student = {
     fname: '',
     lname: '',
-    email: ''
+    email: '',
+    cohort: ''
   };
   students: Student[];
   private subscription: Subscription;
