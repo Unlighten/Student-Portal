@@ -41,6 +41,7 @@ export class AddCohortComponent implements OnInit {
       }
     )
     console.log(this.cohorts)
+    this.onFetchData();
 
   }
 
@@ -57,5 +58,9 @@ export class AddCohortComponent implements OnInit {
         console.log(response)
       }
     )
+  }
+
+  onFetchData() {
+    this.dataStorageService.getData(); //Attn. data-storage.service.ts
   }
 }

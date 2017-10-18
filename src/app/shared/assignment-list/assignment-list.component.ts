@@ -3,6 +3,8 @@ import { Assignment } from '../assignment.model';
 import { CreateAssignmentService } from '../../admin/create-assignment/create-assignment.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
+import { Cohort } from '../../admin/add-cohort/cohort.model';
+import { AddCohortService } from '../../admin/add-cohort/add-cohort.service';
 
 @Component({
   selector: 'app-assignment-list',
@@ -15,11 +17,15 @@ export class AssignmentListComponent implements OnInit {
 
   assignments: Assignment[];
   private subscription: Subscription;
-
-  constructor(private createAssignmentService: CreateAssignmentService) { }
+  cohorts: Cohort[];
+  
+  constructor(private createAssignmentService: CreateAssignmentService, private addCohortService: AddCohortService) { }
 
   ngOnInit() { //Infills Assignment[] with FB data
+    console.log('cohorts 1 ', this.cohorts)
     this.assignments = this.createAssignmentService.getAssignments();
+    this.cohorts = this.addCohortService.getCohorts();
+    console.log('cohorts ', this.cohorts)
     this.subscription = this.createAssignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
         this.assignments = assignments;

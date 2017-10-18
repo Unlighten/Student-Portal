@@ -6,6 +6,8 @@ import { StudentService } from '../../../shared/student.service';
 import { DataStorageService } from '../../../shared/data-storage.service';
 import { Response } from '@angular/http';
 import * as firebase from 'firebase';
+import { Cohort } from '../../add-cohort/cohort.model';
+import { AddCohortService } from '../../add-cohort/add-cohort.service';
 
 @Component({
   selector: 'app-edit-student',
@@ -18,8 +20,9 @@ export class EditStudentComponent implements OnInit {
   editMode = false;
   editedItemIndex: number;
   editedItem: Student;
+  cohorts: Cohort[];
 
-  constructor(private studentService: StudentService, private dataStorageService: DataStorageService) { }
+  constructor(private addCohortService: AddCohortService, private studentService: StudentService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.subscription = this.studentService.startedEditing.subscribe(
@@ -35,6 +38,7 @@ export class EditStudentComponent implements OnInit {
         })
       }
     );
+    this.cohorts = this.addCohortService.getCohorts();    
   }
 
   onSubmit(form: NgForm) {
