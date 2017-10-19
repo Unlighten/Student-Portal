@@ -12,30 +12,45 @@ import { AddCohortService } from '../../admin/add-cohort/add-cohort.service';
   styleUrls: ['./assignment-list.component.css']
 })
 export class AssignmentListComponent implements OnInit {
+  assignmentsByCohort: Assignment[];
   @Input() assignment: Assignment;
   @Output() assignmentSelected = new Subject<void>();
 
   assignments: Assignment[];
   private subscription: Subscription;
-  cohorts: Cohort[];
+  private cohortSubscription: Subscription;
+  cohort: Cohort;
   
   constructor(private createAssignmentService: CreateAssignmentService, private addCohortService: AddCohortService) { }
 
   ngOnInit() { //Infills Assignment[] with FB data
-    console.log('cohorts 1 ', this.cohorts)
     this.assignments = this.createAssignmentService.getAssignments();
-    this.cohorts = this.addCohortService.getCohorts();
-    console.log('cohorts ', this.cohorts)
+    // this.cohort = this.addCohortService.releaseCohortFilter();
+    console.log(this.cohort, ' ass list test')
+    
     this.subscription = this.createAssignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
         this.assignments = assignments;
-        // console.log(assignments)
+        console.log(assignments)
       }
     );
+    this.cohortSubscription = this.addCohortService.cohortChanged.subscribe(
+      (cohort: Cohort) => {
+        this.cohort = cohort;
+        this.assignments = this.createAssignmentService.getAssignments();        
+        this.changeAssignments()      
+      }
+    )
+    this.changeAssignments()          
   }
 
   onSelected() { //When clicked, infills edit input bars for edit functionality
     this.createAssignmentService.assignmentSelected.next(this.assignment);
+  }
+
+  changeAssignments() {
+    this.assignments = this.assignments.filter(
+      assignment => assignment.cohort.toString() === this.cohort.toString());
   }
 
   bindElementToAssignment(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list

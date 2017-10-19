@@ -57,9 +57,9 @@ export class CreateEditComponent implements OnInit, OnDestroy {
   onSaveData() {
     this.dataStorageService.storeAssignmentData().subscribe(
       (response: Response) => {
-        console.log(response);
       }
     );
+    this.createAssignmentService.clearAssignments();
   }
 
   onClear() {
