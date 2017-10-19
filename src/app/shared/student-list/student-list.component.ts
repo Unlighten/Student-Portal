@@ -3,6 +3,8 @@ import { Student } from '../student.model';
 import { Subscription } from 'rxjs/Subscription';
 import { StudentService } from '../student.service';
 import { Subject } from 'rxjs/Subject';
+import { AddCohortService } from '../../admin/add-cohort/add-cohort.service';
+import { Cohort } from '../../admin/add-cohort/cohort.model';
 
 @Component({
   selector: 'app-student-list',
@@ -12,11 +14,13 @@ import { Subject } from 'rxjs/Subject';
 export class StudentListComponent implements OnInit {
   @Input() student: Student;
   @Output() studentSelected = new Subject<void>();
-  
+  private cohortSubscription: Subscription;
+  cohort: Cohort;
+
   students: Student[]; //Links to home.model and reminds Angular Student is an array
   private subscription: Subscription;
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private addCohortService: AddCohortService) { }
 
   ngOnInit() {
     this.students = this.studentService.getStudents(); //OnInit, Angular sets up student array
@@ -26,11 +30,24 @@ export class StudentListComponent implements OnInit {
         // console.log("should be here",students)
       }
     );
-    console.log(this.students)
+
+    this.cohortSubscription = this.addCohortService.cohortChanged.subscribe(
+      (cohort: Cohort) => {
+        this.cohort = cohort;
+        this.students = this.studentService.getStudents();        
+        this.changeStudents()      
+      }
+    )
+    this.changeStudents()          
   }
 
   onSelected() {
     this.studentService.studentSelected.next(this.student);
+  }
+
+  changeStudents() {
+    this.students = this.students.filter(
+      assignment => assignment.cohort.toString() === this.cohort.toString());
   }
 
   bindElementToStudent(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list

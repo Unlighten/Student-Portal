@@ -79,7 +79,6 @@ export class EditStudentComponent implements OnInit {
   onSaveData() {
     this.dataStorageService.storeStudentData().subscribe(
       (response: Response) => {
-        console.log(response);
       }
     );
   }

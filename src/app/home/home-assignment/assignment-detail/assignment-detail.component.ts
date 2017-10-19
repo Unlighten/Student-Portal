@@ -37,7 +37,6 @@ export class AssignmentDetailComponent implements OnInit {
         this.assignments = assignments;
       }
     );
-    console.log(this.assignments);
 
     this.createAssignmentService.oneAssignment.subscribe(data => this.assignment = data); //Modal component => Attn. createAssignmentService
   }

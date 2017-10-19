@@ -22,25 +22,12 @@ export class AddCohortComponent implements OnInit {
   constructor(private dataStorageService: DataStorageService, private addCohortService: AddCohortService) { }
 
   ngOnInit() {
-    // this.subscription = this.createAssignmentService.startedEditing.subscribe(
-    //   (index: number) => {
-    //     this.editedItemIndex = index;
-    //     this.editMode = true;
-    //     this.editedItem = this.createAssignmentService.getAssignment(index);
-    //     this.createAssignmentForm.setValue({
-    //       name: this.editedItem.name,
-    //       desc: this.editedItem.description,
-    //       due: this.editedItem.due
-    //     })
-    //   }
-    // );
     this.cohorts = this.addCohortService.getCohorts();
     this.subscription = this.addCohortService.cohortsChanged.subscribe(
       (cohorts: Cohort[]) => {
         this.cohorts = cohorts;
       }
     )
-    console.log(this.cohorts)
     this.onFetchData();
 
   }
@@ -55,7 +42,6 @@ export class AddCohortComponent implements OnInit {
   onSaveData() {
     this.dataStorageService.storeCohortData().subscribe(
       (response: Response) => {
-        console.log(response)
       }
     )
   }

@@ -19,7 +19,5 @@ export class HomeStudentComponent implements OnInit {
 
   onDetail(e) { //(click) of student list to get to modal 
     let data = this.getStudent.students;
-    console.log(data)
-    console.log("Click worked")
   }
 }

@@ -21,9 +21,7 @@ export class NavbarComponent {
 
   ngOnInit() {
     this.dataStorageService.getData();
-    console.log('cohorts nav ', this.cohorts) 
     this.cohorts = this.addCohortService.getCohorts();
-    console.log('cohorts ', this.cohorts)   
   }
 
   @Output() featureSelected = new Subject<string>();
