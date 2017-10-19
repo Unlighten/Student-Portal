@@ -11,6 +11,7 @@
               name="name"
               ngModel
               required
+              placeholder="Name"
             >
         </div>
         <div class="col-sm-4 form-group">
@@ -21,17 +22,19 @@
               class="form-control"
               name="desc"
               ngModel
+              placeholder="Link"
             >
         </div>
         <div class="col-sm-4 form-group">
           <label for="due">Due Date:</label>
             <input 
               type="text" 
-              id="due" 
+              id="due datepicker" 
               class="form-control"
               name="due"
               ngModel
               required
+              placeholder="mm/dd/yyyy"
             >
         </div>
         <div class='col-xs-3 form-group move-left'>
@@ -69,3 +72,9 @@
     </form>
   </div>
 </div>
+
+<script>
+   $(function() {
+      $("#datepicker").datepicker();
+    });
+</script>
