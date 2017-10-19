@@ -37,7 +37,7 @@ export class CreateEditComponent implements OnInit, OnDestroy {
         })
       }
     );
-    this.cohorts = this.addCohortService.getCohorts();        
+    this.cohorts = this.addCohortService.getCohorts();       
   }
 
   onSubmit(form: NgForm) {
