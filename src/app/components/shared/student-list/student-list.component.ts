@@ -35,10 +35,10 @@ export class StudentListComponent implements OnInit {
       (cohort: Cohort) => {
         this.cohort = cohort;
         this.students = this.studentService.getStudents();        
-        this.changeStudents()      
+        // this.changeStudents()      
       }
     )
-    this.changeStudents()          
+    // this.changeStudents()          
   }
 
   onSelected() {

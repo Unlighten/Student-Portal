@@ -38,7 +38,8 @@ export class AssignmentDetailComponent implements OnInit {
       }
     );
 
-    this.assignmentService.oneAssignment.subscribe(data => this.assignment = data); //Modal component => Attn. createAssignmentService
+    this.assignmentService.oneAssignment.subscribe(data => this.assignment = data); //Modal component => Attn. assignmentService
+    console.log("HEY")
   }
 
 
@@ -47,12 +48,14 @@ export class AssignmentDetailComponent implements OnInit {
     this.addCAssignmentService.addCompletedAssignment(completedAssignment)
     this.onSaveData()
     form.reset();
+    console.log("hello")
+    console.log(this.assignmentService.oneAssignment)
   }
 
   onSaveData() {
     this.dataStorageService.storeCompletedAssignmentData().subscribe(
       (response: Response) => {
-        console.log(response);
+        // console.log(response);
       }
     );
   }

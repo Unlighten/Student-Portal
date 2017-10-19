@@ -38,10 +38,10 @@ export class AssignmentListComponent implements OnInit {
       (cohort: Cohort) => {
         this.cohort = cohort;
         this.assignments = this.assignmentService.getAssignments();        
-        this.changeAssignments()      
+        // this.changeAssignments()      
       }
     )
-    this.changeAssignments()          
+    // this.changeAssignments()          
   }
 
   onSelected() { //When clicked, infills edit input bars for edit functionality
@@ -59,6 +59,7 @@ export class AssignmentListComponent implements OnInit {
       this.assignmentService.getAssignmentById(data.target.id);
     } else { //prevents errors within the modal itself
       this.assignmentService.getAssignmentById(data.target.parentElement.parentElement.id)
+      console.log(data)
     }
   }
 
