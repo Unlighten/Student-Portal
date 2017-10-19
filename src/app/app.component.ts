@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import firebaseConfig from '../../firebaseConfig.js';
 import * as firebase from 'firebase';
-import { DataStorageService } from './shared/data-storage.service';
+import { DataStorageService } from './services/data-storage.service';
 
 @Component({
   selector: 'app-root',

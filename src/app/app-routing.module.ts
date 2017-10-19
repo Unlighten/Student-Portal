@@ -1,13 +1,12 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from "./auth/login/login.component";
-import { HomeComponent } from "./home/home.component"
 import { AuthGuard } from "./auth/auth-guard.service";
 import { AuthNullGuard } from "./auth/auth-null-guard.service";
-import { CreateEditComponent } from './admin/create-assignment/create-edit/create-edit.component';
-import { CreateAssignmentComponent } from './admin/create-assignment/create-assignment.component';
-import { AddCohortComponent } from "./admin/add-cohort/add-cohort.component";
-import { CreateStudentComponent } from "./admin/create-student/create-student.component";
+import { HomeComponent } from "./components/home/home.component";
+import { CreateAssignmentComponent } from "./components/admin/create-assignment/create-assignment.component";
+import { AddCohortComponent } from "./components/admin/add-cohort/add-cohort.component";
+import { CreateStudentComponent } from "./components/admin/create-student/create-student.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
