@@ -37,7 +37,7 @@ export class StudentListComponent implements OnInit {
     if (data.target.id) { //prevents errors when hitting the links directly
       this.studentService.getStudentById(data.target.id);
     } else { //prevents errors within the modal itself
-      
+      this.studentService.getStudentById(data.target.parentElement.parentElement.id)
     }
   }
 
