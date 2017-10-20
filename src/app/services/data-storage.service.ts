@@ -7,6 +7,9 @@ import { CohortService } from "./cohort.service";
 import { Assignment } from "../models/assignment.model";
 import { Student } from "../models/student.model";
 import { Cohort } from "../models/cohort.model";
+import { CAssignment } from "../components/home/home-assignment/assignment-detail/add-completed-assignment.model";
+import { AddCAssignmentService } from "../components/home/home-assignment/assignment-detail/add-completed-assignment.service";
+
 
 @Injectable()
 export class DataStorageService {
@@ -24,7 +27,7 @@ export class DataStorageService {
   }
 
   storeCompletedAssignmentData() { //aaron's function in the making
-    return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.assignmentService.getAssignments()); 
+    return this.http.put('https://student-portal-4e814.firebaseio.com/assignments-completed.json', this.assignmentService.getAssignments()); 
   }
 
   storeStudentData() {
