@@ -45,6 +45,7 @@ export class AddCohortComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const newCohort = form.value.cohortName;
+    console.log('newCohort')
     this.cohortService.addCohort(newCohort)
     this.onSaveData()
     form.reset();

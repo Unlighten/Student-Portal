@@ -49,6 +49,7 @@ export class AssignmentListComponent implements OnInit {
   }
 
   changeAssignments() {
+    console.log(this.cohort)
     this.assignments = this.assignments.filter(
       assignment => assignment.cohort.toString() === this.cohort.toString());
   }

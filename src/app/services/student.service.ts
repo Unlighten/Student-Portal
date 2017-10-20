@@ -16,7 +16,7 @@ export class StudentService {
   }
 
   getStudents() { //Pulls in data to infill Student[]
-    // console.log(this.students);
+    console.log(this.students);
     return this.students.slice(); 
   }
   

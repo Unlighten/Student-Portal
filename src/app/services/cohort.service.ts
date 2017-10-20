@@ -15,16 +15,20 @@ export class CohortService {
     constructor() {
       this.setCohortFilter$ = this.setCohortFilterSubject.asObservable()
     }
-    private cohorts: Cohort[] = [];
+    public cohorts: Cohort[] = [];
 
     setCohortData(cohorts: Cohort[]) {
       this.cohorts = cohorts;
-      this.cohortsChanged.next(this.cohorts.slice());
+      console.log(' i give up ', this.cohorts)
+      if (this.cohorts) {this.cohortsChanged.next(this.cohorts.slice())};
     }
         
     addCohort(cohort: Cohort) {
+        console.log('this cohorts ', this.cohorts)
+        this.cohorts = this.cohorts || []  
       this.cohorts.push(cohort);
-      this.cohortsChanged.next(this.cohorts.slice());        
+      if (this.cohorts) {
+      this.cohortsChanged.next(this.cohorts.slice())};        
     }
 
     updateCohort(index: number, newCohort: Cohort) {
@@ -38,7 +42,8 @@ export class CohortService {
     }
 
     getCohorts() { //Pulls in data to infill Assignment[]
-      return this.cohorts.slice();
+        console.log(this.cohorts)
+      if (this.cohorts) {return this.cohorts.slice()};
     }
 
     getCohort(index: number) {
