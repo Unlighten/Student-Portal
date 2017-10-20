@@ -47,15 +47,16 @@ export class AddCohortComponent implements OnInit {
     const newCohort = form.value.cohortName;
     console.log('newCohort')
     this.cohortService.addCohort(newCohort)
-    this.onSaveData()
+    this.onSaveData(newCohort)
     form.reset();
   }
 
-  onSaveData() {
-    this.dataStorageService.storeCohortData().subscribe(
-      (response: Response) => {
-      }
-    )
+  onSaveData(newCohort) {
+    this.dataStorageService.storeCohortData(newCohort)
+    // .subscribe(
+    //   (response: Response) => {
+    //   }
+    // )
   }
 
   onFetchData() {

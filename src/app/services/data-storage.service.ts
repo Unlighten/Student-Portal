@@ -7,6 +7,7 @@ import { CohortService } from "./cohort.service";
 import { Assignment } from "../models/assignment.model";
 import { Student } from "../models/student.model";
 import { Cohort } from "../models/cohort.model";
+import * as firebase from 'firebase';
 
 @Injectable()
 export class DataStorageService {
@@ -19,45 +20,50 @@ export class DataStorageService {
     private studentService: StudentService
   ) {}
 
-  storeAssignmentData() { //stores data via preset criteria (name, description, due)
-    return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.assignmentService.getAssignments()); 
+  storeAssignmentData(cohortKey, newAssignment) { //stores data via preset criteria (name, description, due)
+    firebase.database().ref(`cohorts/${cohortKey}/assignments`).push(newAssignment)    
   }
 
   storeCompletedAssignmentData() { //aaron's function in the making
     return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.assignmentService.getAssignments()); 
   }
 
-  storeStudentData() {
-    return this.http.put('https://student-portal-4e814.firebaseio.com/users.json', this.studentService.getStudents()); 
+  // storeStudentData() {
+  //   return this.http.put('https://student-portal-4e814.firebaseio.com/users.json', this.studentService.getStudents()); 
+  // }
+
+  storeStudentData(cohortKey, newStudent) {
+    firebase.database().ref(`cohorts/${cohortKey}/students`).push(newStudent)    
   }
 
   getData() { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
-    this.http.get('https://student-portal-4e814.firebaseio.com/assignments.json')
-    .subscribe( //since .subscribe is here, no need for each instance of getData
-      (response: Response) => {
-        const assignments: Assignment[] = response.json(); //json readable by Angular
-        this.assignmentService.setAssignmentData(assignments); //looks to infill where criteria fits Assignment[]
+    firebase.database().ref('cohorts').once('value')
+    .then(data => {
+      // const cohorts
+      let cohorts = []
+      const obj = data.val()
+      for (let key in obj){
+        console.log('something ', obj[key])
+        var newObject = {
+          key: key,
+          info: obj[key]
+        }
+        // console.log(Object.getOwnPropertyNames(obj))
+        cohorts.push(newObject)
       }
-    );
-
-    this.http.get('https://student-portal-4e814.firebaseio.com/users.json')
-    .subscribe(
-      (response: Response) => {
-        const students: Student[] = response.json();
-        this.studentService.setStudentData(students);
-      }
-    );
-
-    this.http.get('https://student-portal-4e814.firebaseio.com/cohorts.json')
-    .subscribe( //since .subscribe is here, no need for each instance of getData
-      (response: Response) => {
-        const cohorts: Cohort[] = response.json(); //json readable by Angular
-        this.cohortService.setCohortData(cohorts); //looks to infill where criteria fits Assignment[]
-      }
-    );
+      console.log(cohorts)
+      return cohorts
+    }
+  )
   }
 
-  storeCohortData() {
-    return this.http.put('https://student-portal-4e814.firebaseio.com/cohorts.json', this.cohortService.getCohorts());     
+  storeCohortData(cohort) {
+    // return this.http.put('https://student-portal-4e814.firebaseio.com/cohorts.json', this.cohortService.getCohorts());
+
+    firebase.database().ref('cohorts').push(cohort)
+    // .then((data) => {
+    //  key = data.key
+    //  return key
+    // })    
   }
 }
