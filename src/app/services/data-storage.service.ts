@@ -36,7 +36,7 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/students`).push(newStudent)    
   }
 
-  getData() { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
+  getData(): any { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
     firebase.database().ref('cohorts').once('value')
     .then(data => {
       // const cohorts
@@ -51,8 +51,8 @@ export class DataStorageService {
         // console.log(Object.getOwnPropertyNames(obj))
         cohorts.push(newObject)
       }
-      console.log(cohorts)
-      return cohorts
+      console.log('change <any>', cohorts)
+      return <any>cohorts
     }
   )
   }
