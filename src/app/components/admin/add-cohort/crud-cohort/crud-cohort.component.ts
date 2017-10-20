@@ -39,6 +39,9 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       this.cohortService.updateCohort(this.editedItemIndex, newCohort);
       this.onSaveData();
+    } else {
+      this.cohortService.addCohort(newCohort);
+      this.onSaveData();
     }
     this.editMode = false;
     form.reset();

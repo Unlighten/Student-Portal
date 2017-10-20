@@ -1,40 +1,41 @@
 <div class="row">
-    <div class="col-xs-12">
-      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div class="row">
-          <div class="col-sm-4 form-group">
-            <label for="cohortName">Cohort Name:</label>
-            <input 
-              type='text'
-              id='cohortName'
-              class='form-control'
-              name='cohortName'
-              ngModel
-              required
-              placeholder="Cohort"
-            >
-          </div>
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-4 form-group">
+          <label for="cohortName">Cohort Name:</label>
+          <input 
+            type='text'
+            id='cohortName'
+            class='form-control'
+            name='cohortName'
+            ngModel
+            required
+            placeholder="Cohort"
+          >
         </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <button 
-              class="btn btn-success" 
-              type="submit"
-              [disabled]="!f.valid"
-            >{{ editMode ? 'Update' : 'Add' }}</button>
-            <button 
-              class="btn btn-danger" 
-              type="button"
-              (click)="onDelete()"
-              *ngIf="editMode"
-            >Delete</button>
-            <button 
-              class="btn btn-primary" 
-              type="button" 
-              (click)="onClear()"
-            >Clear</button>
-          </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button 
+            class="btn btn-success" 
+            type="submit"
+            [disabled]="!f.valid"
+            *ngIf="!editMode"
+          >Add</button>
+          <button 
+            class="btn btn-danger" 
+            type="button"
+            (click)="onDelete()"
+            *ngIf="editMode"
+          >Delete</button>
+          <button 
+            class="btn btn-primary" 
+            type="button" 
+            (click)="onClear()"
+          >Cancel</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
+</div>

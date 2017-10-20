@@ -16,6 +16,7 @@ export class AssignmentService {
 
   clearAssignments() {
   }
+  
   getAssignments() { //Pulls in data to infill Assignment[]
     return this.assignments.slice();
   }

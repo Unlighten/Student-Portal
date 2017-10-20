@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Response } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
 import { Cohort } from '../../../models/cohort.model';
 import { DataStorageService } from '../../../services/data-storage.service';
 import { CohortService } from '../../../services/cohort.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-add-cohort',
@@ -16,6 +17,8 @@ export class AddCohortComponent implements OnInit {
   editMode = false;
   editedItemIndex: number;
   editedItem: Cohort;
+  @Input() cohort: Cohort;
+  @Output() cohortSelected = new Subject<void>();
 
   cohorts: Cohort[];
 
@@ -26,10 +29,18 @@ export class AddCohortComponent implements OnInit {
     this.subscription = this.cohortService.cohortsChanged.subscribe(
       (cohorts: Cohort[]) => {
         this.cohorts = cohorts;
+        this.cohorts = this.cohortService.getCohorts();
       }
     )
     this.onFetchData();
+  }
 
+  onSelected() {
+    this.cohortService.cohortSelected.next(this.cohort)
+  }
+
+  onEditItem(index: number) {
+    this.cohortService.startedEditing.next(index);
   }
 
   onSubmit(form: NgForm) {

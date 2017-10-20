@@ -13,18 +13,18 @@ export class CohortService {
     cohort: Cohort;
 
     constructor() {
-        this.setCohortFilter$ = this.setCohortFilterSubject.asObservable()
+      this.setCohortFilter$ = this.setCohortFilterSubject.asObservable()
     }
     private cohorts: Cohort[] = [];
 
     setCohortData(cohorts: Cohort[]) {
-        this.cohorts = cohorts;
-        this.cohortsChanged.next(this.cohorts.slice());
+      this.cohorts = cohorts;
+      this.cohortsChanged.next(this.cohorts.slice());
     }
         
     addCohort(cohort: Cohort) {
-        this.cohorts.push(cohort);
-        this.cohortsChanged.next(this.cohorts.slice());        
+      this.cohorts.push(cohort);
+      this.cohortsChanged.next(this.cohorts.slice());        
     }
 
     updateCohort(index: number, newCohort: Cohort) {
@@ -38,7 +38,7 @@ export class CohortService {
     }
 
     getCohorts() { //Pulls in data to infill Assignment[]
-        return this.cohorts.slice();
+      return this.cohorts.slice();
     }
 
     getCohort(index: number) {
@@ -46,9 +46,9 @@ export class CohortService {
     }
 
     setCohortFilter(cohort) {
-        console.log('testers ', cohort)
-        this.cohort = cohort;
-        this.cohortChanged.next(cohort);
-        // return cohort
+      console.log('testers ', cohort)
+      this.cohort = cohort;
+      this.cohortChanged.next(cohort);
+      // return cohort
     }
 }
