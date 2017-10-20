@@ -14,7 +14,7 @@ export class AddCAssignmentService {
         
     addCompletedAssignment(cassignment: CAssignment) {
         this.cassignments.push(cassignment);
-        this.cassignmentChanged.next(this.cassignments.slice());        
+        this.cassignmentChanged.next(this.cassignments.slice());       
     }
 
     getCompletedAssignment() { //Pulls in data to infill CAssignment[]

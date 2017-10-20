@@ -14,7 +14,6 @@ import { DataStorageService } from '../../../../services/data-storage.service';
   styleUrls: ['./assignment-detail.component.css']
 })
 export class AssignmentDetailComponent implements OnInit {
-  AddCAssignmentService: any;  //aaron/wonky
   assignments: Assignment[];
   caAssignments: CAssignment[]; //aaron/wonky
   private subscription: Subscription;
@@ -46,16 +45,17 @@ export class AssignmentDetailComponent implements OnInit {
   onSubmit(form: NgForm) {
     const completedAssignment = form.value.completedAssignment;
     this.addCAssignmentService.addCompletedAssignment(completedAssignment)
+    console.log('weeeeeeee', this.addCAssignmentService)
     this.onSaveData()
     form.reset();
-    console.log("hello")
+    console.log("Submit button was clicked!")
     console.log(this.assignmentService.oneAssignment)
   }
 
   onSaveData() {
     this.dataStorageService.storeCompletedAssignmentData().subscribe(
       (response: Response) => {
-        // console.log(response);
+        console.log(response);
       }
     );
   }
