@@ -34,7 +34,7 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
           desc: this.editedItem.description,
           due: this.editedItem.due,
           cohort: this.editedItem.cohort
-        })
+        });
       }
     );
     this.cohorts = this.cohortService.getCohorts();       
@@ -55,10 +55,10 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
   }
 
   onSaveData() {
-    this.dataStorageService.storeAssignmentData().subscribe(
-      (response: Response) => {
-      }
-    );
+    this.dataStorageService.storeAssignmentData()
+      .subscribe(
+        (response: Response) => {}
+      );
     this.assignmentService.clearAssignments();
   }
 
