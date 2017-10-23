@@ -3,12 +3,12 @@ import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthNullGuard implements CanActivate {
   constructor(private authService: AuthService) {}
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    let uid = await this.authService.getID()
-    return this.authService.isAdminAuthenticated(uid)
-    // return this.authService.isAuthenticated()
+    // let uid = await this.authService.getID()
+    // return this.authService.isAdminAuthenticated(uid) && this.authService.isAuthenticated()
+    return this.authService.isAuthenticated()
   }
 }

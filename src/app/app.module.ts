@@ -5,23 +5,32 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { DropdownDirective } from './navbar/dropdown.directives';
-import { AdminComponent } from './admin/admin.component';
-import { HomeComponent } from './admin/home/home.component';
-import { CreateAssignmentComponent } from './admin/create-assignment/create-assignment.component';
-import { HomeListComponent } from './admin/home/home-list/home-list.component';
-import { HomeStudentComponent } from './admin/home/home-student/home-student.component';
-import { CreateEditComponent } from './admin/create-assignment/create-edit/create-edit.component';
-import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
-import { CreateAssignmentService } from './admin/create-assignment/create-assignment.service';
-import { DataStorageService } from './shared/data-storage.service';
-import { AssignmentListComponent } from './shared/assignment-list/assignment-list.component';
-import { HomeDetailComponent } from './admin/home/home-detail/home-detail.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthNullGuard } from './auth/auth-null-guard.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { HomeComponent } from './components/home/home.component';
+import { CreateAssignmentComponent } from './components/admin/create-assignment/create-assignment.component';
+import { HomeAssignmentComponent } from './components/home/home-assignment/home-assignment.component';
+import { HomeStudentComponent } from './components/home/home-student/home-student.component';
+import { CrudAssignmentComponent } from './components/admin/create-assignment/crud-assignment/crud-assignment.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AssignmentListComponent } from './components/shared/assignment-list/assignment-list.component';
+import { AssignmentDetailComponent } from './components/home/home-assignment/assignment-detail/assignment-detail.component';
+import { StudentListComponent } from './components/shared/student-list/student-list.component';
+import { StudentDetailComponent } from './components/home/home-student/student-detail/student-detail.component';
+import { AddCohortComponent } from './components/admin/add-cohort/add-cohort.component';
+import { CrudStudentComponent } from './components/admin/create-student/crud-student/crud-student.component';
+import { CreateStudentComponent } from './components/admin/create-student/create-student.component';
+import { SelectCohortComponent } from './components/shared/select-cohort/select-cohort.component';
+import { AssignmentService } from './services/assignment.service';
+import { DataStorageService } from './services/data-storage.service';
+import { StudentService } from './services/student.service';
+import { CohortService } from './services/cohort.service';
+import { AddCAssignmentService } from './components/home/home-assignment/assignment-detail/add-completed-assignment.service';
+import { CrudCohortComponent } from './components/admin/add-cohort/crud-cohort/crud-cohort.component';
 
 @NgModule({
   declarations: [
@@ -30,15 +39,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AdminComponent,
     HomeComponent,
     CreateAssignmentComponent,
-    DropdownDirective,
-    HomeListComponent,
+    HomeAssignmentComponent,
     HomeStudentComponent,
-    CreateEditComponent,
+    CrudAssignmentComponent,
     FooterComponent,
     LoginComponent,
     AssignmentListComponent,
-    HomeDetailComponent
-    
+    AssignmentDetailComponent,
+    StudentListComponent,
+    StudentDetailComponent,
+    AddCohortComponent,
+    CrudStudentComponent,
+    CreateStudentComponent,
+    SelectCohortComponent,
+    CrudCohortComponent
   ],
   imports: [
     BrowserModule,
@@ -46,13 +60,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
-    NgbModule.forRoot()
   ],
   providers: [
     AuthService,
     AuthGuard,
-    CreateAssignmentService,
-    DataStorageService
+    AuthNullGuard,
+    AssignmentService,
+    DataStorageService,
+    StudentService,
+    CohortService,
+    AddCAssignmentService    
   ],
   bootstrap: [AppComponent]
 })
