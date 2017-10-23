@@ -20,30 +20,40 @@ export class CohortService {
     setCohortData(cohorts: Cohort[]) {
       this.cohorts = cohorts;
       console.log(' i give up ', this.cohorts)
-      if (this.cohorts) {this.cohortsChanged.next(this.cohorts.slice())};
+      if (this.cohorts) {this.cohortsChanged.next(this.cohorts)};
     }
         
     addCohort(cohort: Cohort) {
         console.log('this cohorts ', this.cohorts)
-        this.cohorts = this.cohorts || []  
-      this.cohorts.push(cohort);
+        // this.cohorts = this.cohorts || []  
+    //   this.cohorts.push(cohort);
       if (this.cohorts) {
-      this.cohortsChanged.next(this.cohorts.slice())};        
+      this.cohortsChanged.next(this.cohorts)};        
     }
 
     updateCohort(index: number, newCohort: Cohort) {
       this.cohorts[index] = newCohort;
-      this.cohortsChanged.next(this.cohorts.slice());
+      this.cohortsChanged.next(this.cohorts);
     }
 
     deleteCohort(index: number) {
       this.cohorts.splice(index, 1);
-      this.cohortsChanged.next(this.cohorts.slice());
+      this.cohortsChanged.next(this.cohorts);
     }
 
     getCohorts() { //Pulls in data to infill Assignment[]
-        console.log(this.cohorts)
-      if (this.cohorts) {return this.cohorts.slice()};
+    //     console.log(this.cohorts)
+    //   if (this.cohorts) {return this.cohorts};
+        var cohortsArray = [];
+        for(let cohort in this.cohorts){
+            var newObject = {
+            key: cohort,
+            cohortName: this.cohorts[cohort].cohortName
+        }
+         cohortsArray.push(newObject)
+        }
+         console.log(typeof(cohortsArray))
+        return cohortsArray
     }
 
     getCohort(index: number) {

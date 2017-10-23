@@ -19,22 +19,27 @@ export class AddCohortComponent implements OnInit {
   editedItem: Cohort;
   @Input() cohort: Cohort;
   @Output() cohortSelected = new Subject<void>();
-
-  cohorts: Cohort[];
-
+  newCohorts: '';
+  cohorts: Array<any>;
+  
   constructor(private dataStorageService: DataStorageService, private cohortService: CohortService) { }
 
   ngOnInit() {
-    this.cohorts = this.cohortService.getCohorts();
-    this.subscription = this.cohortService.cohortsChanged.subscribe(
-      (cohorts: Cohort[]) => {
-        this.cohorts = cohorts;
-        this.cohorts = this.cohortService.getCohorts();
-      }
-    )
-    this.onFetchData();
+    // this.cohorts = this.cohortService.getCohorts();
+    // this.subscription = this.cohortService.cohortsChanged.subscribe(
+    //   (cohorts: Cohort[]) => {
+    //     this.cohorts = cohorts;
+    //     this.cohorts = this.cohortService.getCohorts();
+    //   }
+    // )
+    // this.cohorts = <any>this.onFetchData();
+    this.cohorts = this.dataStorageService.getData()
+    console.log('Changing to <any>', this.cohorts) 
+    // console.log(newCohorts)
   }
-
+  ngAfterViewInit() {
+    console.log('Oke does this really work?', this.cohorts)
+  }
   onSelected() {
     this.cohortService.cohortSelected.next(this.cohort)
   }
@@ -45,20 +50,21 @@ export class AddCohortComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const newCohort = form.value.cohortName;
-    console.log('newCohort')
     this.cohortService.addCohort(newCohort)
-    this.onSaveData()
+    this.onSaveData(newCohort)
     form.reset();
   }
 
-  onSaveData() {
-    this.dataStorageService.storeCohortData().subscribe(
-      (response: Response) => {
-      }
-    )
+  onSaveData(newCohort) {
+    this.dataStorageService.storeCohortData(newCohort)
+    // .subscribe(
+    //   (response: Response) => {
+    //   }
+    // )
   }
 
-  onFetchData() {
-    this.dataStorageService.getData(); //Attn. data-storage.service.ts
+  async onFetchData() {
+    let cohortArray = await <any>this.dataStorageService.getData()
+    return cohortArray; //Attn. data-storage.service.ts
   }
 }

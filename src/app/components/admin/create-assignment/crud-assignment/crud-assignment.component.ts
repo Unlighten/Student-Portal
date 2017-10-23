@@ -42,24 +42,27 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newAssignment = new Assignment(value.name, value.desc, value.due, value.cohort);
+    const newAssignment = new Assignment(
+      value.name, 
+      value.desc, 
+      value.due, 
+      value.cohort
+    );
+    const cohortKey = value.cohort
     if (this.editMode) {
       this.assignmentService.updateAssignment(this.editedItemIndex, newAssignment);
-      this.onSaveData();
+      this.onSaveData(cohortKey, newAssignment);
     } else {
       this.assignmentService.addAssignment(newAssignment);
-      this.onSaveData();
+      this.onSaveData(cohortKey, newAssignment);
     }
     this.editMode = false;
     form.reset();
   }
 
-  onSaveData() {
-    this.dataStorageService.storeAssignmentData()
-      .subscribe(
-        (response: Response) => {}
-      );
-    this.assignmentService.clearAssignments();
+  onSaveData(cohortKey, newAssignment) {
+    this.dataStorageService.storeAssignmentData(cohortKey, newAssignment)
+    // this.assignmentService.clearAssignments();
   }
 
   onClear() {
@@ -67,11 +70,11 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
     this.editMode = false;
   }
 
-  onDelete() {
-    this.assignmentService.deleteAssignment(this.editedItemIndex);
-    this.onClear();
-    this.onSaveData();
-  }
+  // onDelete() {
+  //   this.assignmentService.deleteAssignment(this.editedItemIndex);
+  //   this.onClear();
+  //   this.onSaveData();
+  // }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

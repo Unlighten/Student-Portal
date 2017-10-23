@@ -15,8 +15,10 @@ import { CohortService } from '../../../services/cohort.service';
 export class SelectCohortComponent implements OnInit {
   // @Input() cohorts: Observable<Cohort[]>;
   cohorts: Cohort[];
+  // cohortsArrayTwo: this.createArray;
+
   @Output('selectedCohortChange')
-  public data: string = 'test again';
+  // public cohort22: array = []];
   cohort: '';
 
   public constructor(private cohortService: CohortService) {
@@ -25,11 +27,25 @@ export class SelectCohortComponent implements OnInit {
 
   ngOnInit() {
     this.cohorts = this.cohortService.getCohorts();
+    console.log('checker 1', this.cohorts)
+  }
+
+  createArray(){
+    var cohortsArray = [];
+    for(let cohort in this.cohorts){
+      var newObject = {
+        key: cohort,
+        cohortName: this.cohorts[cohort].cohortName
+      }
+      cohortsArray.push(newObject)
+    }
+    console.log(typeof(cohortsArray))
+    return cohortsArray
   }
 
   sendCohortFilter(cohort) {
     this.cohort = cohort
-    console.log(cohort)
+    console.log('2 22222 ', cohort)
     console.log('super serious test ', JSON.stringify(this.cohort))
     this.cohortService.setCohortFilter(this.cohort)
   }

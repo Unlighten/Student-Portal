@@ -38,10 +38,10 @@ export class AssignmentListComponent implements OnInit {
       (cohort: Cohort) => {
         this.cohort = cohort;
         this.assignments = this.assignmentService.getAssignments();        
-        // this.changeAssignments()      
+        this.changeAssignments()      
       }
     )
-    // this.changeAssignments()          
+    this.changeAssignments()          
   }
 
   onSelected() { //When clicked, infills edit input bars for edit functionality

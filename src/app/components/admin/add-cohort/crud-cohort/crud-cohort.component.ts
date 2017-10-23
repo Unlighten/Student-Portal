@@ -34,24 +34,19 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-    const value = form.value;
-    const newCohort = new Cohort(value.cohortName);
-    if (this.editMode) {
-      this.cohortService.updateCohort(this.editedItemIndex, newCohort);
-      this.onSaveData();
-    } else {
+    const newCohort = form.value;
+    // const newCohort = new Cohort(value.cohortName);
       this.cohortService.addCohort(newCohort);
-      this.onSaveData();
-    }
+      this.onSaveData(newCohort);
     this.editMode = false;
     form.reset();
   }
 
-  onSaveData() {
-    this.dataStorageService.storeCohortData()
-      .subscribe(
-        (response: Response) => {}
-      );
+  onSaveData(newCohort) {
+    this.dataStorageService.storeCohortData(newCohort)
+      // .subscribe(
+      //   (response: Response) => {}
+      // );
   }
 
   onClear() {
@@ -62,7 +57,7 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
   onDelete() {
     this.cohortService.deleteCohort(this.editedItemIndex);
     this.onClear();
-    this.onSaveData();
+    // this.onSaveData();
   }
 
   ngOnDestroy() {

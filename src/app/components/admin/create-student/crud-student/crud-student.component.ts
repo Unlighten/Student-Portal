@@ -39,7 +39,8 @@ export class CrudStudentComponent implements OnInit {
         })
       }
     );
-    this.cohorts = this.cohortService.getCohorts();    
+    this.cohorts = this.cohortService.getCohorts(); 
+    console.log('wowee', this.cohorts)   
   }
 
   onSubmit(form: NgForm) {
@@ -50,12 +51,13 @@ export class CrudStudentComponent implements OnInit {
       value.email, 
       value.cohort
     );
+    const cohortKey = value.cohort
     if (this.editMode) {
       this.studentService.updateStudent(this.editedItemIndex, newStudent);
-      this.onSaveData();
+      this.onSaveData(cohortKey, newStudent);
     } else {
       this.studentService.addStudent(newStudent);
-      this.onSaveData();
+      this.onSaveData(cohortKey, newStudent);
     }
     this.editMode = false;
     form.reset();
@@ -76,11 +78,8 @@ export class CrudStudentComponent implements OnInit {
       })
   }
 
-  onSaveData() {
-    this.dataStorageService.storeStudentData().subscribe(
-      (response: Response) => {
-      }
-    );
+  onSaveData(cohortKey, newStudent) {
+    this.dataStorageService.storeStudentData(cohortKey, newStudent)
   }
 
   onClear() {
@@ -88,11 +87,11 @@ export class CrudStudentComponent implements OnInit {
     this.editMode = false;
   }
 
-  onDelete() {
-    this.studentService.deleteStudent(this.editedItemIndex);
-    this.onClear();
-    this.onSaveData();
-  }
+  // onDelete() {
+  //   this.studentService.deleteStudent(this.editedItemIndex);
+  //   this.onClear();
+  //   this.onSaveData(cohortKey, newStudent);
+  // }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

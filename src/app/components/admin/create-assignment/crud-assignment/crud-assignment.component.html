@@ -45,7 +45,7 @@
               name='cohort'
               ngModel
               required>
-                <option *ngFor='let cohort of cohorts'>{{ cohort }}</option>
+                <option *ngFor='let cohort of cohorts' [value]=cohort.key>{{ cohort.cohortName }}</option>
             </select>
         </div>
       </div>
