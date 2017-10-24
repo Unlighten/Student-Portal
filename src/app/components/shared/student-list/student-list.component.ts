@@ -5,6 +5,7 @@ import { Student } from '../../../models/student.model';
 import { Cohort } from '../../../models/cohort.model';
 import { StudentService } from '../../../services/student.service';
 import { CohortService } from '../../../services/cohort.service';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-student-list',
@@ -15,15 +16,18 @@ export class StudentListComponent implements OnInit {
   @Input() student: Student;
   @Output() studentSelected = new Subject<void>();
   private cohortSubscription: Subscription;
-  cohort: Cohort;
+  public someSubscription: Subscription;
+  cohort
+  cohorts
 
-  students: Student[]; //Links to home.model and reminds Angular Student is an array
+  students: Array<any> //Links to home.model and reminds Angular Student is an array
   private subscription: Subscription;
 
-  constructor(private studentService: StudentService, private cohortService: CohortService) { }
+  constructor(private dataStorageService: DataStorageService, private studentService: StudentService, public cohortService: CohortService) { }
 
-  ngOnInit() {
-    this.students = this.studentService.getStudents(); //OnInit, Angular sets up student array
+  async ngOnInit() {
+    this.cohorts = await this.dataStorageService.getData();
+     //OnInit, Angular sets up student array
     this.subscription = this.studentService.studentsChanged.subscribe(
       (students: Student[]) => {
         this.students = students;
@@ -31,11 +35,15 @@ export class StudentListComponent implements OnInit {
       }
     );
 
+    this.someSubscription = this.cohortService.setRenew$.subscribe(
+      this.cohorts =  await this.dataStorageService.getData();      
+    )
+
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
       (cohort: Cohort) => {
         this.cohort = cohort;
         this.students = this.studentService.getStudents();        
-        // this.changeStudents()      
+        this.changeStudents()      
       }
     )
     // this.changeStudents()          
@@ -46,8 +54,18 @@ export class StudentListComponent implements OnInit {
   }
 
   changeStudents() {
-    this.students = this.students.filter(
-      assignment => assignment.cohort.toString() === this.cohort.toString());
+    for (let aCohort of this.cohorts) {
+      if (aCohort.key == this.cohort) {
+        console.log('here ', aCohort.info.students)
+        this.students = Object.values(aCohort.info.students)
+        this.studentService.setStudentData(this.students)
+        console.log('this students ', this.students)
+      }
+    }
+  }
+
+  async renewData() {
+    this.cohorts = await this.dataStorageService.getData()
   }
 
   bindElementToStudent(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list

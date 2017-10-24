@@ -1,6 +1,6 @@
 <a 
   class="list-group-item clearfix"
-  *ngFor="let assignment in assignments, let i = index"
+  *ngFor="let assignment of assignments, let i = index"
   (click)="onEditItem(i)"
   (click)="onSelected()"
   style="cursor: pointer"

@@ -13,16 +13,23 @@ export class CohortService {
     startedEditing = new Subject<number>();
     ourCohorts = new Subject<any>();
     @Input() newCohorts = new Subject<any>();
+    public renew = new Subject<any>();
 
     public setCohortFilterSubject = new Subject<Cohort>();
     setCohortFilter$: Observable<Cohort>;
+    setRenew$: Observable<any>
     cohort: Cohort;
     public cohorts: Array<any>;
 
+    public renewCohortData() {
+      this.renew.next()
+    }
     constructor() {
       this.setCohortFilter$ = this.setCohortFilterSubject.asObservable()
+      this.setRenew$ = this.renew.asObservable()
     }
 
+    
     setCohortData(cohorts: Cohort[]) {
       this.cohorts = cohorts;
       console.log(' i give up ', this.cohorts)
