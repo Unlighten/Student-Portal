@@ -26,12 +26,8 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/assignments`).push(newAssignment)    
   }
 
-  storeCompletedAssignmentData() { //aaron's function in the making
-    return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.assignmentService.getAssignments()); 
-  }
-
-  // storeStudentData() {
-  //   return this.http.put('https://student-portal-4e814.firebaseio.com/users.json', this.studentService.getStudents()); 
+  // storeCompletedAssignmentData() { //Aaron
+  //   firebase.database().ref('completedassignments').push()
   // }
 
   storeStudentData(cohortKey, newStudent) {
