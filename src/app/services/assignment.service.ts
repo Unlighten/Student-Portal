@@ -9,7 +9,7 @@ export class AssignmentService {
 
   private assignments: Assignment[] = []; //Sets array for assignments => infilled by FB
 
-  setAssignmentData(assignments: Assignment[]) { //Fills in data for assignments
+  setAssignmentData(assignments: Array<any>) { //Fills in data for assignments
     this.assignments = assignments;
     this.assignmentsChanged.next(this.assignments.slice());
   }
@@ -42,6 +42,7 @@ export class AssignmentService {
 
   getAssignmentById(aid) { //Accesses individual assignments for modal
     const getAssignmentById = this.assignments[aid];
+    console.log('this assignment service ', this.assignments)
     this.oneAssignment.next(getAssignmentById);
   }
 }

@@ -15,11 +15,13 @@ import { DataStorageService } from '../../../services/data-storage.service';
 export class AssignmentListComponent implements OnInit {
   assignmentsByCohort: Assignment[];
   @Input() assignment: Assignment;
-  @Output() assignmentSelected = new Subject<void>();
+  // @Output() assignmentSelected = new Subject<void>();
 
-  assignments: Assignment[];
+  assignments: Array<any>
   private subscription: Subscription;
   private cohortSubscription: Subscription;
+  private someSubscription: Subscription;
+  
   cohort
   cohorts
   
@@ -36,6 +38,13 @@ export class AssignmentListComponent implements OnInit {
         console.log(assignments)
       }
     );
+
+    this.someSubscription = this.cohortService.setRenew$.subscribe(
+      (res) => {
+        this.getMoreData()
+      }
+    )
+
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
       (cohort: Cohort) => {
         this.cohort = cohort;
@@ -50,6 +59,11 @@ export class AssignmentListComponent implements OnInit {
     this.assignmentService.assignmentSelected.next(this.assignment);
   }
 
+  async getMoreData() {
+    this.cohorts = await this.dataStorageService.getData();
+    this.changeAssignments()          
+  }
+
   changeAssignments() {
     console.log(this.cohorts, ' ass list test')
     // console.log('this cohort ass ', this.cohort.key)
@@ -57,16 +71,22 @@ export class AssignmentListComponent implements OnInit {
     //-KwuiSXI-2DXInd6idGJ
     for (let aCohort of this.cohorts) {
         if (aCohort.key == this.cohort) {
-        console.log('if statemnent')
-        this.assignments = aCohort.info.assignments
+          console.log('here ', aCohort.info.assignments)
+          this.assignments = Object.values(aCohort.info.assignments)
+          this.assignmentService.setAssignmentData(this.assignments)
       }
     }
+    // for(let assignment of this.assignments) {
+    //   console.log('test', assignment.name)
+    // }
       console.log('this assignments', this.assignments)
   }
 
   bindElementToAssignment(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list
     // console.log(this.createAssignmentService)
+    console.log('data ', data)
     if (data.target.id) { //prevents errors when hitting the links directly
+      console.log('data.target.id ', data.target.id)
       this.assignmentService.getAssignmentById(data.target.id);
     } else { //prevents errors within the modal itself
       this.assignmentService.getAssignmentById(data.target.parentElement.parentElement.id)
