@@ -16,7 +16,8 @@ export class CreateAssignmentComponent implements OnInit {
   }
 
   onFetchData() {
-    this.dataStorageService.getData(); //Attn. data-storage.service.ts
+    let assignmentData = this.dataStorageService.getData(); //Attn. data-storage.service.ts
+    console.log('assignment data', assignmentData)
   }
 
 }

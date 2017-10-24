@@ -5,6 +5,7 @@ import { Assignment } from '../../../models/assignment.model';
 import { Cohort } from '../../../models/cohort.model';
 import { AssignmentService } from '../../../services/assignment.service';
 import { CohortService } from '../../../services/cohort.service';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-assignment-list',
@@ -19,14 +20,15 @@ export class AssignmentListComponent implements OnInit {
   assignments: Assignment[];
   private subscription: Subscription;
   private cohortSubscription: Subscription;
-  cohort: Cohort;
+  cohort
+  cohorts
   
-  constructor(private assignmentService: AssignmentService, private cohortService: CohortService) { }
+  constructor(private assignmentService: AssignmentService, private cohortService: CohortService, private dataStorageService: DataStorageService) { }
 
-  ngOnInit() { //Infills Assignment[] with FB data
-    this.assignments = this.assignmentService.getAssignments();
+  async ngOnInit() { //Infills Assignment[] with FB data
+    // this.assignments = this.assignmentService.getAssignments();
+    this.cohorts = await this.dataStorageService.getData()
     // this.cohort = this.addCohortService.releaseCohortFilter();
-    console.log(this.cohort, ' ass list test')
     
     this.subscription = this.assignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
@@ -41,7 +43,7 @@ export class AssignmentListComponent implements OnInit {
         this.changeAssignments()      
       }
     )
-    this.changeAssignments()          
+    console.log('this assignments winner', this.assignments)          
   }
 
   onSelected() { //When clicked, infills edit input bars for edit functionality
@@ -49,9 +51,17 @@ export class AssignmentListComponent implements OnInit {
   }
 
   changeAssignments() {
-    console.log(this.cohort)
-    this.assignments = this.assignments.filter(
-      assignment => assignment.cohort.toString() === this.cohort.toString());
+    console.log(this.cohorts, ' ass list test')
+    // console.log('this cohort ass ', this.cohort.key)
+    // let banana = this.cohort.propertyName
+    //-KwuiSXI-2DXInd6idGJ
+    for (let aCohort of this.cohorts) {
+        if (aCohort.key == this.cohort) {
+        console.log('if statemnent')
+        this.assignments = aCohort.info.assignments
+      }
+    }
+      console.log('this assignments', this.assignments)
   }
 
   bindElementToAssignment(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list
