@@ -42,7 +42,7 @@ export class CrudStudentComponent implements OnInit {
       }
     );
     this.cohorts = this.cohortService.receiveCohorts(); 
-    console.log('wowee', this.cohorts)   
+    // console.log('wowee', this.cohorts)   
   }
 
   onSubmit(form: NgForm) {
@@ -72,7 +72,7 @@ export class CrudStudentComponent implements OnInit {
 
     firebase.auth().sendPasswordResetEmail(value.email)
       .then(function() {
-        console.log('Password reset sent to ' + value.email);
+        // console.log('Password reset sent to ' + value.email);
       })
       .catch(function(error) {
         let errorCode = error.code;

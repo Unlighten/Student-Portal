@@ -40,10 +40,10 @@ export class SelectCohortComponent implements OnInit {
       (cohorts) => {
         this.cohorts = cohorts;
         // this.cohorts = this.cohortService.getCohorts();
-        console.log('this cohorts 12', this.cohorts)
+        // console.log('this cohorts 12', this.cohorts)
       }
     )
-    console.log('checker 1', this.cohorts)
+    // console.log('checker 1', this.cohorts)
   }
 
   createArray(){
@@ -55,14 +55,14 @@ export class SelectCohortComponent implements OnInit {
       }
       cohortsArray.push(newObject)
     }
-    console.log('cohorts 11 ', cohortsArray)
+    // console.log('cohorts 11 ', cohortsArray)
     return cohortsArray
   }
 
   sendCohortFilter(cohort) {
     this.cohort = cohort
-    console.log('2 22222 ', cohort)
-    console.log('super serious test ', JSON.stringify(this.cohort))
+    // console.log('2 22222 ', cohort)
+    // console.log('super serious test ', JSON.stringify(this.cohort))
     this.cohortService.setCohortFilter(this.cohort)
   }
 
