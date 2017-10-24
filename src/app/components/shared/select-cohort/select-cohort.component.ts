@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Cohort } from '../../../models/cohort.model';
 import { CohortService } from '../../../services/cohort.service';
+import { Subscription } from 'rxjs/Subscription';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 // interface Cohort {
 //   cohortName: string;
@@ -14,19 +16,33 @@ import { CohortService } from '../../../services/cohort.service';
 })
 export class SelectCohortComponent implements OnInit {
   // @Input() cohorts: Observable<Cohort[]>;
-  cohorts: Cohort[];
+  subscription: Subscription;
+  cohorts
   // cohortsArrayTwo: this.createArray;
 
   @Output('selectedCohortChange')
   // public cohort22: array = []];
   cohort: '';
 
-  public constructor(private cohortService: CohortService) {
+  public constructor(private cohortService: CohortService, private dataStorageService: DataStorageService) {
     // this.addCohortService.setCohortFilter(this.data)
    }
 
-  ngOnInit() {
-    this.cohorts = this.cohortService.getCohorts();
+  async ngOnInit() {
+    // this.cohorts = this.cohortService.getCohorts();
+    if (this.cohorts) {
+      this.cohorts = this.cohorts
+    } else {
+      this.cohorts = await this.dataStorageService.getData();
+      this.cohortService.setCohortData(this.cohorts)      
+    }
+    this.subscription = this.cohortService.cohortsChanged.subscribe(
+      (cohorts) => {
+        this.cohorts = cohorts;
+        // this.cohorts = this.cohortService.getCohorts();
+        console.log('this cohorts 12', this.cohorts)
+      }
+    )
     console.log('checker 1', this.cohorts)
   }
 
@@ -39,7 +55,7 @@ export class SelectCohortComponent implements OnInit {
       }
       cohortsArray.push(newObject)
     }
-    console.log(typeof(cohortsArray))
+    console.log('cohorts 11 ', cohortsArray)
     return cohortsArray
   }
 

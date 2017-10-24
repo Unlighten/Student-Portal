@@ -20,7 +20,7 @@ export class CrudStudentComponent implements OnInit {
   editMode = false;
   editedItemIndex: number;
   editedItem: Student;
-  cohorts: Cohort[];
+  cohorts
 
   constructor(private cohortService: CohortService, private studentService: StudentService, private dataStorageService: DataStorageService) { }
 
@@ -39,7 +39,7 @@ export class CrudStudentComponent implements OnInit {
         })
       }
     );
-    this.cohorts = this.cohortService.getCohorts(); 
+    this.cohorts = this.cohortService.receiveCohorts(); 
     console.log('wowee', this.cohorts)   
   }
 

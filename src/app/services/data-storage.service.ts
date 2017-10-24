@@ -8,6 +8,7 @@ import { Assignment } from "../models/assignment.model";
 import { Student } from "../models/student.model";
 import { Cohort } from "../models/cohort.model";
 import * as firebase from 'firebase';
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class DataStorageService {
@@ -19,6 +20,7 @@ export class DataStorageService {
     private cohortService: CohortService,
     private studentService: StudentService
   ) {}
+  // cohorts: Array<any>
 
   storeAssignmentData(cohortKey, newAssignment) { //stores data via preset criteria (name, description, due)
     firebase.database().ref(`cohorts/${cohortKey}/assignments`).push(newAssignment)    
@@ -36,14 +38,12 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/students`).push(newStudent)    
   }
 
-  getData(): any { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
-    firebase.database().ref('cohorts').once('value')
+  getData() { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
+    return firebase.database().ref('cohorts').once('value')
     .then(data => {
-      // const cohorts
       let cohorts = []
       const obj = data.val()
       for (let key in obj){
-        console.log('something ', obj[key])
         var newObject = {
           key: key,
           info: obj[key]
@@ -51,10 +51,9 @@ export class DataStorageService {
         // console.log(Object.getOwnPropertyNames(obj))
         cohorts.push(newObject)
       }
-      console.log('change <any>', cohorts)
-      return <any>cohorts
+      return cohorts
     }
-  )
+    )
   }
 
   storeCohortData(cohort) {
@@ -62,8 +61,7 @@ export class DataStorageService {
 
     firebase.database().ref('cohorts').push(cohort)
     // .then((data) => {
-    //  key = data.key
-    //  return key
+    //  return data
     // })    
   }
 }
