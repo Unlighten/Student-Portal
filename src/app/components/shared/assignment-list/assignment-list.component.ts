@@ -66,14 +66,15 @@ export class AssignmentListComponent implements OnInit {
 
   changeAssignments() {
     console.log(this.cohorts, ' ass list test')
-    // console.log('this cohort ass ', this.cohort.key)
-    // let banana = this.cohort.propertyName
-    //-KwuiSXI-2DXInd6idGJ
     for (let aCohort of this.cohorts) {
-        if (aCohort.key == this.cohort) {
-          console.log('here ', aCohort.info.assignments)
-          this.assignments = Object.values(aCohort.info.assignments)
-          this.assignmentService.setAssignmentData(this.assignments)
+      if (aCohort.key == this.cohort) {
+        if (aCohort.info.assignments) {
+        console.log('here ', aCohort.info.assignments)
+        this.assignments = Object.values(aCohort.info.assignments)
+        this.assignmentService.setAssignmentData(this.assignments)
+        } else {
+          this.assignments = []
+        }
       }
     }
     // for(let assignment of this.assignments) {

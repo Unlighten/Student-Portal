@@ -38,7 +38,7 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
-    const newCohort = form.value;
+    const newCohort = form.value
     // const newCohort = new Cohort(value.cohortName);
       this.cohortService.addCohort(newCohort);
       this.onSaveData(newCohort);

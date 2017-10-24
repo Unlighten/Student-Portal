@@ -45,11 +45,17 @@ export class StudentListComponent implements OnInit {
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
       (cohort: Cohort) => {
         this.cohort = cohort;
-        this.students = this.studentService.getStudents();        
-        this.changeStudents()      
+        this.students = this.studentService.getStudents();
+        console.log('this cohort ', this.cohort)   
+        this.changeStudents()     
+        // if (!this.cohort.info.students){
+        //   this.cohorts = [];
+        // } else {
+        //   this.changeStudents()      
+        // }
       }
     )
-    // this.changeStudents()          
+    this.changeStudents()          
   }
 
   async getMoreData() {
@@ -64,10 +70,15 @@ export class StudentListComponent implements OnInit {
   changeStudents() {
     for (let aCohort of this.cohorts) {
       if (aCohort.key == this.cohort) {
-        console.log('here ', aCohort.info.students)
+        if (aCohort.info.students){
+        console.log('here agha ', aCohort.info.students)
         this.students = Object.values(aCohort.info.students)
         this.studentService.setStudentData(this.students)
         console.log('this students ', this.students)
+        } else {
+          console.log('else ')
+          this.students = [];
+        }
       }
     }
   }
