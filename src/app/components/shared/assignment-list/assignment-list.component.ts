@@ -20,6 +20,8 @@ export class AssignmentListComponent implements OnInit {
   assignments: Array<any>
   private subscription: Subscription;
   private cohortSubscription: Subscription;
+  private someSubscription: Subscription;
+  
   cohort
   cohorts
   
@@ -36,6 +38,13 @@ export class AssignmentListComponent implements OnInit {
         console.log(assignments)
       }
     );
+
+    this.someSubscription = this.cohortService.setRenew$.subscribe(
+      (res) => {
+        this.getMoreData()
+      }
+    )
+
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
       (cohort: Cohort) => {
         this.cohort = cohort;
@@ -48,6 +57,11 @@ export class AssignmentListComponent implements OnInit {
 
   onSelected() { //When clicked, infills edit input bars for edit functionality
     this.assignmentService.assignmentSelected.next(this.assignment);
+  }
+
+  async getMoreData() {
+    this.cohorts = await this.dataStorageService.getData();
+    this.changeAssignments()          
   }
 
   changeAssignments() {

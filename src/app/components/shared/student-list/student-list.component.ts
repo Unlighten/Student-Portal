@@ -19,6 +19,7 @@ export class StudentListComponent implements OnInit {
   public someSubscription: Subscription;
   cohort
   cohorts
+  morecohorts
 
   students: Array<any> //Links to home.model and reminds Angular Student is an array
   private subscription: Subscription;
@@ -36,7 +37,9 @@ export class StudentListComponent implements OnInit {
     );
 
     this.someSubscription = this.cohortService.setRenew$.subscribe(
-      this.cohorts =  await this.dataStorageService.getData();      
+      (res) => {
+        this.getMoreData()
+      }
     )
 
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
@@ -47,6 +50,11 @@ export class StudentListComponent implements OnInit {
       }
     )
     // this.changeStudents()          
+  }
+
+  async getMoreData() {
+    this.cohorts = await this.dataStorageService.getData(); 
+    this.changeStudents()         
   }
 
   onSelected() {
