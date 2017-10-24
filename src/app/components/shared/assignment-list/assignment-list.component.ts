@@ -5,6 +5,7 @@ import { Assignment } from '../../../models/assignment.model';
 import { Cohort } from '../../../models/cohort.model';
 import { AssignmentService } from '../../../services/assignment.service';
 import { CohortService } from '../../../services/cohort.service';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-assignment-list',
@@ -14,19 +15,22 @@ import { CohortService } from '../../../services/cohort.service';
 export class AssignmentListComponent implements OnInit {
   assignmentsByCohort: Assignment[];
   @Input() assignment: Assignment;
-  @Output() assignmentSelected = new Subject<void>();
+  // @Output() assignmentSelected = new Subject<void>();
 
-  assignments: Assignment[];
+  assignments: Array<any>
   private subscription: Subscription;
   private cohortSubscription: Subscription;
-  cohort: Cohort;
+  private someSubscription: Subscription;
   
-  constructor(private assignmentService: AssignmentService, private cohortService: CohortService) { }
+  cohort
+  cohorts
+  
+  constructor(private assignmentService: AssignmentService, private cohortService: CohortService, private dataStorageService: DataStorageService) { }
 
-  ngOnInit() { //Infills Assignment[] with FB data
-    this.assignments = this.assignmentService.getAssignments();
+  async ngOnInit() { //Infills Assignment[] with FB data
+    // this.assignments = this.assignmentService.getAssignments();
+    this.cohorts = await this.dataStorageService.getData()
     // this.cohort = this.addCohortService.releaseCohortFilter();
-    console.log(this.cohort, ' ass list test')
     
     this.subscription = this.assignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
@@ -34,6 +38,13 @@ export class AssignmentListComponent implements OnInit {
         console.log(assignments)
       }
     );
+
+    this.someSubscription = this.cohortService.setRenew$.subscribe(
+      (res) => {
+        this.getMoreData()
+      }
+    )
+
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
       (cohort: Cohort) => {
         this.cohort = cohort;
@@ -41,22 +52,41 @@ export class AssignmentListComponent implements OnInit {
         this.changeAssignments()      
       }
     )
-    this.changeAssignments()          
+    console.log('this assignments winner', this.assignments)          
   }
 
   onSelected() { //When clicked, infills edit input bars for edit functionality
     this.assignmentService.assignmentSelected.next(this.assignment);
   }
 
+  async getMoreData() {
+    this.cohorts = await this.dataStorageService.getData();
+    this.changeAssignments()          
+  }
+
   changeAssignments() {
-    console.log(this.cohort)
-    this.assignments = this.assignments.filter(
-      assignment => assignment.cohort.toString() === this.cohort.toString());
+    console.log(this.cohorts, ' ass list test')
+    // console.log('this cohort ass ', this.cohort.key)
+    // let banana = this.cohort.propertyName
+    //-KwuiSXI-2DXInd6idGJ
+    for (let aCohort of this.cohorts) {
+        if (aCohort.key == this.cohort) {
+          console.log('here ', aCohort.info.assignments)
+          this.assignments = Object.values(aCohort.info.assignments)
+          this.assignmentService.setAssignmentData(this.assignments)
+      }
+    }
+    // for(let assignment of this.assignments) {
+    //   console.log('test', assignment.name)
+    // }
+      console.log('this assignments', this.assignments)
   }
 
   bindElementToAssignment(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list
     // console.log(this.createAssignmentService)
+    console.log('data ', data)
     if (data.target.id) { //prevents errors when hitting the links directly
+      console.log('data.target.id ', data.target.id)
       this.assignmentService.getAssignmentById(data.target.id);
     } else { //prevents errors within the modal itself
       this.assignmentService.getAssignmentById(data.target.parentElement.parentElement.id)

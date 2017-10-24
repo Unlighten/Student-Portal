@@ -19,7 +19,7 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
   editMode = false;
   editedItemIndex: number;
   editedItem: Assignment;
-  cohorts: Cohort[]
+  cohorts
   
   constructor(private assignmentService: AssignmentService, private dataStorageService: DataStorageService, private cohortService: CohortService) { }
 
@@ -37,7 +37,7 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
         });
       }
     );
-    this.cohorts = this.cohortService.getCohorts();       
+    this.cohorts = this.cohortService.receiveCohorts();       
   }
 
   onSubmit(form: NgForm) {

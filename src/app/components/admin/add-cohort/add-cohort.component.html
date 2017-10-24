@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
-    <app-crud-cohort></app-crud-cohort>
+    <app-crud-cohort [cohorts]='cohorts'></app-crud-cohort>
   </div>
 </div>
 <div class="row">
@@ -24,7 +24,7 @@
       id="{{i}}"
     >
       <div class="pull-left">
-        <h4 class="list-group-item-heading">{{ cohort.cohortName }}</h4>
+        <h4 class="list-group-item-heading">{{ cohort.info.cohortName }}</h4>
       </div>
     </a>
   </div>

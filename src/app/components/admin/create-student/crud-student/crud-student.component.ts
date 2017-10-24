@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Response } from '@angular/http';
@@ -8,6 +8,7 @@ import { Cohort } from '../../../../models/cohort.model';
 import { CohortService } from '../../../../services/cohort.service';
 import { StudentService } from '../../../../services/student.service';
 import { DataStorageService } from '../../../../services/data-storage.service';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-crud-student',
@@ -15,12 +16,13 @@ import { DataStorageService } from '../../../../services/data-storage.service';
   styleUrls: ['./crud-student.component.css']
 })
 export class CrudStudentComponent implements OnInit {
+  @Output() renewData = new Subject<any>()
   @ViewChild('f') createAssignmentForm: NgForm;
   subscription: Subscription;
   editMode = false;
   editedItemIndex: number;
   editedItem: Student;
-  cohorts: Cohort[];
+  cohorts
 
   constructor(private cohortService: CohortService, private studentService: StudentService, private dataStorageService: DataStorageService) { }
 
@@ -39,7 +41,7 @@ export class CrudStudentComponent implements OnInit {
         })
       }
     );
-    this.cohorts = this.cohortService.getCohorts(); 
+    this.cohorts = this.cohortService.receiveCohorts(); 
     console.log('wowee', this.cohorts)   
   }
 
@@ -76,6 +78,8 @@ export class CrudStudentComponent implements OnInit {
         let errorCode = error.code;
         let errorMessage = error.message;
       })
+
+    this.cohortService.renewCohortData()
   }
 
   onSaveData(cohortKey, newStudent) {

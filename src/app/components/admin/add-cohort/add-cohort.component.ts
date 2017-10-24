@@ -6,6 +6,7 @@ import { Cohort } from '../../../models/cohort.model';
 import { DataStorageService } from '../../../services/data-storage.service';
 import { CohortService } from '../../../services/cohort.service';
 import { Subject } from 'rxjs/Subject';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-add-cohort',
@@ -18,26 +19,32 @@ export class AddCohortComponent implements OnInit {
   editedItemIndex: number;
   editedItem: Cohort;
   @Input() cohort: Cohort;
+  @Input() newCohorts
   @Output() cohortSelected = new Subject<void>();
-  newCohorts: '';
-  cohorts: Array<any>;
+  cohorts
   
   constructor(private dataStorageService: DataStorageService, private cohortService: CohortService) { }
 
-  ngOnInit() {
-    // this.cohorts = this.cohortService.getCohorts();
-    // this.subscription = this.cohortService.cohortsChanged.subscribe(
-    //   (cohorts: Cohort[]) => {
-    //     this.cohorts = cohorts;
-    //     this.cohorts = this.cohortService.getCohorts();
-    //   }
-    // )
-    // this.cohorts = <any>this.onFetchData();
-    this.cohorts = this.dataStorageService.getData()
+  async ngOnInit() {
+    if (this.newCohorts) {
+      this.cohorts = this.newCohorts
+    } else {
+      this.cohorts = await this.dataStorageService.getData();
+      this.cohortService.setCohortData(this.cohorts)      
+    }
+    this.subscription = this.cohortService.cohortsChanged.subscribe(
+      (cohorts) => {
+        this.cohorts = cohorts;
+        // this.cohorts = this.cohortService.getCohorts();
+        console.log('this cohorts', this.cohorts)
+      }
+    )
     console.log('Changing to <any>', this.cohorts) 
-    // console.log(newCohorts)
-  }
+    console.log(' this ', this.cohorts)
+    }
+  
   ngAfterViewInit() {
+    // this.onFetchData()
     console.log('Oke does this really work?', this.cohorts)
   }
   onSelected() {
@@ -48,23 +55,20 @@ export class AddCohortComponent implements OnInit {
     this.cohortService.startedEditing.next(index);
   }
 
-  onSubmit(form: NgForm) {
-    const newCohort = form.value.cohortName;
-    this.cohortService.addCohort(newCohort)
-    this.onSaveData(newCohort)
-    form.reset();
-  }
-
   onSaveData(newCohort) {
     this.dataStorageService.storeCohortData(newCohort)
+    // this.onFetchData()
     // .subscribe(
     //   (response: Response) => {
     //   }
     // )
   }
 
-  async onFetchData() {
-    let cohortArray = await <any>this.dataStorageService.getData()
-    return cohortArray; //Attn. data-storage.service.ts
+  onFetchData() {
+    let cohortArray = this.dataStorageService.getData()
+    console.log('cohort array ', cohortArray)
+    console.log('anything', this.cohorts)
+    // return this.cohorts
+    // return cohortArray; //Attn. data-storage.service.ts
   }
 }

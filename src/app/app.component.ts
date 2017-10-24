@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import firebaseConfig from '../../firebaseConfig.js';
 import * as firebase from 'firebase';
 import { DataStorageService } from './services/data-storage.service';
+import { CohortService } from './services/cohort.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { DataStorageService } from './services/data-storage.service';
 export class AppComponent {
   loadedFeature = 'home';
 
-  constructor(private dataStorageService: DataStorageService) { }
+  constructor(private dataStorageService: DataStorageService, private cohortService: CohortService) { }
   
   ngOnInit(){
     firebase.initializeApp({
@@ -31,5 +32,6 @@ export class AppComponent {
 
   onFetchData() {
     this.dataStorageService.getData(); //Attn. data-storage.service.ts
+    // this.cohortService.getOurCohorts()
   }
 }
