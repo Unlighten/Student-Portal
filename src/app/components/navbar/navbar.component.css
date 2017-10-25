@@ -28,7 +28,8 @@ img.logo{
 }
 
 .navbar-brand:hover {
-    color: white;
+    color: #e24a52;
+    background-color: white;
 }
 
 .navbar-inverse, .navbar-nav>li>a {

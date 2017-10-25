@@ -9,6 +9,7 @@ export class AuthGuard implements CanActivate {
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     let uid = await this.authService.getID()
     return this.authService.isAdminAuthenticated(uid)
+    
     // return this.authService.isAuthenticated()
   }
 }

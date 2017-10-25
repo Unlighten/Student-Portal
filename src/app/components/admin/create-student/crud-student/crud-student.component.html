@@ -48,14 +48,16 @@
         </div>
       </div>
       <div class='col-xs-3 form-group move-left'>
-          <select 
+        <label for="cohort">Cohort:</label>  
+        <select 
             class="form-control"
             type='text'
             id='cohort'
             name='cohort'
             ngModel
-            required>
-              <option *ngFor='let cohort of cohorts' [value]='cohort.key'>{{ cohort.info.cohortName }}</option>
+            required
+          >
+            <option *ngFor='let cohort of cohorts' [value]='cohort.key'>{{ cohort.info.cohortName }}</option>
           </select>
       </div>
       <div class="row">
