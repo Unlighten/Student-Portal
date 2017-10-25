@@ -85,9 +85,11 @@ export class AssignmentListComponent implements OnInit {
     // console.log(this.createAssignmentService)
     if (data.target.id) { //prevents errors when hitting the links directly
       this.assignmentService.getAssignmentById(data.target.id);
-    } else { //prevents errors within the modal itself
+    } else if (data.target.parentElement.parentElement.id) { //prevents errors within the modal itself
       this.assignmentService.getAssignmentById(data.target.parentElement.parentElement.id)
       console.log(data)
+    } else {
+      this.assignmentService.getAssignmentById(data.target.parentElement.parentElement.parentElement.id)
     }
   }
 

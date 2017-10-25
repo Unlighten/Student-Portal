@@ -90,8 +90,11 @@ export class StudentListComponent implements OnInit {
   bindElementToStudent(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list
     if (data.target.id) { //prevents errors when hitting the links directly
       this.studentService.getStudentById(data.target.id);
-    } else { //prevents errors within the modal itself
+    } else if (data.target.parentElement.parentElement.id) { //prevents errors within the modal itself
       this.studentService.getStudentById(data.target.parentElement.parentElement.id)
+      console.log(data)
+    } else {
+      this.studentService.getStudentById(data.target.parentElement.parentElement.parentElement.id)
     }
   }
 
