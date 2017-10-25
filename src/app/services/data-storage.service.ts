@@ -9,6 +9,7 @@ import { Student } from "../models/student.model";
 import { Cohort } from "../models/cohort.model";
 import * as firebase from 'firebase';
 import { Observable } from "rxjs/Observable";
+import { CAssignment } from "../models/assignment.model";
 
 @Injectable()
 export class DataStorageService {
@@ -26,9 +27,19 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/assignments`).push(newAssignment)    
   }
 
-  // storeCompletedAssignmentData() { //Aaron
-  //   firebase.database().ref('completedassignments').push()
-  // }
+
+  updateAssignmentData(cohortKey, newAssignment, assignmentKey) { //stores data via preset criteria (name, description, due)
+    firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}`).set(newAssignment)    
+  }
+
+  storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment) { //Aaron
+    firebase.database().ref(
+      `cohorts/${cohortKey}
+      /assignments/${assignmentKey}
+      /completed-assignments`
+    ).push(cohortKey, completedAssignment) 
+  }
+
 
   storeStudentData(cohortKey, newStudent) {
     firebase.database().ref(`cohorts/${cohortKey}/students`).push(newStudent)    
@@ -37,15 +48,29 @@ export class DataStorageService {
   getData() { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
     return firebase.database().ref('cohorts').once('value')
     .then(data => {
-      let cohorts = []
+      let cohorts = [];
       const obj = data.val()
       for (let key in obj){
-        var newObject = {
-          key: key,
-          info: obj[key]
-        }
-        // console.log(Object.getOwnPropertyNames(obj))
-        cohorts.push(newObject)
+        let assignments = [];                  
+        for (let assignmentKey in obj[key].assignments){ 
+          var assignmentsObject = {
+              name: obj[key].assignments[assignmentKey].name,
+              cohort: obj[key].assignments[assignmentKey].cohort,
+              due: obj[key].assignments[assignmentKey].due,
+              description: obj[key].assignments[assignmentKey].description,
+              assignmentKey: assignmentKey
+          }      
+          assignments.push(assignmentsObject)
+          }          
+          var newObject = {
+            key: key,
+            info: {
+              assignments: assignments,
+              students: obj[key].students,
+              cohortName: obj[key].cohortName
+            }
+          }
+          cohorts.push(newObject)
       }
       return cohorts
     }
@@ -53,11 +78,6 @@ export class DataStorageService {
   }
 
   storeCohortData(cohort) {
-    // return this.http.put('https://student-portal-4e814.firebaseio.com/cohorts.json', this.cohortService.getCohorts());
-
     firebase.database().ref('cohorts').push(cohort)
-    // .then((data) => {
-    //  return data
-    // })    
   }
 }

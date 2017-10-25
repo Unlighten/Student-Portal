@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Response } from '@angular/http';
 import { Assignment } from '../../../../models/assignment.model';
+import { CAssignment } from '../../../../models/cAssignment.model'
 import { AssignmentService } from '../../../../services/assignment.service';
 import { DataStorageService } from '../../../../services/data-storage.service';
 
@@ -21,6 +22,18 @@ export class AssignmentDetailComponent implements OnInit {
     due: '',
     cohort: ''
   };
+
+  //==============================================================
+  //assignment needs uploadedAssignment field or...
+  //==============================================================
+
+  cassignment: CAssignment = { //Empty object to fill with modal click
+    name: '',
+    description: '',
+    due: '',
+    cohort: '',
+    uploadedAssignment: ''
+  };
   
   constructor(private assignmentService: AssignmentService, private dataStorageService: DataStorageService) { }
 
@@ -35,17 +48,23 @@ export class AssignmentDetailComponent implements OnInit {
     this.assignmentService.oneAssignment.subscribe(data => this.assignment = data); //Modal component => Attn. assignmentService
   }
 
-
   onSubmit(form: NgForm) {
-    this.onSaveData()
+    const value = form.value;
+    const completedAssignment = new CAssignment(
+      value.name, 
+      value.desc, 
+      value.due, 
+      value.cohort,
+      value.uploadedAssignment
+    );
+    const cohortKey = value.cohort;
+    this.onSaveData(cohortKey, assignmentKey, completedAssignment);
     form.reset();
-    // console.log('assignment submitted');
-    // console.log(this.assignmentService.oneAssignment)
   }
 
-  onSaveData() {
-      // this.dataStorageService.storeCompletedAssignmentData();
-      // console.log(this.completedAssignment, 'this.completedAssignment')
+  onSaveData(cohortKey, assignmentKey, completedAssignment) {
+      this.dataStorageService.storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment);
+      console.log(this.completedAssignment, 'this.completedAssignment')
   }
 }
 
