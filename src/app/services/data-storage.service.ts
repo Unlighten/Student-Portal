@@ -48,7 +48,8 @@ export class DataStorageService {
       let cohorts = [];
       const obj = data.val()
       for (let key in obj){
-        let assignments = [];                  
+        let assignments = []; 
+        let students = [];                 
         for (let assignmentKey in obj[key].assignments){ 
           var assignmentsObject = {
               name: obj[key].assignments[assignmentKey].name,
@@ -58,12 +59,23 @@ export class DataStorageService {
               assignmentKey: assignmentKey
           }      
           assignments.push(assignmentsObject)
-          }          
+        }  
+          for (let studentKey in obj[key].students){
+            var studentsObject = {
+              cohort: obj[key].students[studentKey].cohort,
+              fname: obj[key].students[studentKey].fname,
+              lname: obj[key].students[studentKey].lname,
+              email: obj[key].students[studentKey].email,
+              studentKey: studentKey
+            }
+            console.log(studentsObject)
+            students.push(studentsObject)
+          }        
           var newObject = {
             key: key,
             info: {
               assignments: assignments,
-              students: obj[key].students,
+              students: students,
               cohortName: obj[key].cohortName
             }
           }

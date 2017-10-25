@@ -71,7 +71,7 @@ export class StudentListComponent implements OnInit {
     for (let aCohort of this.cohorts) {
       if (aCohort.key == this.cohort) {
         if (aCohort.info.students){
-        console.log('here agha ', aCohort.info.students)
+        console.log('here agha ', aCohort.info)
         this.students = Object.values(aCohort.info.students)
         this.studentService.setStudentData(this.students)
         console.log('this students ', this.students)
