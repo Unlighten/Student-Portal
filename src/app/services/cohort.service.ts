@@ -62,6 +62,10 @@ export class CohortService {
         this.cohortsChanged.next(this.cohorts);
     }
 
+    getCohorts2() {
+      return this.cohorts
+    }
+
     receiveCohorts() {
       return this.cohorts
     }
