@@ -63,29 +63,30 @@ export class CrudStudentComponent implements OnInit {
       this.studentService.addStudent(newStudent);
       this.onSaveData(cohortKey, newStudent);
     }
-    this.editMode = false;
-    form.reset();
 
     firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-      .catch(function(error) {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-      })
+    .catch(function(error) {
+      let errorCode = error.code;
+      let errorMessage = error.message;
+    })
 
-    firebase.auth().sendPasswordResetEmail(value.email)
-      .then(function() {
-        // console.log('Password reset sent to ' + value.email);
-      })
-      .catch(function(error) {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-      })
+    // firebase.auth().sendPasswordResetEmail(value.email)
+    // .then(function() {
+    //   console.log('Password reset sent to ' + value.email);
+    // })
+    // .catch(function(error) {
+    //   let errorCode = error.code;
+    //   let errorMessage = error.message;
+    // })
+    
+    this.editMode = false;
+    form.reset();
 
     this.cohortService.renewCohortData()
   }
 
   onSaveData(cohortKey, newStudent) {
-    this.dataStorageService.storeStudentData(cohortKey, newStudent)
+    this.dataStorageService.storeStudentData(cohortKey, newStudent);
   }
 
   onUpdateData(cohortKey, newStudent) {

@@ -31,9 +31,9 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}`).set(newAssignment)    
   }
 
-  storeCompletedAssignmentData() { //aaron's function in the making
-    return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.assignmentService.getAssignments()); 
-  }
+  // storeCompletedAssignmentData() { //aaron's function in the making
+  //   return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.assignmentService.getAssignments()); 
+  // }
 
   updateStudentData(cohortKey, newStudent, studentKey) {
     firebase.database().ref(`cohorts/${cohortKey}/students/${studentKey}`).set(newStudent)
@@ -69,7 +69,7 @@ export class DataStorageService {
               email: obj[key].students[studentKey].email,
               studentKey: studentKey
             }
-            console.log(studentsObject)
+            // console.log(studentsObject)
             students.push(studentsObject)
           }        
           var newObject = {
