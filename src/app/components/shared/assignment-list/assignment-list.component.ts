@@ -45,13 +45,13 @@ export class AssignmentListComponent implements OnInit {
 
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
       (cohort: Cohort) => {
-        if (cohort == 123456) {
+        // if (cohort == 123456) {
 
-        } else {
+        // } else {
           this.cohort = cohort;
           this.assignments = this.assignmentService.getAssignments();        
           this.changeAssignments()  
-        }    
+        // }    
       }
     )
   }
