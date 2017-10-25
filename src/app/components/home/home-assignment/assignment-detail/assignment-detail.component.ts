@@ -48,19 +48,19 @@ export class AssignmentDetailComponent implements OnInit {
     this.assignmentService.oneAssignment.subscribe(data => this.assignment = data); //Modal component => Attn. assignmentService
   }
 
-  onSubmit(form: NgForm) {
-    const value = form.value;
-    const completedAssignment = new CAssignment(
-      value.name, 
-      value.desc, 
-      value.due, 
-      value.cohort,
-      value.uploadedAssignment
-    );
-    const cohortKey = value.cohort;
-    this.onSaveData(cohortKey, assignmentKey, completedAssignment);
-    form.reset();
-  }
+  // onSubmit(form: NgForm) {
+  //   const value = form.value;
+  //   const completedAssignment = new CAssignment(
+  //     value.name, 
+  //     value.desc, 
+  //     value.due, 
+  //     value.cohort,
+  //     value.uploadedAssignment
+  //   );
+  //   const cohortKey = value.cohort;
+  //   this.onSaveData(cohortKey, assignmentKey, completedAssignment);
+  //   form.reset();
+  // }
 
   onSaveData(cohortKey, assignmentKey, completedAssignment) {
       this.dataStorageService.storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment);

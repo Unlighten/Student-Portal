@@ -9,6 +9,7 @@ import { Student } from "../models/student.model";
 import { Cohort } from "../models/cohort.model";
 import * as firebase from 'firebase';
 import { Observable } from "rxjs/Observable";
+import { CAssignment } from "../models/cAssignment.model";
 
 @Injectable()
 export class DataStorageService {

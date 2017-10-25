@@ -1,7 +1,7 @@
-<p>
+<!-- <p>
   Filter by Cohort
-</p>
-
+</p> -->
+<label for="cohort">Filter by Cohort:</label>
 <select class="form-control" ngControl='cohort' (change)='sendCohortFilter($event.target.value)'>
     <option selected [value]='123456'>Filter by Cohort here!</option>
     <option *ngFor='let cohort of cohorts' [value]="cohort.key">{{ cohort.info.cohortName }}</option>
