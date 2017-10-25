@@ -9,6 +9,7 @@ import { Student } from "../models/student.model";
 import { Cohort } from "../models/cohort.model";
 import * as firebase from 'firebase';
 import { Observable } from "rxjs/Observable";
+import { CAssignment } from "../models/assignment.model";
 
 @Injectable()
 export class DataStorageService {
@@ -26,16 +27,19 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/assignments`).push(newAssignment)    
   }
 
+
   updateAssignmentData(cohortKey, newAssignment, assignmentKey) { //stores data via preset criteria (name, description, due)
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}`).set(newAssignment)    
   }
 
-  storeCompletedAssignmentData() { //aaron's function in the making
-    return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.assignmentService.getAssignments()); 
+  storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment) { //Aaron
+    firebase.database().ref(
+      `cohorts/${cohortKey}
+      /assignments/${assignmentKey}
+      /completed-assignments`
+    ).push(cohortKey, completedAssignment) 
   }
 
-  // storeCompletedAssignmentData() { //Aaron
-  //   firebase.database().ref('completedassignments
 
   storeStudentData(cohortKey, newStudent) {
     firebase.database().ref(`cohorts/${cohortKey}/students`).push(newStudent)    
