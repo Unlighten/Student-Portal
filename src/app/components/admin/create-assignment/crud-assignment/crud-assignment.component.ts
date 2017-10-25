@@ -83,11 +83,12 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
     this.editMode = false;
   }
 
-  // onDelete() {
-  //   this.assignmentService.deleteAssignment(this.editedItemIndex);
-  //   this.onClear();
-  //   this.onSaveData();
-  // }
+  onDelete() {
+    this.assignmentKey = this.assignmentKey.assignmentKey
+    this.assignmentService.deleteAssignment(this.editedItemIndex);
+    this.onClear();
+    this.dataStorageService.deleteAssignmentData(this.editedItem.cohort, this.assignmentKey)
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
