@@ -21,9 +21,10 @@ export class CrudStudentComponent implements OnInit {
   subscription: Subscription;
   editMode = false;
   editedItemIndex: number;
-  editedItem: Student;
+  editedItem
   cohorts
   studentKey
+  newStudent
 
   constructor(private cohortService: CohortService, private studentService: StudentService, private dataStorageService: DataStorageService) { }
 
@@ -49,26 +50,46 @@ export class CrudStudentComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newStudent = new Student(
-      value.fname, 
-      value.lname, 
-      value.email, 
-      value.cohort
-    );
+    // const newStudent = new Student(
+    //   value.fname, 
+    //   value.lname, 
+    //   value.email, 
+    //   value.cohort
+    // );
     const cohortKey = value.cohort
-    if (this.editMode) {
-      this.studentService.updateStudent(this.editedItemIndex, newStudent);
-      this.onUpdateData(cohortKey, newStudent)
-    } else {
-      this.studentService.addStudent(newStudent);
-      this.onSaveData(cohortKey, newStudent);
-    }
+    // if (this.editMode) {
+    //   this.studentService.updateStudent(this.editedItemIndex, newStudent);
+    //   this.onUpdateData(cohortKey, newStudent)
+    // } else {
+    //   this.studentService.addStudent(newStudent);
+    //   this.onSaveData(cohortKey, newStudent);
+    // }
+    
 
     firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-    .catch(function(error) {
-      let errorCode = error.code;
-      let errorMessage = error.message;
-    })
+      .then(res => {
+        console.log('restponse ', res.uid)
+        const newStudent = {
+          fname: value.fname, 
+          lname: value.lname, 
+          email: value.email, 
+          cohort: value.cohort,
+          uid: res.uid
+        } 
+        if (this.editMode) {
+          this.studentService.updateStudent(this.editedItemIndex, newStudent);
+          this.onUpdateData(cohortKey, newStudent)
+        } else {
+          this.studentService.addStudent(newStudent);
+          this.onSaveData(cohortKey, newStudent);
+        }
+        this.editMode = false;
+        form.reset()
+      })
+      .catch(function(error) {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+      })
 
     // firebase.auth().sendPasswordResetEmail(value.email)
     // .then(function() {

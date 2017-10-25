@@ -52,8 +52,13 @@ export class AuthService {
     })    
   }
 
-  isAuthenticated() {
+  isAuthenticated(uid) {
+    this.uid = uid
     return this.token != null; 
+  }
+
+  getUID() {
+    return this.uid
   }
 
   isAdminAuthenticated(uid) {
