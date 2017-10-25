@@ -58,8 +58,8 @@ export class SelectCohortComponent implements OnInit {
 
   sendCohortFilter(cohort) {
     this.cohort = cohort
-    console.log('2 22222 ', cohort)
-    console.log('super serious test ', JSON.stringify(this.cohort))
+    // console.log('2 22222 ', cohort)
+    // console.log('super serious test ', JSON.stringify(this.cohort))
     this.cohortService.setCohortFilter(this.cohort)
   }
 
