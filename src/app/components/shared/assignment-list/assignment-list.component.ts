@@ -45,7 +45,7 @@ export class AssignmentListComponent implements OnInit {
 
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
       (cohort: Cohort) => {
-        // if (cohort == 123456) {
+        // if (cohort.value == 123456) {
 
         // } else {
           this.cohort = cohort;

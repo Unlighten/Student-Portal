@@ -75,7 +75,7 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
   onUpdateData(cohortKey, newAssignment) {
     this.assignmentKey = this.assignmentKey.assignmentKey
     console.log( ' newwer assignment ', newAssignment)
-    this.dataStorageService.updateAssignmentData(cohortKey, this.newAssignment, this.assignmentKey)
+    this.dataStorageService.updateAssignmentData(cohortKey, newAssignment, this.assignmentKey)
   }
 
   onClear() {
