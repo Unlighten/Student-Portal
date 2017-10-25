@@ -23,6 +23,7 @@ export class CrudStudentComponent implements OnInit {
   editedItemIndex: number;
   editedItem: Student;
   cohorts
+  studentKey
 
   constructor(private cohortService: CohortService, private studentService: StudentService, private dataStorageService: DataStorageService) { }
 
@@ -32,6 +33,7 @@ export class CrudStudentComponent implements OnInit {
         this.editedItemIndex = index;
         this.editMode = true;
         this.editedItem = this.studentService.getStudent(index);
+        this.studentKey = this.studentService.getStudent(index);
         this.createAssignmentForm.setValue({
           fname: this.editedItem.fname,
           lname: this.editedItem.lname,
@@ -56,7 +58,7 @@ export class CrudStudentComponent implements OnInit {
     const cohortKey = value.cohort
     if (this.editMode) {
       this.studentService.updateStudent(this.editedItemIndex, newStudent);
-      this.onSaveData(cohortKey, newStudent);
+      this.onUpdateData(cohortKey, newStudent)
     } else {
       this.studentService.addStudent(newStudent);
       this.onSaveData(cohortKey, newStudent);
@@ -86,6 +88,11 @@ export class CrudStudentComponent implements OnInit {
     this.dataStorageService.storeStudentData(cohortKey, newStudent)
   }
 
+  onUpdateData(cohortKey, newStudent) {
+    this.studentKey = this.studentKey.studentKey
+    console.log(' new wer student ', newStudent)
+    this.dataStorageService.updateStudentData(cohortKey, newStudent, this.studentKey)
+  }
   onClear() {
     this.createAssignmentForm.reset();
     this.editMode = false;
