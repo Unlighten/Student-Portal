@@ -26,9 +26,13 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/assignments`).push(newAssignment)    
   }
 
-  // storeCompletedAssignmentData() { //Aaron
-  //   firebase.database().ref('completedassignments').push()
-  // }
+  storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment) { //Aaron
+    firebase.database().ref(
+      `cohorts/${cohortKey}
+      /assignments/${assignmentKey}
+      /completed-assignments`
+    ).push(cohortKey, completedAssignment) 
+  }
 
   storeStudentData(cohortKey, newStudent) {
     firebase.database().ref(`cohorts/${cohortKey}/students`).push(newStudent)    
