@@ -44,7 +44,7 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
       this.onSaveData(newCohort);
     this.editMode = false;
     this.newCohorts = await this.dataStorageService.getData()
-    console.log('this cohorts crud ', this.newCohorts)
+    // console.log('this cohorts crud ', this.newCohorts)
     form.reset();
     this.cohortService.getCohorts(this.newCohorts);
   }
