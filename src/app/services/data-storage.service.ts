@@ -31,6 +31,10 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}`).set(newAssignment)    
   }
 
+  deleteAssignmentData(cohortKey, assignmentKey) {
+    firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}`).remove()
+  }
+
   storeCompletedAssignmentData() { //aaron's function in the making
     return this.http.put('https://student-portal-4e814.firebaseio.com/assignments.json', this.assignmentService.getAssignments()); 
   }
@@ -41,6 +45,10 @@ export class DataStorageService {
 
   storeStudentData(cohortKey, newStudent) {
     firebase.database().ref(`cohorts/${cohortKey}/students`).push(newStudent)    
+  }
+
+  deleteStudentData(cohortKey, studentKey) {
+    firebase.database().ref(`cohorts/${cohortKey}/students/${studentKey}`).remove()
   }
 
   getData() { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)

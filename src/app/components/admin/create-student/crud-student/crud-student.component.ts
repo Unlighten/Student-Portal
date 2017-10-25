@@ -98,11 +98,12 @@ export class CrudStudentComponent implements OnInit {
     this.editMode = false;
   }
 
-  // onDelete() {
-  //   this.studentService.deleteStudent(this.editedItemIndex);
-  //   this.onClear();
-  //   this.onSaveData(cohortKey, newStudent);
-  // }
+  onDelete() {
+    this.studentKey = this.studentKey.studentKey
+    this.studentService.deleteStudent(this.editedItemIndex);
+    this.onClear();
+    this.dataStorageService.deleteStudentData(this.editedItem.cohort, this.studentKey)
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

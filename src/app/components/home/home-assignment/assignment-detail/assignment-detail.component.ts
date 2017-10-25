@@ -62,9 +62,9 @@ export class AssignmentDetailComponent implements OnInit {
   //   form.reset();
   // }
 
-  onSaveData(cohortKey, assignmentKey, completedAssignment) {
-      this.dataStorageService.storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment);
-      console.log(this.completedAssignment, 'this.completedAssignment')
-  }
+  // onSaveData(cohortKey, assignmentKey, completedAssignment) {
+  //     this.dataStorageService.storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment);
+  //     console.log(this.completedAssignment, 'this.completedAssignment')
+  // }
 }
 
