@@ -3,6 +3,6 @@
 </p>
 
 <select class="form-control" ngControl='cohort' (change)='sendCohortFilter($event.target.value)'>
-    <option selected>Filter by Cohort here!</option>
+    <option selected [value]='123456'>Filter by Cohort here!</option>
     <option *ngFor='let cohort of cohorts' [value]="cohort.key">{{ cohort.info.cohortName }}</option>
 </select>

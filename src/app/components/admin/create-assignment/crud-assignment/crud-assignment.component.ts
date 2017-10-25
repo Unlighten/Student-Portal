@@ -20,7 +20,9 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
   editedItemIndex: number;
   editedItem: Assignment;
   cohorts
-  
+  assignmentKey 
+  newAssignment
+
   constructor(private assignmentService: AssignmentService, private dataStorageService: DataStorageService, private cohortService: CohortService) { }
 
   ngOnInit() {
@@ -29,6 +31,8 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
         this.editedItemIndex = index;
         this.editMode = true;
         this.editedItem = this.assignmentService.getAssignment(index);
+        this.assignmentKey = this.assignmentService.getAssignment(index)
+        console.log('assignment key ', this.assignmentKey.assignmentKey)
         this.createAssignmentForm.setValue({
           name: this.editedItem.name,
           desc: this.editedItem.description,
@@ -42,27 +46,36 @@ export class CrudAssignmentComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newAssignment = new Assignment(
-      value.name, 
-      value.desc, 
-      value.due, 
-      value.cohort
-    );
+    console.log('value ', value.name)
+    this.newAssignment = {
+      name: value.name,
+      description: value.desc,
+      due: value.due,
+      cohort: value.cohort
+    };
+    console.log('new assign ', this.newAssignment)
     const cohortKey = value.cohort
     if (this.editMode) {
-      this.assignmentService.updateAssignment(this.editedItemIndex, newAssignment);
-      this.onSaveData(cohortKey, newAssignment);
+      this.assignmentService.updateAssignment(this.editedItemIndex, this.newAssignment);
+      console.log('new assignment ', this.newAssignment)
+      this.onUpdateData(cohortKey, this.newAssignment);
     } else {
-      this.assignmentService.addAssignment(newAssignment);
-      this.onSaveData(cohortKey, newAssignment);
+      this.assignmentService.addAssignment(this.newAssignment);
+      this.onSaveData(cohortKey, this.newAssignment);
     }
     this.editMode = false;
     form.reset();
   }
 
   onSaveData(cohortKey, newAssignment) {
-    this.dataStorageService.storeAssignmentData(cohortKey, newAssignment)
+    this.dataStorageService.storeAssignmentData(cohortKey, this.newAssignment)
     // this.assignmentService.clearAssignments();
+  }
+
+  onUpdateData(cohortKey, newAssignment) {
+    this.assignmentKey = this.assignmentKey.assignmentKey
+    console.log( ' newwer assignment ', newAssignment)
+    this.dataStorageService.updateAssignmentData(cohortKey, this.newAssignment, this.assignmentKey)
   }
 
   onClear() {
