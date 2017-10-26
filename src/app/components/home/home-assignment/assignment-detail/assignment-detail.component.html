@@ -22,7 +22,18 @@
           <div class="row">
             <div class="col-xs-12">
               <label for="upload">Upload Assignment:</label>
-              <input id="upload" type="text">
+              <input 
+                id="upload" 
+                name='upload' 
+                type="text"
+                ngModel
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <h4>Completed Assignments</h4>>
+              <p *ngFor='let completion of completedAssignments'>{{completion.student}}</p><a href='{{completion.submission}}'>Link</a>
             </div>
           </div>
         </div>

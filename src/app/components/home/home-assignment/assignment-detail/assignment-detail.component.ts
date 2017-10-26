@@ -23,22 +23,17 @@ export class AssignmentDetailComponent implements OnInit {
     name: '',
     description: '',
     due: '',
-    cohort: ''
+    assignmentKey: '',
+    cohort: '',
+    completedAssignments: {}
   };
   uid
   studentKey
   cohort
   cohorts
   cohortKey
-
-  //==============================================================
-  //assignment needs uploadedAssignment field or...
-  //==============================================================
-
-  cassignment = { //Empty object to fill with modal click
-    uid: this.uid,
-    uploadedAssignment: ''
-  };
+  assignmentKey
+  completedAssignments
 
   constructor(private assignmentService: AssignmentService, private dataStorageService: DataStorageService, private authService: AuthService, private cohortService: CohortService) { }
 
@@ -54,6 +49,8 @@ export class AssignmentDetailComponent implements OnInit {
 
     await this.assignmentService.oneAssignment.subscribe((data) => {
       this.assignment = data
+      this.completedAssignments = this.assignment.completedAssignments
+      console.log('this.completed ', this.completedAssignments)
       this.cohorts = this.cohortService.getCohorts2()
       for (let ourCohort of this.cohorts) {
         console.log(ourCohort)
@@ -79,31 +76,36 @@ export class AssignmentDetailComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const value = form.value;
+    console.log('value ', form.value)
     console.log('this.assignment cohort key ', this.assignment.cohort)
     console.log('cohorts ', this.cohorts)
     console.log('this cohort ', this.cohort)
     console.log('uid ', this.uid)
     for (let student of this.cohort.info.students) {
-      if (this.uid == this.cohort.info.students.student.uid) {
-        this.studentKey = this.cohort.info.students.student.studentKey
+      if (this.uid == student.uid) {
+        this.studentKey = student.studentKey
+        console.log('student key ', this.studentKey)
       }
     }
-    // const completedAssignment = new CAssignment(
-    //   value.name, 
-    //   value.desc, 
-    //   value.due, 
-    //   value.cohort,
-    //   value.uploadedAssignment
-    // );
-    const cohortKey = value.cohort;
-    console.log('this cohort ', value.cohort)
-    // this.onSaveData(cohortKey, assignmentKey, completedAssignment);
+    console.log('student k2', this.studentKey)
+    // this.dataStorageService.storeCompletedAssignmentData(this.cohortKey, this.studentKey, )
+    const completedAssignment = {
+      student: this.studentKey,
+      submission: value.upload,
+      assignment: this.assignment.assignmentKey
+    }
+    console.log('completed ', completedAssignment)
+    // const cohortKey = value.cohort;
+    // console.log('this cohort ', value.cohort)
+    console.log('ck ', this.cohort.key)
+    console.log('ak ', this.assignment.assignmentKey)
+    this.onSaveData(this.cohort.key, this.assignment.assignmentKey, completedAssignment, this.studentKey);
     form.reset();
   }
 
-  onSaveData(cohortKey, assignmentKey, completedAssignment) {
-    this.dataStorageService.storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment);
-    console.log(this.completedAssignment, 'this.completedAssignment')
+  onSaveData(cohortKey, assignmentKey, completedAssignment, studentKey) {
+    this.dataStorageService.storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment, studentKey);
+    console.log(completedAssignment, 'this.completedAssignment')
   }
 }
 
