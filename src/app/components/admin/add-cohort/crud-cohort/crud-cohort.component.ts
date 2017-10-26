@@ -4,7 +4,6 @@ import { Cohort } from '../../../../models/cohort.model';
 import { CohortService } from '../../../../services/cohort.service';
 import { DataStorageService } from '../../../../services/data-storage.service';
 import { NgForm } from '@angular/forms';
-import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-crud-cohort',
@@ -20,28 +19,33 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
   editMode = false;
   editedItemIndex: number;
   editedItem: Cohort;
-
+  cohortKey
+  newCohort
 
   constructor(private cohortService: CohortService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    // this.subscription = this.cohortService.startedEditing.subscribe(
-    //   (index: number) => {
-    //     this.editedItemIndex = index;
-    //     this.editMode = true;
-    //     this.editedItem = this.cohortService.getCohort(index);
-    //     this.createCohortForm.setValue({
-    //       cohortName: this.editedItem.cohortName
-    //     });
-    //   }
-    // );
+    this.subscription = this.cohortService.startedEditing.subscribe(
+      (index: number) => {
+        this.editedItemIndex = index;
+        this.editMode = true;
+        this.editedItem = this.cohortService.getCohort(index);
+        this.cohortKey = this.cohortService.getCohort(index);
+        console.log('cohort key ', this.cohortKey.cohortKey);
+        // this.createCohortForm.setValue({
+        //   cohortName: this.editedItem.cohortName
+        // });
+        console.log("OVER HERE", this.createCohortForm)
+      }
+    );
   }
 
   async onSubmit(form: NgForm) {
     const newCohort = form.value
     // const newCohort = new Cohort(value.cohortName);
-      this.cohortService.addCohort(newCohort);
-      this.onSaveData(newCohort);
+    this.cohortService.addCohort(newCohort);
+    this.onSaveData(newCohort);
+
     this.editMode = false;
     this.newCohorts = await this.dataStorageService.getData()
     // console.log('this cohorts crud ', this.newCohorts)
@@ -62,13 +66,14 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
   }
 
   onDelete() {
+    this.cohortKey = this.cohortKey.cohortKey;
     this.cohortService.deleteCohort(this.editedItemIndex);
     this.onClear();
-    // this.onSaveData();
+    this.dataStorageService.deleteCohortData(this.cohortKey);
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }
