@@ -9,13 +9,11 @@
       <div class="modal-body">
           <div class="row">
               <div class="col-xs-12">
-                <h4>Student's Assignments</h4>
-                <hr>
+                <h4>Student's Assignments:</h4>
                 <div *ngFor='let completion of studentAssignments'>
                   <h5>{{ completion.assignmentName }}</h5>
                   <a href='{{ completion.submission }}' target="blank">Submission</a>
                 </div>
-                <hr>
               </div>
             </div>
         </div>

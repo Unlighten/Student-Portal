@@ -25,7 +25,7 @@ export class AssignmentDetailComponent implements OnInit {
     due: '',
     assignmentKey: '',
     cohort: '',
-    completedAssignments: {}
+    completedAssignments: []
   };
   uid
   studentKey
