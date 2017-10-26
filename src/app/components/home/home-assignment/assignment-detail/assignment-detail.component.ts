@@ -51,6 +51,7 @@ export class AssignmentDetailComponent implements OnInit {
       this.assignment = data
       this.completedAssignments = this.assignment.completedAssignments
       console.log('this.completed ', this.completedAssignments)
+      console.log('this.completed submission ', this.completedAssignments)      
       this.cohorts = this.cohortService.getCohorts2()
       for (let ourCohort of this.cohorts) {
         console.log(ourCohort)
