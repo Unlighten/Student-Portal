@@ -35,8 +35,10 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}`).remove()
   }
 
-  storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment) { //aaron's function in the making
+  storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment, studentKey) { //aaron's function in the making
+    console.log('all this ', cohortKey, assignmentKey)
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}/completedAssignments`).push(completedAssignment)
+    firebase.database().ref(`cohorts/${cohortKey}/students/${studentKey}/studentAssignments`).push(completedAssignment)
   }
 
   updateStudentData(cohortKey, newStudent, studentKey) {
@@ -58,13 +60,23 @@ export class DataStorageService {
       const obj = data.val()
       for (let key in obj){
         let assignments = []; 
-        let students = [];                 
+        let students = [];    
+        let completedAssignments = []             
         for (let assignmentKey in obj[key].assignments){ 
+          for (let completion in obj[key].assignments[assignmentKey].completedAssignments) {
+            var cAssignmentsObject = {
+              student: obj[key].assignments[assignmentKey].completedAssignments[completion].student,
+              submission: obj[key].assignments[assignmentKey].completedAssignments[completion].submission
+            }
+            completedAssignments.push(cAssignmentsObject)
+            console.log('completetion ', completedAssignments)
+          }
           var assignmentsObject = {
               name: obj[key].assignments[assignmentKey].name,
               cohort: obj[key].assignments[assignmentKey].cohort,
               due: obj[key].assignments[assignmentKey].due,
               description: obj[key].assignments[assignmentKey].description,
+              completedAssignments: completedAssignments,
               assignmentKey: assignmentKey
           }      
           assignments.push(assignmentsObject)
