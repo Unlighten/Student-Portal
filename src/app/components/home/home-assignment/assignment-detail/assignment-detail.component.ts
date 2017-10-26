@@ -19,7 +19,7 @@ export class AssignmentDetailComponent implements OnInit {
   completedAssignment: any;
   private subscription: Subscription;
   private cohortSubscription: Subscription
-  assignment: Assignment = { //Empty object to fill with modal click
+  assignment: Assignment = { 
     name: '',
     description: '',
     due: '',
@@ -50,15 +50,15 @@ export class AssignmentDetailComponent implements OnInit {
     await this.assignmentService.oneAssignment.subscribe((data) => {
       this.assignment = data
       this.completedAssignments = this.assignment.completedAssignments
-      console.log('this.completed ', this.completedAssignments)
-      console.log('this.completed submission ', this.completedAssignments)      
+      // console.log('this.completed ', this.completedAssignments)
+      // console.log('this.completed submission ', this.completedAssignments)      
       this.cohorts = this.cohortService.getCohorts2()
       for (let ourCohort of this.cohorts) {
-        console.log(ourCohort)
-        console.log('this assignment thing ', this.assignment.cohort)
+        // console.log(ourCohort)
+        // console.log('this assignment thing ', this.assignment.cohort)
         if (ourCohort.key == this.assignment.cohort) {
           this.cohort = ourCohort
-          console.log('ourt cohort ', this.cohort)
+          // console.log('ourt cohort ', this.cohort)
         }
       }
     }); //Modal component => Attn. assignmentService

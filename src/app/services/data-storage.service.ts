@@ -61,7 +61,8 @@ export class DataStorageService {
       for (let key in obj){
         let assignments = []; 
         let students = [];    
-        let completedAssignments = []             
+        let completedAssignments = [];
+        let studentAssignments = [];          
         for (let assignmentKey in obj[key].assignments){ 
           for (let completion in obj[key].assignments[assignmentKey].completedAssignments) {
             var cAssignmentsObject = {
@@ -81,14 +82,25 @@ export class DataStorageService {
               assignmentKey: assignmentKey
           }      
           assignments.push(assignmentsObject)
-        }  
+        } 
           for (let studentKey in obj[key].students){
+            for (let completion in obj[key].students[studentKey].studentAssignments) {
+              var sAssignmentsObject = {
+                student: obj[key].students[studentKey].studentAssignments[completion].student,
+                assignmentName: obj[key].assignments[obj[key].students[studentKey].studentAssignments[completion].assignment].name, 
+                submission: obj[key].students[studentKey].studentAssignments[completion].submission
+              }
+              studentAssignments.push(sAssignmentsObject);
+              console.log(sAssignmentsObject)
+            }
+
             var studentsObject = {
               cohort: obj[key].students[studentKey].cohort,
               fname: obj[key].students[studentKey].fname,
               lname: obj[key].students[studentKey].lname,
               email: obj[key].students[studentKey].email,
               uid: obj[key].students[studentKey].uid,
+              studentAssignments: studentAssignments,
               studentKey: studentKey
             }
             // console.log(studentsObject)

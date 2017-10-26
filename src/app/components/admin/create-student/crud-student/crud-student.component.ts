@@ -74,7 +74,8 @@ export class CrudStudentComponent implements OnInit {
           lname: value.lname, 
           email: value.email, 
           cohort: value.cohort,
-          uid: res.uid
+          uid: res.uid,
+          studentAssignments: []
         } 
         if (this.editMode) {
           this.studentService.updateStudent(this.editedItemIndex, newStudent);
