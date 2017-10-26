@@ -52,7 +52,11 @@ export class DataStorageService {
   deleteStudentData(cohortKey, studentKey) {
     firebase.database().ref(`cohorts/${cohortKey}/students/${studentKey}`).remove()
   }
-
+  
+  deleteDuplicateAssignment(cohortKey, assignmentKey, submissionKey) {
+    console.log(firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}/completedAssignments/${submissionKey}`))
+    firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}/completedAssignments/${submissionKey}`).remove()
+  }
   getData() { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
     return firebase.database().ref('cohorts').once('value')
     .then(data => {
@@ -69,7 +73,8 @@ export class DataStorageService {
               student: obj[key].assignments[assignmentKey].completedAssignments[completion].student,
               studentFName: obj[key].students[obj[key].assignments[assignmentKey].completedAssignments[completion].student].fname,
               studentLName: obj[key].students[obj[key].assignments[assignmentKey].completedAssignments[completion].student].lname,
-              submission: obj[key].assignments[assignmentKey].completedAssignments[completion].submission
+              submission: obj[key].assignments[assignmentKey].completedAssignments[completion].submission,
+              submissionKey: completion
             }
             completedAssignments.push(cAssignmentsObject)
           }

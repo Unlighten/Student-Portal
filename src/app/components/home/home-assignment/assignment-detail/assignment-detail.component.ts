@@ -88,6 +88,16 @@ export class AssignmentDetailComponent implements OnInit {
         console.log('student key ', this.studentKey)
       }
     }
+    for (let submission of this.completedAssignments) {
+      if (submission.student == this.studentKey) {
+        console.log('submission.student', typeof(submission.student), submission.student)
+        console.log('this student key', typeof(this.studentKey), this.studentKey)
+        console.log('this.cohort key ', this.cohort.key)
+        console.log('this assignment key ', this.assignment.assignmentKey)
+        console.log('this submission ', submission.submissionKey)
+        this.dataStorageService.deleteDuplicateAssignment(this.cohort.key, this.assignment.assignmentKey, submission.submissionKey)
+      }
+    }
     console.log('student k2', this.studentKey)
     // this.dataStorageService.storeCompletedAssignmentData(this.cohortKey, this.studentKey, )
     const completedAssignment = {

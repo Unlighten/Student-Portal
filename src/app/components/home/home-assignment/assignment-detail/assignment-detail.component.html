@@ -10,13 +10,13 @@
           <div class="row">
             <div class="col-xs-12">
               <h4>Description Link: </h4>
-              <a href="{{ assignment.description }}" target="blank">Link to assignment description</a>
+              <a href="{{ assignment.description }}" target="blank" class='assignmentDetail'>Link to assignment description</a>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12">
               <h4>Due:</h4>
-              <h5>{{ assignment.due }}</h5>
+              <h5 class='assignmentDetail'>{{ assignment.due }}</h5>
             </div>
           </div>
         
@@ -33,14 +33,28 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-4">
               <label for="upload">Upload Assignment:</label>
               <input 
                 id="upload" 
-                name='upload' 
-                type="text"
+                name='upload'
+                required
+                placeholder='https://' 
+                pattern="https?://.+" 
+                type="url"
+                class="form-control"
                 ngModel
               >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <h4>Completed Assignments: </h4>
+              <div *ngFor='let completion of completedAssignments'>
+                <p class='assignmentDetail'>{{ completion.studentFName }} {{ completion.studentLName }} <a target='blank' href='{{ completion.submission }}'>Link</a>
+                </p>
+                <!-- <p>{{ completion.submission }}</p>                 -->
+              </div>
             </div>
           </div>
         </div>
@@ -49,6 +63,7 @@
             type="submit" 
             class="btn btn-default" 
             style="border: 2px solid #e24a52"
+            [disabled]='!f.valid'
           >Submit</button>
           <button
             type="button"
