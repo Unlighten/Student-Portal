@@ -32,8 +32,13 @@
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <h4>Completed Assignments</h4>>
-              <p *ngFor='let completion of completedAssignments'>{{ completion.student }}</p><a href='{{ completion }}'>Link</a>
+
+              <h4>Completed Assignments</h4>
+              <div *ngFor='let completion of completedAssignments'>
+                <p>{{ completion.studentFName }} {{ completion.studentLName }}</p>
+                <!-- <p>{{ completion.submission }}</p>                 -->
+               <a target='blank' href='{{ completion.submission }}'>Link</a>
+              </div>
             </div>
           </div>
         </div>

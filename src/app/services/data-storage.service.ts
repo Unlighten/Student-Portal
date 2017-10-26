@@ -66,10 +66,11 @@ export class DataStorageService {
           for (let completion in obj[key].assignments[assignmentKey].completedAssignments) {
             var cAssignmentsObject = {
               student: obj[key].assignments[assignmentKey].completedAssignments[completion].student,
+              studentFName: obj[key].students[obj[key].assignments[assignmentKey].completedAssignments[completion].student].fname,
+              studentLName: obj[key].students[obj[key].assignments[assignmentKey].completedAssignments[completion].student].lname,
               submission: obj[key].assignments[assignmentKey].completedAssignments[completion].submission
             }
             completedAssignments.push(cAssignmentsObject)
-            console.log('completetion ', completedAssignments)
           }
           var assignmentsObject = {
               name: obj[key].assignments[assignmentKey].name,
