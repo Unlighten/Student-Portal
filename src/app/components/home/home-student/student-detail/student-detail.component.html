@@ -8,22 +8,23 @@
       </div>
       <div class="modal-body">
           <div class="row">
-            <div class="col-xs-12">
-              <h5>Hi</h5>
+              <div class="col-xs-12">
+                <h4>Student's Assignments</h4>
+                <p *ngFor='let completion of completedAssignments'>{{ completion.student }}</p><a href='{{ completion }}'>Link</a>
+              </div>
             </div>
-          </div>
         </div>
       <div class="modal-footer">
-        <button 
+        <!-- <button 
           type="submit" 
           class="btn btn-default" 
           style="border: 2px solid #e24a52"
-        >Submit</button>
+        >Submit</button> -->
         <button
           type="button"
           class="btn btn-danger"
           data-dismiss="modal"
-        >Cancel</button>
+        >Close</button>
       </div>
     </div>
     
