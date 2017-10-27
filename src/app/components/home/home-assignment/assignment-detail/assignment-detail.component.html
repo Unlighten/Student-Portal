@@ -7,19 +7,27 @@
           <h4 class="modal-title">{{ assignment.name }}</h4>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-xs-12">
+          <div class="row col-xs-12">    
+            <div class="col-xs-6">
               <h4>Description Link: </h4>
               <a href="{{ assignment.description }}" target="blank" class='assignmentDetail'>Link to assignment description</a>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-6">
               <h4>Due:</h4>
               <h5 class='assignmentDetail'>{{ assignment.due }}</h5>
             </div>
           </div>
           <div class="row">
+            <div class="col-xs-12"><hr>
+              <h4>Completed Assignments:</h4>
+              <div *ngFor='let completion of completedAssignments'>
+                <h5>{{ completion.studentFName }} {{ completion.studentLName }}</h5>
+                <a target='blank' href='{{ completion.submission }}'>Submission</a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <hr>
             <div class="col-xs-4">
               <label for="upload">Upload Assignment:</label>
               <input 
@@ -32,16 +40,6 @@
                 class="form-control"
                 ngModel
               >
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <h4>Completed Assignments: </h4>
-              <div *ngFor='let completion of completedAssignments'>
-                <p class='assignmentDetail'>{{ completion.studentFName }} {{ completion.studentLName }} <a target='blank' href='{{ completion.submission }}'>Link</a>
-                </p>
-                <!-- <p>{{ completion.submission }}</p>                 -->
-              </div>
             </div>
           </div>
         </div>

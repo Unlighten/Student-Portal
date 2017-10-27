@@ -34,6 +34,10 @@ export class DataStorageService {
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}`).remove()
   }
 
+  deleteCohortData(cohortKey) {
+    firebase.database().ref(`cohorts/${cohortKey}`).remove();
+  }
+
   storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment, studentKey) { //aaron's function in the making
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}/completedAssignments`).push(completedAssignment)
     firebase.database().ref(`cohorts/${cohortKey}/students/${studentKey}/studentAssignments`).push(completedAssignment)

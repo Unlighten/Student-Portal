@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-import { Response } from '@angular/http';
 import { Assignment } from '../../../../models/assignment.model';
 import { Cohort } from '../../../../models/cohort.model';
 import { AssignmentService } from '../../../../services/assignment.service';
