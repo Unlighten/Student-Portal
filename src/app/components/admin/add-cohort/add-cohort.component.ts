@@ -52,6 +52,7 @@ export class AddCohortComponent implements OnInit {
   }
 
   onEditItem(index: number) {
+    console.log('add cohort test ', index)
     this.cohortService.startedEditing.next(index);
   }
 
