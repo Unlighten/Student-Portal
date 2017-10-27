@@ -11,7 +11,7 @@
       </ng-template>
     </div>
     <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" *ngIf="isAdmin">
         <ng-template [ngIf]="authService.isAuthenticated()">
           <li><a routerLink='/add-cohort'>Create Cohort</a></li>
           <li><a routerLink="/create-students">Create Students</a></li>
