@@ -2,13 +2,14 @@ import * as firebase from 'firebase';
 import firebaseConfig from '../../../firebaseConfig'
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { NavbarService } from '../services/navbar.service';
 
 @Injectable()
 export class AuthService {
   token: string;
   uid: string;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public nav: NavbarService) {}
 
   loginUser(email: string, password: string) {
       firebase.auth().signInWithEmailAndPassword(email, password)
@@ -30,10 +31,10 @@ export class AuthService {
     firebase.auth().signOut()
       .then(
         response => {
+          this.token = null;
           this.router.navigate(['/login']);
         }
       );
-    this.token = null;
   }
 
   getIdToken() {
@@ -68,4 +69,5 @@ export class AuthService {
       return null;
     }
   }
+
 }
