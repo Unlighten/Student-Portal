@@ -19,29 +19,36 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   editMode = false;
   editedItemIndex: number;
-  editedItem: Cohort;
+  editedItem
 
 
   constructor(private cohortService: CohortService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    // this.subscription = this.cohortService.startedEditing.subscribe(
-    //   (index: number) => {
-    //     this.editedItemIndex = index;
-    //     this.editMode = true;
-    //     this.editedItem = this.cohortService.getCohort(index);
-    //     this.createCohortForm.setValue({
-    //       cohortName: this.editedItem.cohortName
-    //     });
-    //   }
-    // );
+    this.subscription = this.cohortService.startedEditing.subscribe(
+      (index: number) => {
+        this.editedItemIndex = index;
+        this.editMode = true;
+        this.editedItem = this.cohortService.getCohort(index);
+        console.log('this ', this.editedItem)
+        this.createCohortForm.setValue({
+          cohortName: this.editedItem.info.cohortName
+        });
+      }
+    );
   }
 
   async onSubmit(form: NgForm) {
     const newCohort = form.value
     // const newCohort = new Cohort(value.cohortName);
+    console.log(newCohort)
+    if(this.editMode) {
+      this.onUpdate(this.editedItem.key, newCohort)
+      // this.cohortService.updateCohort(this.editedItem)
+    } else {
       this.cohortService.addCohort(newCohort);
       this.onSaveData(newCohort);
+    }
     this.editMode = false;
     this.newCohorts = await this.dataStorageService.getData()
     // console.log('this cohorts crud ', this.newCohorts)
@@ -63,8 +70,13 @@ export class CrudCohortComponent implements OnInit, OnDestroy {
 
   onDelete() {
     this.cohortService.deleteCohort(this.editedItemIndex);
+    this.dataStorageService.deleteCohort(this.editedItem.key)
     this.onClear();
     // this.onSaveData();
+  }
+
+  onUpdate(cohortKey, cohortName) {
+    this.dataStorageService.updateCohort(cohortKey, cohortName)
   }
 
   ngOnDestroy() {

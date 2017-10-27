@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
+import { DataStorageService } from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-home-assignment',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-assignment.component.css']
 })
 export class HomeAssignmentComponent implements OnInit {
-  
+  @Input() cohorts
+  constructor(private dataStorageService: DataStorageService) {}
   ngOnInit() {
+  }
+
+  async getData() {
+    this.cohorts = await this.dataStorageService.getData()
   }
 }

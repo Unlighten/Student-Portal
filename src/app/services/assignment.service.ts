@@ -43,7 +43,7 @@ export class AssignmentService {
 
   getAssignmentById(aid) { //Accesses individual assignments for modal
     const getAssignmentById = this.assignments[aid];
-    console.log('this assignment service ', this.assignments)
+    console.log('this assignment service ', getAssignmentById)
     this.oneAssignment.next(getAssignmentById);
   }
 }

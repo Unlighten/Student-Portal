@@ -7,13 +7,14 @@ import { Input } from "@angular/core";
 // import { AllCohorts } from "../models/allCohorts.model";
 
 export class CohortService {
-    cohortSelected = new Subject<Cohort>();
+    cohortSelected = new Subject<any>();
     cohortChanged = new Subject<any>();
-    cohortsChanged = new Subject<Cohort[]>();
+    cohortsChanged = new Subject<any[]>();
     startedEditing = new Subject<number>();
     ourCohorts = new Subject<any>();
     @Input() newCohorts = new Subject<any>();
     public renew = new Subject<any>();
+    cohortsChanged2 = new Subject<any[]>();
 
     public setCohortFilterSubject = new Subject<Cohort>();
     setCohortFilter$: Observable<Cohort>;
@@ -47,6 +48,10 @@ export class CohortService {
     updateCohort(index: number, newCohort: Cohort) {
       this.cohorts[index] = newCohort;
       this.cohortsChanged.next(this.cohorts);
+    }
+
+    updateCohorts2() {
+      this.cohortsChanged2.next(this.cohorts)
     }
 
     deleteCohort(index: number) {

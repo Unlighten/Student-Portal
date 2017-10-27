@@ -21,7 +21,6 @@ export class DataStorageService {
     private cohortService: CohortService,
     private studentService: StudentService
   ) {}
-  // cohorts: Array<any>
 
   storeAssignmentData(cohortKey, newAssignment) { //stores data via preset criteria (name, description, due)
     firebase.database().ref(`cohorts/${cohortKey}/assignments`).push(newAssignment)    
@@ -36,7 +35,6 @@ export class DataStorageService {
   }
 
   storeCompletedAssignmentData(cohortKey, assignmentKey, completedAssignment, studentKey) { //aaron's function in the making
-    console.log('all this ', cohortKey, assignmentKey)
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}/completedAssignments`).push(completedAssignment)
     firebase.database().ref(`cohorts/${cohortKey}/students/${studentKey}/studentAssignments`).push(completedAssignment)
   }
@@ -54,10 +52,14 @@ export class DataStorageService {
   }
   
   deleteDuplicateAssignment(cohortKey, assignmentKey, submissionKey) {
-    console.log(firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}/completedAssignments/${submissionKey}`))
     firebase.database().ref(`cohorts/${cohortKey}/assignments/${assignmentKey}/completedAssignments/${submissionKey}`).remove()
   }
-  getData() { //getData was not an automatic feature for Angular => creates path to fetch data and replace existing data (allows add/update/delete without duplicates)
+
+  deleteDuplicateStudentSubmission(cohortKey, studentKey, studentSubmissionKey) {
+    firebase.database().ref(`cohorts/${cohortKey}/students/${studentKey}/studentAssignments/${studentSubmissionKey}`).remove()
+  }
+  
+  getData() { 
     return firebase.database().ref('cohorts').once('value')
     .then(data => {
       let cohorts = [];
@@ -65,9 +67,8 @@ export class DataStorageService {
       for (let key in obj){
         let assignments = []; 
         let students = [];    
-        let completedAssignments = [];
-        let studentAssignments = [];          
         for (let assignmentKey in obj[key].assignments){ 
+          let completedAssignments = [];
           for (let completion in obj[key].assignments[assignmentKey].completedAssignments) {
             var cAssignmentsObject = {
               student: obj[key].assignments[assignmentKey].completedAssignments[completion].student,
@@ -89,14 +90,16 @@ export class DataStorageService {
           assignments.push(assignmentsObject)
         } 
           for (let studentKey in obj[key].students){
+            let studentAssignments = [];          
             for (let completion in obj[key].students[studentKey].studentAssignments) {
               var sAssignmentsObject = {
                 student: obj[key].students[studentKey].studentAssignments[completion].student,
-                assignmentName: obj[key].assignments[obj[key].students[studentKey].studentAssignments[completion].assignment].name, 
-                submission: obj[key].students[studentKey].studentAssignments[completion].submission
+                assignmentName: obj[key].students[studentKey].studentAssignments[completion].assignmentName, 
+                assignmentKey: obj[key].students[studentKey].studentAssignments[completion].assignment,
+                submission: obj[key].students[studentKey].studentAssignments[completion].submission,
+                studentSubmissionKey: completion
               }
               studentAssignments.push(sAssignmentsObject);
-              console.log(sAssignmentsObject)
             }
 
             var studentsObject = {
@@ -108,7 +111,6 @@ export class DataStorageService {
               studentAssignments: studentAssignments,
               studentKey: studentKey
             }
-            // console.log(studentsObject)
             students.push(studentsObject)
           }        
           var newObject = {
@@ -124,6 +126,14 @@ export class DataStorageService {
       return cohorts
     }
     )
+  }
+
+  deleteCohort(cohortKey) {
+    firebase.database().ref(`cohorts/${cohortKey}`).remove()
+  }
+
+  updateCohort(cohortKey, newName) {
+    firebase.database().ref(`cohorts/${cohortKey}`).set(newName)
   }
 
   storeCohortData(cohort) {

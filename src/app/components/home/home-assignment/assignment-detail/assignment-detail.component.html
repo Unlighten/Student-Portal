@@ -19,19 +19,6 @@
               <h5 class='assignmentDetail'>{{ assignment.due }}</h5>
             </div>
           </div>
-        
-          <div class="row">
-            <div class="col-xs-12">
-              <h4>Completed Assignments:</h4>
-              <hr>
-              <div *ngFor='let completion of completedAssignments'>
-                <h5>{{ completion.studentFName }} {{ completion.studentLName }}</h5>
-                <!-- <p>{{ completion.submission }}</p>                 -->
-               <a target='blank' href='{{ completion.submission }}'>Submission</a>
-               <hr>
-              </div>
-            </div>
-          </div>
           <div class="row">
             <div class="col-xs-4">
               <label for="upload">Upload Assignment:</label>

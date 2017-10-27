@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Response } from '@angular/http';
@@ -15,103 +15,122 @@ import { CohortService } from '../../../../services/cohort.service';
   styleUrls: ['./assignment-detail.component.css']
 })
 export class AssignmentDetailComponent implements OnInit {
+  updateAssignment: any;
+  aKey: any;
   assignments: Assignment[];
   completedAssignment: any;
   private subscription: Subscription;
-  private cohortSubscription: Subscription
+  private subscription2: Subscription;
   assignment: Assignment = { 
     name: '',
     description: '',
     due: '',
     assignmentKey: '',
     cohort: '',
-    completedAssignments: {}
+    completedAssignments: []
   };
   uid
   studentKey
   cohort
   cohorts
+  @Output() newCohorts
   cohortKey
   assignmentKey
   completedAssignments
+  studentSubmissionKey
 
   constructor(private assignmentService: AssignmentService, private dataStorageService: DataStorageService, private authService: AuthService, private cohortService: CohortService) { }
 
   async ngOnInit() { //Creates and infills assignments onInit
     this.assignments = this.assignmentService.getAssignments();
     this.uid = this.authService.getUID()
-    // this.cohort = this.assignment.cohortKey
     this.subscription = this.assignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
         this.assignments = assignments;
       }
     );
 
-    await this.assignmentService.oneAssignment.subscribe((data) => {
-      this.assignment = data
-      this.completedAssignments = this.assignment.completedAssignments
-      // console.log('this.completed ', this.completedAssignments)
-      // console.log('this.completed submission ', this.completedAssignments)      
-      this.cohorts = this.cohortService.getCohorts2()
-      for (let ourCohort of this.cohorts) {
-        // console.log(ourCohort)
-        // console.log('this assignment thing ', this.assignment.cohort)
-        if (ourCohort.key == this.assignment.cohort) {
-          this.cohort = ourCohort
-          // console.log('ourt cohort ', this.cohort)
-        }
-      }
-    }); //Modal component => Attn. assignmentService
-    
-    // await this.cohortService.cohortsChanged.subscribe(
-    //     (cohorts) => {
-    //       this.cohorts = cohorts;
-          
-    //     }
-        
-    // )
+    this.subscription2 = this.cohortService.cohortsChanged.subscribe((data) => {
+      this.cohorts = data
+    })
 
+    await this.assignmentService.oneAssignment.subscribe((data) => {
+      if (data) {
+          this.assignment = data
+          this.aKey = data.assignmentKey
+          console.log(data)
+        if (this.assignment.completedAssignments) {
+          this.completedAssignments = this.assignment.completedAssignments
+        } else {
+          this.completedAssignments = []
+        }
+        this.cohorts = this.cohortService.getCohorts2()
+        for (let ourCohort of this.cohorts) {
+          if (ourCohort.key == this.assignment.cohort) {
+            this.cohort = ourCohort
+          }
+        }
+      } else {
+        this.completedAssignments = []
+      }
+    });
     this.cohortKey = this.assignment.cohort
-    // this.cohort = this.cohorts.key[this.assignment.cohort]
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     const value = form.value;
-    console.log('value ', form.value)
-    console.log('this.assignment cohort key ', this.assignment.cohort)
-    console.log('cohorts ', this.cohorts)
-    console.log('this cohort ', this.cohort)
-    console.log('uid ', this.uid)
     for (let student of this.cohort.info.students) {
       if (this.uid == student.uid) {
         this.studentKey = student.studentKey
-        console.log('student key ', this.studentKey)
       }
     }
     for (let submission of this.completedAssignments) {
       if (submission.student == this.studentKey) {
-        console.log('submission.student', typeof(submission.student), submission.student)
-        console.log('this student key', typeof(this.studentKey), this.studentKey)
-        console.log('this.cohort key ', this.cohort.key)
-        console.log('this assignment key ', this.assignment.assignmentKey)
-        console.log('this submission ', submission.submissionKey)
-        this.dataStorageService.deleteDuplicateAssignment(this.cohort.key, this.assignment.assignmentKey, submission.submissionKey)
+        
+            this.dataStorageService.deleteDuplicateAssignment(this.cohort.key, this.assignment.assignmentKey, submission.submissionKey)
       }
     }
-    console.log('student k2', this.studentKey)
-    // this.dataStorageService.storeCompletedAssignmentData(this.cohortKey, this.studentKey, )
+    let sKey = this.studentKey
+    for (let student of this.cohort.info.students) {
+      if (student.studentKey == this.studentKey) {
+        for (let submission of student.studentAssignments) {
+          if (submission.assignmentKey == this.assignment.assignmentKey) {
+            student.studentSubmissionKey = submission.studentSubmissionKey
+          }
+        }
+        this.dataStorageService.deleteDuplicateStudentSubmission(this.cohort.key, this.studentKey, student.studentSubmissionKey)
+      }
+    }
+
     const completedAssignment = {
       student: this.studentKey,
       submission: value.upload,
-      assignment: this.assignment.assignmentKey
+      assignment: this.assignment.assignmentKey,
+      assignmentName: this.assignment.name
     }
-    console.log('completed ', completedAssignment)
-    // const cohortKey = value.cohort;
-    // console.log('this cohort ', value.cohort)
-    console.log('ck ', this.cohort.key)
-    console.log('ak ', this.assignment.assignmentKey)
     this.onSaveData(this.cohort.key, this.assignment.assignmentKey, completedAssignment, this.studentKey);
     form.reset();
+    this.regetAssignment()
+  }
+
+  async regetAssignment() {
+    this.newCohorts = await this.dataStorageService.getData()
+    console.log(this.newCohorts)
+    let aKey = this.aKey
+    console.log(aKey)
+    this.assignmentService.oneAssignment.next()
+    for (let cohort of this.newCohorts) {
+      if (this.cohort.key == cohort.key) {
+        for (let assignment of cohort.info.assignments) {
+          if (aKey == assignment.assignmentKey) {
+            this.updateAssignment = assignment
+            this.assignmentService.oneAssignment.next(this.updateAssignment)
+            break;            
+          }
+        }
+      }
+    }
+    
   }
 
   onSaveData(cohortKey, assignmentKey, completedAssignment, studentKey) {
