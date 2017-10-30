@@ -21,8 +21,10 @@ export class CrudStudentComponent implements OnInit {
   subscription: Subscription;
   editMode = false;
   editedItemIndex: number;
-  editedItem: Student;
+  editedItem
   cohorts
+  studentKey
+  newStudent
 
   constructor(private cohortService: CohortService, private studentService: StudentService, private dataStorageService: DataStorageService) { }
 
@@ -32,6 +34,7 @@ export class CrudStudentComponent implements OnInit {
         this.editedItemIndex = index;
         this.editMode = true;
         this.editedItem = this.studentService.getStudent(index);
+        this.studentKey = this.studentService.getStudent(index);
         this.createAssignmentForm.setValue({
           fname: this.editedItem.fname,
           lname: this.editedItem.lname,
@@ -42,60 +45,88 @@ export class CrudStudentComponent implements OnInit {
       }
     );
     this.cohorts = this.cohortService.receiveCohorts(); 
-    console.log('wowee', this.cohorts)   
+    // console.log('wowee', this.cohorts)   
   }
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newStudent = new Student(
-      value.fname, 
-      value.lname, 
-      value.email, 
-      value.cohort
-    );
+    // const newStudent = new Student(
+    //   value.fname, 
+    //   value.lname, 
+    //   value.email, 
+    //   value.cohort
+    // );
     const cohortKey = value.cohort
-    if (this.editMode) {
-      this.studentService.updateStudent(this.editedItemIndex, newStudent);
-      this.onSaveData(cohortKey, newStudent);
-    } else {
-      this.studentService.addStudent(newStudent);
-      this.onSaveData(cohortKey, newStudent);
-    }
-    this.editMode = false;
-    form.reset();
+    // if (this.editMode) {
+    //   this.studentService.updateStudent(this.editedItemIndex, newStudent);
+    //   this.onUpdateData(cohortKey, newStudent)
+    // } else {
+    //   this.studentService.addStudent(newStudent);
+    //   this.onSaveData(cohortKey, newStudent);
+    // }
+    
 
     firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
+      .then(res => {
+        console.log('restponse ', res.uid)
+        const newStudent = {
+          fname: value.fname, 
+          lname: value.lname, 
+          email: value.email, 
+          cohort: value.cohort,
+          uid: res.uid,
+          studentAssignments: []
+        } 
+        if (this.editMode) {
+          this.studentService.updateStudent(this.editedItemIndex, newStudent);
+          this.onUpdateData(cohortKey, newStudent)
+        } else {
+          this.studentService.addStudent(newStudent);
+          this.onSaveData(cohortKey, newStudent);
+        }
+        this.editMode = false;
+        form.reset()
+      })
       .catch(function(error) {
         let errorCode = error.code;
         let errorMessage = error.message;
       })
 
-    firebase.auth().sendPasswordResetEmail(value.email)
-      .then(function() {
-        console.log('Password reset sent to ' + value.email);
-      })
-      .catch(function(error) {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-      })
+    // firebase.auth().sendPasswordResetEmail(value.email)
+    // .then(function() {
+    //   console.log('Password reset sent to ' + value.email);
+    // })
+    // .catch(function(error) {
+    //   let errorCode = error.code;
+    //   let errorMessage = error.message;
+    // })
+    
+    this.editMode = false;
+    form.reset();
 
     this.cohortService.renewCohortData()
   }
 
   onSaveData(cohortKey, newStudent) {
-    this.dataStorageService.storeStudentData(cohortKey, newStudent)
+    this.dataStorageService.storeStudentData(cohortKey, newStudent);
   }
 
+  onUpdateData(cohortKey, newStudent) {
+    this.studentKey = this.studentKey.studentKey
+    console.log(' new wer student ', newStudent)
+    this.dataStorageService.updateStudentData(cohortKey, newStudent, this.studentKey)
+  }
   onClear() {
     this.createAssignmentForm.reset();
     this.editMode = false;
   }
 
-  // onDelete() {
-  //   this.studentService.deleteStudent(this.editedItemIndex);
-  //   this.onClear();
-  //   this.onSaveData(cohortKey, newStudent);
-  // }
+  onDelete() {
+    this.studentKey = this.studentKey.studentKey
+    this.studentService.deleteStudent(this.editedItemIndex);
+    this.onClear();
+    this.dataStorageService.deleteStudentData(this.editedItem.cohort, this.studentKey)
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

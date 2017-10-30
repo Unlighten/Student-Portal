@@ -11,6 +11,7 @@
             name="fname"
             ngModel
             required
+            placeholder="First Name"
           >
         </div>
         <div class="col-sm-3 form-group">
@@ -22,6 +23,7 @@
             name="lname"
             ngModel
             required
+            placeholder="Last Name"
           >
         </div>
         <div class="col-sm-3 form-group">
@@ -33,6 +35,7 @@
             name="email"
             ngModel
             required
+            placeholder="Email"
           >
         </div>
         <div class="col-sm-3 form-group">
@@ -44,18 +47,21 @@
             name="password"
             ngModel
             required
+            placeholder="Six Characters Min"
           >
         </div>
       </div>
       <div class='col-xs-3 form-group move-left'>
-          <select 
+        <label for="cohort">Cohort:</label>  
+        <select 
             class="form-control"
             type='text'
             id='cohort'
             name='cohort'
             ngModel
-            required>
-              <option *ngFor='let cohort of cohorts' [value]='cohort.key'>{{ cohort.info.cohortName }}</option>
+            required
+          >
+            <option *ngFor='let cohort of cohorts' [value]='cohort.key'>{{ cohort.info.cohortName }}</option>
           </select>
       </div>
       <div class="row">

@@ -21,8 +21,7 @@
             class="btn btn-success" 
             type="submit"
             [disabled]="!f.valid"
-            *ngIf="!editMode"
-          >Add</button>
+          >{{ editMode ? 'Update' : 'Add' }}</button>
           <button 
             class="btn btn-danger" 
             type="button"

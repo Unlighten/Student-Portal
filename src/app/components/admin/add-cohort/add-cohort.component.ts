@@ -36,22 +36,23 @@ export class AddCohortComponent implements OnInit {
       (cohorts) => {
         this.cohorts = cohorts;
         // this.cohorts = this.cohortService.getCohorts();
-        console.log('this cohorts', this.cohorts)
+        // console.log('this cohorts', this.cohorts)
       }
     )
-    console.log('Changing to <any>', this.cohorts) 
-    console.log(' this ', this.cohorts)
+    // console.log('Changing to <any>', this.cohorts) 
+    // console.log(' this ', this.cohorts)
     }
   
   ngAfterViewInit() {
     // this.onFetchData()
-    console.log('Oke does this really work?', this.cohorts)
+    // console.log('Oke does this really work?', this.cohorts)
   }
   onSelected() {
     this.cohortService.cohortSelected.next(this.cohort)
   }
 
   onEditItem(index: number) {
+    console.log('add cohort test ', index)
     this.cohortService.startedEditing.next(index);
   }
 
@@ -66,8 +67,8 @@ export class AddCohortComponent implements OnInit {
 
   onFetchData() {
     let cohortArray = this.dataStorageService.getData()
-    console.log('cohort array ', cohortArray)
-    console.log('anything', this.cohorts)
+    // console.log('cohort array ', cohortArray)
+    // console.log('anything', this.cohorts)
     // return this.cohorts
     // return cohortArray; //Attn. data-storage.service.ts
   }

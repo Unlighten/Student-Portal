@@ -19,4 +19,8 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     this.authService.loginUser(email, password);
   }
+
+  onSubmit(uid) {
+    this.authService.isAdminAuthenticated(uid);
+  }
 }

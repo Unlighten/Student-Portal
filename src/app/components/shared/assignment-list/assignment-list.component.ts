@@ -28,9 +28,7 @@ export class AssignmentListComponent implements OnInit {
   constructor(private assignmentService: AssignmentService, private cohortService: CohortService, private dataStorageService: DataStorageService) { }
 
   async ngOnInit() { //Infills Assignment[] with FB data
-    // this.assignments = this.assignmentService.getAssignments();
     this.cohorts = await this.dataStorageService.getData()
-    // this.cohort = this.addCohortService.releaseCohortFilter();
     
     this.subscription = this.assignmentService.assignmentsChanged.subscribe(
       (assignments: Assignment[]) => {
@@ -47,12 +45,15 @@ export class AssignmentListComponent implements OnInit {
 
     this.cohortSubscription = this.cohortService.cohortChanged.subscribe(
       (cohort: Cohort) => {
-        this.cohort = cohort;
-        this.assignments = this.assignmentService.getAssignments();        
-        this.changeAssignments()      
+        // if (cohort.value == 123456) {
+
+        // } else {
+          this.cohort = cohort;
+          this.assignments = this.assignmentService.getAssignments();        
+          this.changeAssignments()  
+        // }    
       }
     )
-    console.log('this assignments winner', this.assignments)          
   }
 
   onSelected() { //When clicked, infills edit input bars for edit functionality
@@ -65,32 +66,30 @@ export class AssignmentListComponent implements OnInit {
   }
 
   changeAssignments() {
-    console.log(this.cohorts, ' ass list test')
-    // console.log('this cohort ass ', this.cohort.key)
-    // let banana = this.cohort.propertyName
-    //-KwuiSXI-2DXInd6idGJ
     for (let aCohort of this.cohorts) {
-        if (aCohort.key == this.cohort) {
-          console.log('here ', aCohort.info.assignments)
-          this.assignments = Object.values(aCohort.info.assignments)
-          this.assignmentService.setAssignmentData(this.assignments)
+      if (aCohort.key == this.cohort) {
+        if (aCohort.info.assignments) {
+        this.assignments = Object.values(aCohort.info.assignments)
+        this.assignmentService.setAssignmentData(this.assignments)
+        } else {
+          this.assignments = []
+        }
       }
     }
     // for(let assignment of this.assignments) {
     //   console.log('test', assignment.name)
     // }
-      console.log('this assignments', this.assignments)
   }
 
   bindElementToAssignment(data) { //Prevents errors when clicking (for assignment modal) the links within assignment-list
     // console.log(this.createAssignmentService)
-    console.log('data ', data)
     if (data.target.id) { //prevents errors when hitting the links directly
-      console.log('data.target.id ', data.target.id)
       this.assignmentService.getAssignmentById(data.target.id);
-    } else { //prevents errors within the modal itself
+    } else if (data.target.parentElement.parentElement.id) { //prevents errors within the modal itself
       this.assignmentService.getAssignmentById(data.target.parentElement.parentElement.id)
       console.log(data)
+    } else {
+      this.assignmentService.getAssignmentById(data.target.parentElement.parentElement.parentElement.id)
     }
   }
 

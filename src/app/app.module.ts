@@ -29,8 +29,8 @@ import { AssignmentService } from './services/assignment.service';
 import { DataStorageService } from './services/data-storage.service';
 import { StudentService } from './services/student.service';
 import { CohortService } from './services/cohort.service';
-import { AddCAssignmentService } from './components/home/home-assignment/assignment-detail/add-completed-assignment.service';
 import { CrudCohortComponent } from './components/admin/add-cohort/crud-cohort/crud-cohort.component';
+import { NavbarService } from './services/navbar.service';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,7 @@ import { CrudCohortComponent } from './components/admin/add-cohort/crud-cohort/c
     DataStorageService,
     StudentService,
     CohortService,
-    AddCAssignmentService    
+    NavbarService
   ],
   bootstrap: [AppComponent]
 })

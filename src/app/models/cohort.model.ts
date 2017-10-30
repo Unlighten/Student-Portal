@@ -1,3 +1,3 @@
 export class Cohort {
-    constructor(public cohortName: string) {} 
+    constructor(public cohortName: string, assignments: object, students: object) {} 
   }

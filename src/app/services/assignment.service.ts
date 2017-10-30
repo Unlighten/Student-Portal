@@ -2,8 +2,8 @@ import { Subject } from "rxjs/Subject";
 import { Assignment } from "../models/assignment.model";
 
 export class AssignmentService {
-  assignmentSelected = new Subject<Assignment>();
-  assignmentsChanged = new Subject<Assignment[]>();
+  assignmentSelected = new Subject<any>();
+  assignmentsChanged = new Subject<any[]>();
   startedEditing = new Subject<number>();
   oneAssignment = new Subject<any>(); //Binds single assignments to oneAssignment
 
@@ -22,6 +22,7 @@ export class AssignmentService {
   }
 
   getAssignment(index: number) { //Pulls in data for individual assignment within Assignment[]
+    console.log('get assignment ', this.assignments[index])
     return this.assignments[index];
   }
 
@@ -42,7 +43,7 @@ export class AssignmentService {
 
   getAssignmentById(aid) { //Accesses individual assignments for modal
     const getAssignmentById = this.assignments[aid];
-    console.log('this assignment service ', this.assignments)
+    console.log('this assignment service ', getAssignmentById)
     this.oneAssignment.next(getAssignmentById);
   }
 }
